@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatGridListModule, MatIconModule, MatInputModule} from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import { RegisterComponent } from './register/register.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -18,14 +19,18 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
     MatButtonModule,
     MatIconModule,
-    RouterModule.forRoot(routes)
+    MatCheckboxModule,
+    MatGridListModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
