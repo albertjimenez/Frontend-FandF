@@ -1,61 +1,28 @@
-<div class="app-header gradient-body ">
-  <h1 class="app-heading"></h1>
-</div>
-<!-- Application header ends -->
+<div class="main-div">
+  <form [formGroup]="loginFormControl">
+    <mat-card class="example-card center animated fadeInUp">
+      <mat-card-header class="background-header">
+        <img mat-card-image src="../../assets/food-provisional-logo.png" height="92" width="420">
+      </mat-card-header>
 
-<mat-grid-list cols="3">
-  <mat-grid-tile></mat-grid-tile>
-
-  <!-- Writing markup for login starts -->
-  <mat-grid-tile class='login-element'>
-    <div class="login-container animated fadeInUp">
-
-      <!-- Template Header starts -->
-      <div class="login-box-header">
-        Food & Friends
-      </div>
-      <!-- Template Header ends -->
-
-      <!-- Template Body starts -->
-      <div class="login-box-body ">
-
-        <!-- Markup for getting Username starts -->
-        <mat-grid-list cols="9" rowHeight="75px">
-          <mat-grid-tile [rowspan]="1" class="login-icon">
-            <mat-icon>lock</mat-icon>
-          </mat-grid-tile>
-          <mat-grid-tile [colspan]="7">
-            <mat-input-container class="justifier">
-              <input matInput placeholder="Nombre de usuario" type="text">
-            </mat-input-container>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <!-- Markup for getting Username ends -->
-
-        <!-- Markup for getting Password starts -->
-        <mat-grid-list cols="9" rowHeight="100px">
-          <mat-grid-tile [rowspan]="1"  class="login-icon">
-            <mat-icon>remove_red_eye</mat-icon>
-          </mat-grid-tile>
-          <mat-grid-tile [colspan]="7">
-            <mat-input-container class="justifier">
-              <input matInput placeholder="Contraseña" type="password">
-            </mat-input-container>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <!-- Markup for getting Password ends -->
-
-        <button mat-raised-button class="login-button">
-          <mat-icon>input</mat-icon> Entrar
+      <mat-card-content>
+        <mat-icon>lock</mat-icon>
+        <mat-input-container>
+          <input matInput placeholder="Nombre de usuario" type="text" formControlName="username">
+        </mat-input-container>
+        <br>
+        <mat-icon>remove_red_eye</mat-icon>
+        <mat-input-container>
+          <input matInput placeholder="Contraseña" type="password" formControlName="password">
+        </mat-input-container>
+        <br>
+        <button mat-raised-button class="login-button" (click)="this.onLoginAccess()">
+          <mat-icon>input</mat-icon>
+          Entrar
         </button>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
 
-      </div>
-      <!-- Template Body ends -->
-
-    </div>
-  </mat-grid-tile>
-  <!-- Writing markup for login ends -->
-  <mat-grid-tile></mat-grid-tile>
-
-</mat-grid-list>
 <app-footer></app-footer>
