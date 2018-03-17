@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';
+import {LoginService} from './login/login.service';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -29,6 +31,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
+    HttpClientModule,
     MatButtonModule,
     MatIconModule,
     MatCheckboxModule,
@@ -36,7 +39,7 @@ const routes: Routes = [
     MatInputModule,
     MatToolbarModule
   ],
-  providers: [],
+  providers: [LoginService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
