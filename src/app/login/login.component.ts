@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     const MIN_CHARS = 0;
     this.loginFormControl = new FormGroup({
-      username: new FormControl('', [Validators.minLength(MIN_CHARS)]),
+      username: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       password: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
     });
   }
