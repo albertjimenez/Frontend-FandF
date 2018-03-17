@@ -4,7 +4,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatGridListModule, MatIconModule, MatInputModule} from '@angular/material';
+import {
+  MatButtonModule, MatCheckboxModule, MatGridListModule, MatIconModule, MatInputModule,
+  MatToolbarModule
+} from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import { RegisterComponent } from './register/register.component';
@@ -31,6 +34,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatGridListModule,
     MatInputModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

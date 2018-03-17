@@ -1,4 +1,4 @@
-<div class="app-header gradient-body">
+<div class="app-header gradient-body ">
   <h1 class="app-heading"></h1>
 </div>
 <!-- Application header ends -->
@@ -26,7 +26,7 @@
           </mat-grid-tile>
           <mat-grid-tile [colspan]="7">
             <mat-input-container class="justifier">
-              <input matInput placeholder="Username" text="text">
+              <input matInput placeholder="Nombre de usuario" type="text">
             </mat-input-container>
           </mat-grid-tile>
         </mat-grid-list>
@@ -39,14 +39,14 @@
           </mat-grid-tile>
           <mat-grid-tile [colspan]="7">
             <mat-input-container class="justifier">
-              <input matInput placeholder="Password" text="password">
+              <input matInput placeholder="Contraseña" type="password">
             </mat-input-container>
           </mat-grid-tile>
         </mat-grid-list>
         <!-- Markup for getting Password ends -->
 
         <button mat-raised-button class="login-button">
-          <mat-icon>input</mat-icon> Login
+          <mat-icon>input</mat-icon> Entrar
         </button>
 
       </div>
@@ -58,3 +58,4 @@
   <mat-grid-tile></mat-grid-tile>
 
 </mat-grid-list>
+<app-footer></app-footer>
