@@ -1,3 +1,58 @@
-<p>
-  register works!
-</p>
+<div class="main-div">
+  <form [formGroup]="registerFormControl">
+    <mat-card class="example-card center animated fadeInLeft">
+      <mat-card-header class="background-header">
+        <img mat-card-image src="../../assets/food-provisional-logo.png" height="92" width="420">
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-icon>account_circle</mat-icon>
+        <mat-input-container>
+          <input matInput placeholder="Nombre" type="text" formControlName="name">
+        </mat-input-container>
+        <br>
+        <mat-icon>account_box</mat-icon>
+        <mat-input-container>
+          <input matInput placeholder="Apellidos" type="text" formControlName="surname">
+        </mat-input-container>
+        <br>
+        <mat-icon>email</mat-icon>
+        <mat-input-container>
+          <input matInput placeholder="Correo electrónico" type="email" formControlName="email">
+        </mat-input-container>
+        <br>
+        <mat-icon>assignment_ind</mat-icon>
+        <mat-input-container>
+          <input matInput placeholder="Nombre de usuario" type="text" formControlName="username">
+        </mat-input-container>
+        <br>
+        <a (click)="this.showPassword(firstInput)">
+          <mat-icon>remove_red_eye</mat-icon>
+        </a>
+        <mat-input-container>
+          <input #firstInput matInput placeholder="Contraseña" type="password" formControlName="password">
+        </mat-input-container>
+        <br>
+        <a (click)="this.showPassword(secondInput)">
+          <mat-icon>remove_red_eye</mat-icon>
+        </a>
+        <mat-input-container>
+          <input #secondInput matInput placeholder="Repite la contraseña" type="password" formControlName="rePassword">
+        </mat-input-container>
+        <br>
+        <button mat-raised-button class="login-button lbutton">
+          <mat-icon>input</mat-icon>
+          Registrarse
+        </button>
+        <br>
+        <br>
+        <button mat-raised-button [routerLink]="['/login']" color="accent">
+          <mat-icon>keyboard_return</mat-icon>
+          Atrás
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,43 @@
+.example-card {
+  max-width: 420px;
+}
+
+.background-header {
+  background-size: cover;
+  text-align: center;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.login-box-header {
+  text-align: center;
+  font-size: 100px;
+  color: #077AF5;
+  text-shadow: 0 0 10px black;
+  font-family: Lobster, "Helvetica Neue", sans-serif;
+
+}
+
+.login-icon {
+  margin-top: -2px;
+}
+
+.center {
+  text-align: center;
+  width: 100%;
+  margin: 10px auto;
+}
+
+.lbutton {
+  background-color: #077AF5;
+  width: 50%;
+}
+
+.main-div {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
