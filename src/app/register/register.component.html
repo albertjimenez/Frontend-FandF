@@ -40,7 +40,8 @@
           <input #secondInput matInput placeholder="Repite la contraseña" type="password" formControlName="rePassword">
         </mat-input-container>
         <br>
-        <button mat-raised-button class="login-button lbutton">
+        <button type="submit" mat-raised-button class="login-button lbutton"
+                (click)="this.submitRegisterForm(passwordSwal)">
           <mat-icon>input</mat-icon>
           Registrarse
         </button>
@@ -54,5 +55,10 @@
     </mat-card>
   </form>
 </div>
-
+<swal
+  #passwordSwal
+  title="Las contraseñas no coinciden"
+  text="Revisa los campos de las contraseñas"
+  type="error">
+</swal>
 <app-footer></app-footer>
