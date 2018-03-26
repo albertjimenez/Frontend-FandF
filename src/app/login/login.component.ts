@@ -3,13 +3,14 @@ import {LoginService} from './login.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HeaderService} from '../header.service';
 import {SwalComponent} from '@toverux/ngx-sweetalert2';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {CredentialsService} from '../credentials.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [LoginService, HeaderService]
+  providers: [LoginService, HeaderService, CredentialsService]
 })
 export class LoginComponent implements OnInit {
 
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginError') loginError: SwalComponent;
   @ViewChild('loginOk') loginOk: SwalComponent;
 
-  constructor(private loginService: LoginService, private router: Router) {
+  constructor(private loginService: LoginService, private router: Router, private credentialsService: CredentialsService) {
   }
 
 
@@ -36,6 +37,9 @@ export class LoginComponent implements OnInit {
     console.log('Username: ', username, 'Password:', password);
     this.loginService.postLoginCredentials(username, password).subscribe(data => {
       console.log('Successful ', data);
+      // TODO el email no está puesto
+      this.credentialsService.storeMySession(username, data.toString(), password, '');
+      this.router.navigateByUrl('/home-dashboard');
     }, error => this.loginError.show(), () => this.loginOk.show());
   }
 }
