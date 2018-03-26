@@ -12,7 +12,14 @@ export class RegisterService {
 
   postRegisterData(registerClass: RegisterClass): Observable<Object> {
     const registerEndpoint = register_endpoint;
-    return this.httpClient.post(registerEndpoint, {}, this.headerService.buildHeaderForRegister(registerClass));
+    const object = {
+      name: registerClass.name,
+      username: registerClass.username,
+      password: registerClass.password,
+      surnames: registerClass.surname,
+      email: registerClass.email,
+    };
+    return this.httpClient.post(registerEndpoint, object, this.headerService.buildHeaderForRegister(registerClass));
   }
 }
 
