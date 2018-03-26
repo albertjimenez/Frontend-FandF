@@ -11,6 +11,7 @@ import {
   MatInputModule,
   MatToolbarModule
 } from '@angular/material';
+import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import {RegisterComponent} from './register/register.component';
@@ -44,7 +45,9 @@ export const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
-    MatCardModule, ReactiveFormsModule
+    MatCardModule,
+    GooglePlaceModule,
+    ReactiveFormsModule
   ],
   providers: [LoginService, HttpClient],
   bootstrap: [AppComponent]
