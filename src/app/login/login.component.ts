@@ -3,6 +3,7 @@ import {LoginService} from './login.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HeaderService} from '../header.service';
 import {SwalComponent} from '@toverux/ngx-sweetalert2';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginError') loginError: SwalComponent;
   @ViewChild('loginOk') loginOk: SwalComponent;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private router: Router) {
   }
 
 
