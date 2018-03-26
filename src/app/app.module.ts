@@ -18,6 +18,7 @@ import {FooterComponent} from './footer/footer.component';
 import {LoginService} from './login/login.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HomeDashboardComponent} from './home-dashboard/home-dashboard.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -29,7 +30,8 @@ export const routes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    FooterComponent
+    FooterComponent,
+    HomeDashboardComponent
   ],
   imports: [
     BrowserModule,
