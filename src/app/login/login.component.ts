@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {LoginService} from './login.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HeaderService} from '../header.service';
+import {SwalComponent} from '@toverux/ngx-sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,8 @@ import {HeaderService} from '../header.service';
 export class LoginComponent implements OnInit {
 
   loginFormControl: FormGroup;
+  @ViewChild('loginError') loginError: SwalComponent;
+  @ViewChild('loginOk') loginOk: SwalComponent;
 
   constructor(private loginService: LoginService) {
   }
@@ -32,6 +35,6 @@ export class LoginComponent implements OnInit {
     console.log('Username: ', username, 'Password:', password);
     this.loginService.postLoginCredentials(username, password).subscribe(data => {
       console.log('Successful ', data);
-    }, error => console.log('Error ->', error));
+    }, error => this.loginError.show(), () => this.loginOk.show());
   }
 }
