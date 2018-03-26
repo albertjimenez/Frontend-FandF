@@ -19,6 +19,7 @@ import {LoginService} from './login/login.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HomeDashboardComponent} from './home-dashboard/home-dashboard.component';
+import {NavbarComponent} from './navbar/navbar.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -32,7 +33,8 @@ export const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     FooterComponent,
-    HomeDashboardComponent
+    HomeDashboardComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

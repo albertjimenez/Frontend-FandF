@@ -1,1 +1,1 @@
-export const KEYS = ['USERNAME', 'TOKEN', 'PASSWORD', 'EMAIL'];
+export const KEYS = ['USERNAME-FandF', 'TOKEN-FandF', 'PASSWORD-FandF', 'EMAIL-FandF'];

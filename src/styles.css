@@ -1,6 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~animate.css";
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 .gradient-body {
   background: -moz-linear-gradient(182deg, rgba(153, 218, 255, 1) 0%, rgba(7, 122, 245, 1) 100%); /* ff3.6+ */
