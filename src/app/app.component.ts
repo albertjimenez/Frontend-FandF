@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 
 // JQUERY
-declare var jquery: any;
+export declare var jquery: any;
 declare var $: any;
 
 @Component({

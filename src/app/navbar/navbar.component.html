@@ -1,3 +1,27 @@
-<p>
-  navbar works!
-</p>
+<mat-toolbar class="animated fadeInDown fandf-color">
+  <button mat-mini-fab (click)="this.toggleSidebar()"
+          matTooltip="Conmutar visión de la barra lateral">
+    <mat-icon>settings</mat-icon>
+  </button>
+
+  <span style="font-family: 'Pacifico', cursive; font-size: 150%;">
+  </span>
+  <!-- This fills the remaining space of the current row -->
+  <span class="lefter"></span>
+
+  <span *ngIf="this.hideButtonOnExistSession()">
+    <button mat-mini-fab class="nostra-color" [matMenuTriggerFor]="menu" *ngIf="this.isMobile">
+          <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-mini-fab class="" matTooltip="Volver al inicio">
+        <mat-icon>home</mat-icon>
+      </button>
+    <mat-menu #menu="matMenu" matTooltip="Buscar">
+      <button mat-menu-item (click)="logout()" matTooltip="Cerrar sesión">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Salir</span>
+      </button>
+    </mat-menu>
+
+  </span>
+</mat-toolbar>

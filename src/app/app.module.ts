@@ -9,17 +9,19 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatToolbarModule
+  MatMenuModule,
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import {RegisterComponent} from './register/register.component';
-import {FooterComponent} from './footer/footer.component';
 import {LoginService} from './login/login.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HomeDashboardComponent} from './home-dashboard/home-dashboard.component';
 import {NavbarComponent} from './navbar/navbar.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -32,9 +34,9 @@ export const routes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    FooterComponent,
     HomeDashboardComponent,
-    NavbarComponent
+    NavbarComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,7 @@ export const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
-    MatCardModule, ReactiveFormsModule
+    MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule
   ],
   providers: [LoginService, HttpClient],
   bootstrap: [AppComponent]
