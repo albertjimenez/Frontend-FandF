@@ -24,6 +24,7 @@ import { GmapsComponent } from './gmaps/gmaps.component';
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'gmaps', component: GmapsComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({

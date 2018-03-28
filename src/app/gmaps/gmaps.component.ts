@@ -1,32 +1,43 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {GooglePlaceDirective} from 'ngx-google-places-autocomplete';
+import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormControl} from '@angular/forms';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
-import {ComponentRestrictions} from 'ngx-google-places-autocomplete/objects/options/componentRestrictions';
-
 
 @Component({
   selector: 'app-gmaps',
-  template: `<input ngx-google-places-autocomplete [options]="{
-    types: ['establishment'],
-    componentRestrictions: { country: 'ES'}
-    }" #places="ngx-places" (onAddressChange)="onChange($event)" />`,
+  templateUrl: './gmaps.component.html',
+  styleUrls: ['./gmaps.component.css']
 })
 export class GmapsComponent implements OnInit {
 
 
-  @ViewChild('place') place: GooglePlaceDirective;
+  number;
+  name;
+  address;
+  phone;
+  comment;
+  author;
+  openingHours;
+  weekdayText;
+  periods;
 
-  options = {
-    types: ['establishment'],
-    componentRestrictions: { country: 'ES'}
-  };
   constructor() { }
 
   ngOnInit() {
+
   }
-
-  public onChange(address: Address) {
-
+  onChange(address: Address) {
+    this.number = address.reviews.length;
+    this.name = address.name;
+    this.address = address.formatted_address;
+    this.phone = address.formatted_phone_number;
+    this.author = address.reviews[this.number - 1].author_name;
+    this.comment = address.reviews[this.number - 1].text;
+    this.openingHours = address.opening_hours;
+    this.weekdayText = address.opening_hours.weekday_text;
+    this.periods = address.opening_hours.periods;
+    alert(this.openingHours);
+    alert(this.weekdayText);
+    alert(this.periods);
   }
 
 }
