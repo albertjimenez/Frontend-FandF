@@ -9,16 +9,8 @@ import {Address} from 'ngx-google-places-autocomplete/objects/address';
 })
 export class GmapsComponent implements OnInit {
 
-
-  number;
-  name;
-  address;
-  phone;
-  comment;
-  author;
-  openingHours;
-  weekdayText;
-  periods;
+  tempAddress = null;
+  hours = null;
 
   constructor() { }
 
@@ -26,18 +18,12 @@ export class GmapsComponent implements OnInit {
 
   }
   onChange(address: Address) {
-    this.number = address.reviews.length;
-    this.name = address.name;
-    this.address = address.formatted_address;
-    this.phone = address.formatted_phone_number;
-    this.author = address.reviews[this.number - 1].author_name;
-    this.comment = address.reviews[this.number - 1].text;
-    this.openingHours = address.opening_hours;
-    this.weekdayText = address.opening_hours.weekday_text;
-    this.periods = address.opening_hours.periods;
-    alert(this.openingHours);
-    alert(this.weekdayText);
-    alert(this.periods);
+    // this.number = address.reviews.length;
+        this.tempAddress = address;
+        console.log(address.opening_hours);
+        const array = this.tempAddress.opening_hours.weekday_text.map( elem => elem.split(':'));
+        const weekday = array.map(elem => elem[0]);
+        console.log(address.opening_hours.periods.map(day => day.open.time + '<:>'  + day.close.time).filter(elem => elem.startsWith('10')));
   }
 
 }

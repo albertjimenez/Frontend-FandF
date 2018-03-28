@@ -1,10 +1,13 @@
 <input ngx-google-places-autocomplete [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places" (onAddressChange)="onChange($event)">
 <p>Informacion del restaurante:<br>
-  Nombre: {{name}}<br>
-  Direccion completa: {{address}}<br>
-  Telefono: {{phone}}<br>
-  Número de comentarios: {{number}}<br>
-  Ultimo comentario realizado:<br>
-  Autor: {{author}}<br>
-  Comentario:<br>{{comment}}
+  Nombre: {{this.tempAddress?.name}}<br>
+  Direccion completa: {{this.tempAddress?.formatted_address}}<br>
+  Telefono: {{this.tempAddress?.formatted_phone_number}}<br>
+  Número de comentarios: {{this.tempAddress?.reviews?.length}}<br>
+  Primer comentario realizado:<br>
+  Autor: {{this.tempAddress?.reviews[0]?.author_name}}<br>
+  Comentario:<br>{{this.tempAddress?.reviews[0]?.text}}<br>
+  Opening now: {{this.tempAddress?.opening_hours?.open_now}}<br>
+  Horario:<br>
+  {{this.tempAddress?.opening_hours?.weekday_text.toLocaleString()}}
 </p>
