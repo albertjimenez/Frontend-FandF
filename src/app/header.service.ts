@@ -11,7 +11,7 @@ export class HeaderService {
   buildHeaderForRegister(registerData: RegisterClass): Object {
     const httpHeaders = new HttpHeaders({
       'name': registerData.name,
-      'surname': registerData.surname,
+      'surname': registerData.surnames,
       'email': registerData.email,
       'username': registerData.username,
       'password': registerData.password,

@@ -2,20 +2,20 @@
   <!-- Sidebar Holder -->
   <nav id="sidebar">
     <div class="sidebar-header">
-      <h3>{{username}}</h3>
+      <h3 [routerLink]="['events']">{{username}}</h3>
     </div>
 
     <ul class="list-unstyled components">
       <p>Dummy Heading</p>
       <li class="active">
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+        <a href="#" data-toggle="collapse" aria-expanded="false">Home</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
           <li><a href="#">Home 1</a></li>
         </ul>
       </li>
       <li>
         <a href="#">About</a>
-        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+        <a href="#" data-toggle="collapse" aria-expanded="false">Pages</a>
         <ul class="collapse list-unstyled" id="pageSubmenu">
           <li><a href="#">Page 1</a></li>
         </ul>
@@ -29,13 +29,13 @@
     </ul>
 
     <ul class="list-unstyled CTAs">
-      <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
+      <li><a class="download">Download source</a></li>
     </ul>
   </nav>
 
   <!-- Page Content Holder -->
   <div id="content">
-    <app-navbar></app-navbar>
+    <app-navbar *ngIf="this.sessionExists()"></app-navbar>
     <router-outlet></router-outlet>
   </div>
 </div>

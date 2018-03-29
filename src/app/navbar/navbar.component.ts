@@ -2,6 +2,7 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {CredentialsService} from '../credentials.service';
 import * as $ from 'jquery';
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

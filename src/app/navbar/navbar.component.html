@@ -3,12 +3,7 @@
           matTooltip="Conmutar visión de la barra lateral">
     <mat-icon>settings</mat-icon>
   </button>
-
-  <span style="font-family: 'Pacifico', cursive; font-size: 150%;">
-  </span>
-  <!-- This fills the remaining space of the current row -->
-  <span class="lefter"></span>
-
+  <span class="righter"></span>
   <span *ngIf="this.hideButtonOnExistSession()">
     <button mat-mini-fab class="nostra-color" [matMenuTriggerFor]="menu" *ngIf="this.isMobile">
           <mat-icon>menu</mat-icon>

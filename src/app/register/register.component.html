@@ -40,6 +40,9 @@
           <input #secondInput matInput placeholder="Repite la contraseña" type="password" formControlName="rePassword">
         </mat-input-container>
         <br>
+        <div *ngIf="this.isRegistering">
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
         <button type="submit" mat-raised-button class="login-button lbutton"
                 (click)="this.submitRegisterForm(passwordSwal)">
           <mat-icon>input</mat-icon>
@@ -59,5 +62,23 @@
   #passwordSwal
   title="Las contraseñas no coinciden"
   text="Revisa los campos de las contraseñas"
+  type="error">
+</swal>
+<swal
+  #loginOkSwal
+  title="Registro realizado correctamente"
+  text="En breve recibirá por correo sus datos"
+  type="success">
+</swal>
+<swal
+  #duplicatedEmail
+  title="Email duplicado"
+  text="Prueba a iniciar sesión con ese email"
+  type="error">
+</swal>
+<swal
+  #duplicatedUsername
+  title="Nombre de usuario duplicado"
+  text="Inténtalo otra vez con otro usuario"
   type="error">
 </swal>

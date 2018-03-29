@@ -10,6 +10,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatProgressSpinnerModule,
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
@@ -22,11 +23,18 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HomeDashboardComponent} from './home-dashboard/home-dashboard.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
+import {CredentialsService} from './credentials.service';
+import {RegisterService} from './register/register.service';
+import {HeaderService} from './header.service';
+import {ProfileService} from './profile.service';
+import {EventsComponent} from './home-dashboard/events/events.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'home-dashboard', component: HomeDashboardComponent},
+  {path: 'sidebar', component: SidebarComponent},
+  {path: 'events', component: EventsComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
@@ -36,7 +44,8 @@ export const routes: Routes = [
     RegisterComponent,
     HomeDashboardComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
@@ -49,9 +58,9 @@ export const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
-    MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule
+    MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule
   ],
-  providers: [LoginService, HttpClient],
+  providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

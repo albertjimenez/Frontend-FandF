@@ -5,6 +5,8 @@ import {HeaderService} from '../header.service';
 import {SwalComponent} from '@toverux/ngx-sweetalert2';
 import {Router} from '@angular/router';
 import {CredentialsService} from '../credentials.service';
+import {ProfileService} from '../profile.service';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -18,12 +20,13 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginError') loginError: SwalComponent;
   @ViewChild('loginOk') loginOk: SwalComponent;
 
-  constructor(private loginService: LoginService, private router: Router, private credentialsService: CredentialsService) {
+  constructor(private loginService: LoginService, private router: Router, private credentialsService: CredentialsService,
+              private profileService: ProfileService, private location: Location) {
   }
 
 
   ngOnInit() {
-    const MIN_CHARS = 0;
+    const MIN_CHARS = 1;
     this.loginFormControl = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       password: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
@@ -34,12 +37,16 @@ export class LoginComponent implements OnInit {
     const username = this.loginFormControl.value.username;
     const password = this.loginFormControl.value.password;
 
-    console.log('Username: ', username, 'Password:', password);
     this.loginService.postLoginCredentials(username, password).subscribe(data => {
-      console.log('Successful ', data);
-      // TODO el email no está puesto
-      this.credentialsService.storeMySession(username, data.toString(), password, '');
-      this.router.navigateByUrl('/home-dashboard');
+      this.profileService.retrieveMyEmail(username).subscribe(email_response => {
+        this.credentialsService.storeMySession(username, data.toString(), password, email_response.toString());
+        this.router.navigateByUrl('/sidebar');
+        // window.location.reload();
+      });
     }, error => this.loginError.show(), () => this.loginOk.show());
+  }
+
+  sessionExists() {
+    return this.credentialsService.sessionExists();
   }
 }
