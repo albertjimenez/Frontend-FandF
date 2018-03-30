@@ -16,4 +16,8 @@ export class AppComponent {
     return this.credentialsService.sessionExists();
   }
 
+  updateUsername() {
+    return this.credentialsService.getUsername().toString();
+  }
+
 }

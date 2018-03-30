@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CredentialsService} from '../credentials.service';
 import {Router} from '@angular/router';
 import * as $ from 'jquery';
@@ -12,7 +12,8 @@ import * as $ from 'jquery';
 })
 export class SidebarComponent implements OnInit {
 
-  username = '';
+
+  @Input() username: string;
 
   constructor(private credentialService: CredentialsService, private router: Router) {
   }

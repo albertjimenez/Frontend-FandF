@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="sessionExists(); else loginScreen">
   <!-- Sidebar Holder -->
   <nav id="sidebar">
     <div class="sidebar-header">
@@ -39,3 +39,6 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+<ng-template #loginScreen>
+  <router-outlet></router-outlet>
+</ng-template>

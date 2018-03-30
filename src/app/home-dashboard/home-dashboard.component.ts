@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CredentialsService} from '../credentials.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 import * as $ from 'jquery';
 
 @Component({
@@ -26,7 +26,6 @@ export class HomeDashboardComponent implements OnInit {
     this.username = this.credentialsService.getUsername().toString();
     this.token = this.credentialsService.getToken().toString();
     this.email = this.credentialsService.getEmail().toString();
-    this.toggleSidebar();
   }
 
   toggleSidebar() {

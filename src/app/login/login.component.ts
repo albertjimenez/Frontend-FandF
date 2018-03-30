@@ -6,7 +6,6 @@ import {SwalComponent} from '@toverux/ngx-sweetalert2';
 import {Router} from '@angular/router';
 import {CredentialsService} from '../credentials.service';
 import {ProfileService} from '../profile.service';
-import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +20,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginOk') loginOk: SwalComponent;
 
   constructor(private loginService: LoginService, private router: Router, private credentialsService: CredentialsService,
-              private profileService: ProfileService, private location: Location) {
+              private profileService: ProfileService) {
   }
 
 

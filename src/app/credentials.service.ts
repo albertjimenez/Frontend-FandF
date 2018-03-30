@@ -25,19 +25,19 @@ export class CredentialsService {
   }
 
   getUsername(): String {
-    return this.sessionExists() ? this.localStorage.getItem(KEYS[0]) : null;
+    return this.sessionExists() ? this.localStorage.getItem(KEYS[0]) : '';
   }
 
   getToken(): String {
-    return this.sessionExists() ? this.localStorage.getItem(KEYS[1]) : null;
+    return this.sessionExists() ? this.localStorage.getItem(KEYS[1]) : '';
   }
 
   getPassword(): String {
-    return this.sessionExists() ? this.localStorage.getItem(KEYS[2]) : null;
+    return this.sessionExists() ? this.localStorage.getItem(KEYS[2]) : '';
   }
 
   getEmail(): String {
-    return this.sessionExists() ? this.localStorage.getItem(KEYS[3]) : null;
+    return this.sessionExists() ? this.localStorage.getItem(KEYS[3]) : '';
   }
 
 }
