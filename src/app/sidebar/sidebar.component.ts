@@ -38,4 +38,9 @@ export class SidebarComponent implements OnInit {
     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
   }
 
+  logout() {
+    this.credentialService.logout();
+    this.router.navigateByUrl('/login');
+  }
+
 }

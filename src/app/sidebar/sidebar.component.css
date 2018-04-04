@@ -1,5 +1,17 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
+div.item {
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  width: 120px;
+}
+
+h3 {
+  display: block;
+  text-align: center;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   background: #fafafa;

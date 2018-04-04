@@ -33,4 +33,18 @@ export class HomeDashboardComponent implements OnInit {
     $('.collapse.in').toggleClass('in');
     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
   }
+
+  goRight() {
+    event.preventDefault();
+    $('#content').animate({
+      scrollLeft: '+=200px'
+    }, 'slow');
+  }
+
+  goLeft() {
+    event.preventDefault();
+    $('#content').animate({
+      scrollLeft: '-=200px'
+    }, 'slow');
+  }
 }

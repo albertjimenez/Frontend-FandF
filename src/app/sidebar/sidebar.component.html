@@ -1,35 +1,30 @@
 <div class="wrapper" *ngIf="sessionExists(); else loginScreen">
   <!-- Sidebar Holder -->
   <nav id="sidebar">
-    <div class="sidebar-header">
+    <div class="sidebar-header item">
       <h3 [routerLink]="['events']">{{username}}</h3>
+      <img src="../../assets/avatar.svg" height="auto" width="128">
     </div>
 
     <ul class="list-unstyled components">
-      <p>Dummy Heading</p>
+      <p>Menú</p>
       <li class="active">
-        <a href="#" data-toggle="collapse" aria-expanded="false">Home</a>
-        <ul class="collapse list-unstyled" id="homeSubmenu">
-          <li><a href="#">Home 1</a></li>
-        </ul>
+        <a routerLink="home-dashboard">Home</a>
       </li>
       <li>
-        <a href="#">About</a>
-        <a href="#" data-toggle="collapse" aria-expanded="false">Pages</a>
-        <ul class="collapse list-unstyled" id="pageSubmenu">
-          <li><a href="#">Page 1</a></li>
-        </ul>
+        <a>Mis eventos</a>
+        <a>Mis grupos</a>
       </li>
       <li>
-        <a href="#">Portfolio</a>
+        <a>Mis amigos</a>
       </li>
       <li>
-        <a href="#">Contact</a>
+        <a>Restaurantes</a>
       </li>
     </ul>
 
     <ul class="list-unstyled CTAs">
-      <li><a class="download">Download source</a></li>
+      <li><a class="download" href="#" color="primary" (click)="logout()">Salir</a></li>
     </ul>
   </nav>
 

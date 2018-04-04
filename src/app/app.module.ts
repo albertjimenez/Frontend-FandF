@@ -6,6 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -58,7 +59,8 @@ export const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
-    MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule
+    MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule,
+    MatDividerModule
   ],
   providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService],
   bootstrap: [AppComponent]
