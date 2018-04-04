@@ -1,3 +1,13 @@
+<mat-form-field>
+  <mat-select placeholder="Dia de la semana" [(ngModel)]="selectedValue">
+    <mat-option *ngFor="let day of week" [value]="day.value">
+      {{ day.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+Dia elegido: {{selectedValue}}
+<br>
 <input ngx-google-places-autocomplete [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places" (onAddressChange)="onChange($event)">
 <p>Informacion del restaurante:<br>
   Nombre: {{this.tempAddress?.name}}<br>

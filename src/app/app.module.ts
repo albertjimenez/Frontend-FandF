@@ -4,6 +4,7 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  MatSelectModule,
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule,
@@ -19,6 +20,7 @@ import {FooterComponent} from './footer/footer.component';
 import {LoginService} from './login/login.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import { GmapsComponent } from './gmaps/gmaps.component';
 
 export const routes: Routes = [
@@ -42,13 +44,15 @@ export const routes: Routes = [
     SweetAlert2Module.forRoot(),
     HttpClientModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
     MatCardModule,
     GooglePlaceModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [LoginService, HttpClient],
   bootstrap: [AppComponent]

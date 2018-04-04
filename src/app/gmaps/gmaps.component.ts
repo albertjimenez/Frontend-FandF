@@ -11,7 +11,17 @@ export class GmapsComponent implements OnInit {
 
   tempAddress = null;
   hours = null;
+  selectedValue: string;
 
+  week = [
+    {value: '1', viewValue: 'Lunes'},
+    {value: '2', viewValue: 'Martes'},
+    {value: '3', viewValue: 'Miercoles'},
+    {value: '4', viewValue: 'Jueves'},
+    {value: '5', viewValue: 'Viernes'},
+    {value: '6', viewValue: 'Sabado'},
+    {value: '0', viewValue: 'Domingo'}
+  ];
   constructor() { }
 
   ngOnInit() {
@@ -21,9 +31,9 @@ export class GmapsComponent implements OnInit {
     // this.number = address.reviews.length;
         this.tempAddress = address;
         console.log(address.opening_hours);
-        const array = this.tempAddress.opening_hours.weekday_text.map( elem => elem.split(':'));
-        const weekday = array.map(elem => elem[0]);
-        console.log(address.opening_hours.periods.map(day => day.open.time + '<:>'  + day.close.time).filter(elem => elem.startsWith('10')));
+        console.log(address.opening_hours.periods.map(day => day.open.time + '<:>'  + day.close.time));
+        console.log(address.opening_hours.periods.map(day => day.open.time + '<:>'  + day.close.time)[parseInt(this.selectedValue, 10)]);
+
   }
 
 }
