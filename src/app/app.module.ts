@@ -29,6 +29,7 @@ import {RegisterService} from './register/register.service';
 import {HeaderService} from './header.service';
 import {ProfileService} from './profile.service';
 import {EventsComponent} from './home-dashboard/events/events.component';
+import {GroupsComponent} from './home-dashboard/groups/groups.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -46,7 +47,8 @@ export const routes: Routes = [
     HomeDashboardComponent,
     NavbarComponent,
     SidebarComponent,
-    EventsComponent
+    EventsComponent,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,
