@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {LoginService} from './login.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HeaderService} from '../header.service';
@@ -6,6 +6,7 @@ import {SwalComponent} from '@toverux/ngx-sweetalert2';
 import {Router} from '@angular/router';
 import {CredentialsService} from '../credentials.service';
 import {ProfileService} from '../profile.service';
+import '../../assets/login-animation.js';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import {ProfileService} from '../profile.service';
   styleUrls: ['./login.component.css'],
   providers: [LoginService, HeaderService, CredentialsService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   loginFormControl: FormGroup;
   @ViewChild('loginError') loginError: SwalComponent;
@@ -30,6 +31,10 @@ export class LoginComponent implements OnInit {
       username: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       password: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
     });
+  }
+
+  ngAfterViewInit() {
+    (window as any).initialize();
   }
 
   onLoginAccess() {

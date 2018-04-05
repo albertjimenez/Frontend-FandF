@@ -14,7 +14,6 @@ export class HomeDashboardComponent implements OnInit {
   username = '';
   token = '';
   email = '';
-
   constructor(private credentialsService: CredentialsService, private router: Router) {
   }
 
@@ -27,7 +26,6 @@ export class HomeDashboardComponent implements OnInit {
     this.token = this.credentialsService.getToken().toString();
     this.email = this.credentialsService.getEmail().toString();
   }
-
   toggleSidebar() {
     $('#sidebar, #content').toggleClass('active');
     $('.collapse.in').toggleClass('in');
