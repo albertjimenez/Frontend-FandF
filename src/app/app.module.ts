@@ -30,6 +30,7 @@ import {HeaderService} from './header.service';
 import {ProfileService} from './profile.service';
 import {EventsComponent} from './home-dashboard/events/events.component';
 import {GroupsComponent} from './home-dashboard/groups/groups.component';
+import {FriendsComponent} from './home-dashboard/friends/friends.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -48,7 +49,8 @@ export const routes: Routes = [
     NavbarComponent,
     SidebarComponent,
     EventsComponent,
-    GroupsComponent
+    GroupsComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,
