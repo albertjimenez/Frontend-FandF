@@ -1,0 +1,139 @@
+.rounded-img {
+  display: block;
+  width: 250px;
+  height: 250px;
+  margin: 1em auto;
+  background-size: cover;
+  background: no-repeat center center;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+  border-radius: 99em;
+  border: 5px solid #eee;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+}
+
+.rounded-img-online {
+  display: block;
+  width: 250px;
+  height: 250px;
+  margin: 1em auto;
+  background-size: cover;
+  background: no-repeat center center;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+  border-radius: 99em;
+  border: 5px solid #4caf50;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+}
+
+.example-card {
+  max-width: 500px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.card {
+  display: flex;
+  background-color: #fff;
+  min-width: 150px;
+  min-height: 150px;
+  overflow-x: auto;
+  margin: 5px;
+}
+
+.card::-webkit-scrollbar {
+  display: none;
+}
+
+.card--content {
+  /*Esto es lo que da la anchura al contenido*/
+  min-width: 300px;
+  margin: 5px;
+}
+
+.section-wrapper {
+  border-radius: 25px;
+  border: solid #4eb8dd;
+  background-color: #4eb8dd;
+}
+
+.lobster {
+  font-family: Lobster, sans-serif;
+}
+
+.example-card {
+  max-width: 500px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.dashed-shadow {
+  position: relative;
+  top: 8px;
+  left: 8px;
+  display: inline-block;
+  color: #e74c3c;
+}
+
+.dashed-shadow:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  bottom: -2px;
+  right: -2px;
+}
+
+.dashed-shadow:hover:before {
+  animation: dash-animation 30s infinite linear;
+}
+
+.dashed-shadow:after {
+  content: attr(data-text);
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  color: #353538;
+  text-shadow: 2px 2px #f06292;
+}
+
+.hello {
+  font-family: 'Cookie', cursive;
+  font-size: 50pt;
+}
+
+.card {
+  display: flex;
+  background-color: #fff;
+  min-width: 150px;
+  min-height: 150px;
+  overflow-x: auto;
+  margin: 5px;
+}
+
+.card::-webkit-scrollbar {
+  display: none;
+}
+
+.card--content {
+  /*Esto es lo que da la anchura al contenido*/
+  min-width: 300px;
+  margin: 5px;
+}
+
+.section-wrapper {
+  border-radius: 25px;
+  border: solid #4eb8dd;
+  background-color: #4eb8dd;
+}
+
+.lobster {
+  font-family: Lobster, sans-serif;
+}
+
+
