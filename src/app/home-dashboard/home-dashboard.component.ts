@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CredentialsService} from '../credentials.service';
 import {Router} from '@angular/router';
 import * as $ from 'jquery';
+import '../../assets/scroller.js';
 
 @Component({
   selector: 'app-home-dashboard',
@@ -14,6 +15,7 @@ export class HomeDashboardComponent implements OnInit {
   username = '';
   token = '';
   email = '';
+
   constructor(private credentialsService: CredentialsService, private router: Router) {
   }
 
@@ -25,24 +27,16 @@ export class HomeDashboardComponent implements OnInit {
     this.username = this.credentialsService.getUsername().toString();
     this.token = this.credentialsService.getToken().toString();
     this.email = this.credentialsService.getEmail().toString();
+
   }
+
+  scroll() {
+    document.getElementById('my_elem').scrollLeft += 150;
+  }
+
   toggleSidebar() {
     $('#sidebar, #content').toggleClass('active');
     $('.collapse.in').toggleClass('in');
     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-  }
-
-  goRight() {
-    event.preventDefault();
-    $('#content').animate({
-      scrollLeft: '+=200px'
-    }, 'slow');
-  }
-
-  goLeft() {
-    event.preventDefault();
-    $('#content').animate({
-      scrollLeft: '-=200px'
-    }, 'slow');
   }
 }
