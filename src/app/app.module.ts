@@ -31,6 +31,7 @@ import {ProfileService} from './profile.service';
 import {EventsComponent} from './home-dashboard/events/events.component';
 import {GroupsComponent} from './home-dashboard/groups/groups.component';
 import {FriendsComponent} from './home-dashboard/friends/friends.component';
+import {TopScrollComponent} from './top-scroll/top-scroll.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -50,7 +51,8 @@ export const routes: Routes = [
     SidebarComponent,
     EventsComponent,
     GroupsComponent,
-    FriendsComponent
+    FriendsComponent,
+    TopScrollComponent
   ],
   imports: [
     BrowserModule,
