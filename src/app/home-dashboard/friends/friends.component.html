@@ -1,13 +1,23 @@
 <section class="section-wrapper">
   <span data-text="Amigos" class="dashed-shadow hello">Amigos</span>
+  <br>
+  <div class="w3-container">
+    <div class="">
+      <button mat-mini-fab class="w3-button w3-left" (click)="leftscroll()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <button mat-mini-fab class="w3-button w3-right" (click)="rightscroll()">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+  </div>
   <mat-divider></mat-divider>
-  <div class="card" id="my_elem">
+  <div class="card" id="friends_cards">
     <div class="card--content">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title><strong>Tokeisi</strong></mat-card-title>
+          <mat-card-title><strong>Tokeisi</strong> <strong>(Activo)</strong></mat-card-title>
           <mat-card-subtitle>Última vez hoy a las 18:56</mat-card-subtitle>
-          <mat-card-subtitle><strong>Activo</strong></mat-card-subtitle>
         </mat-card-header>
         <img src="../../../assets/tokeisi.jpg" class="rounded-img-online" mat-card-image>
         <mat-card-content>
@@ -36,9 +46,8 @@
     <div class="card--content">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title><strong>Peris</strong></mat-card-title>
+          <mat-card-title><strong>Peris</strong> <strong>(Activo)</strong></mat-card-title>
           <mat-card-subtitle>Última vez hoy a las 19:20</mat-card-subtitle>
-          <mat-card-subtitle><strong>Activo</strong></mat-card-subtitle>
         </mat-card-header>
         <img src="../../../assets/peris.jpg" class="rounded-img-online" mat-card-image>
         <mat-card-content>

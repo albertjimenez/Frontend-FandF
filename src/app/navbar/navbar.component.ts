@@ -11,7 +11,7 @@ import * as $ from 'jquery';
 })
 export class NavbarComponent implements OnInit {
 
-  isMobile = true;
+  isMobile = false;
 
   constructor(private credentialsService: CredentialsService) {
   }

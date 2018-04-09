@@ -13,4 +13,11 @@ export class GroupsComponent implements OnInit {
   ngOnInit() {
   }
 
+  rightscroll() {
+    document.getElementById('groups_cards').scrollLeft += 303;
+  }
+
+  leftscroll() {
+    document.getElementById('groups_cards').scrollLeft -= 303;
+  }
 }

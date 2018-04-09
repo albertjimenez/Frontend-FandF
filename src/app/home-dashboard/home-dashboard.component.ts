@@ -30,10 +30,6 @@ export class HomeDashboardComponent implements OnInit {
 
   }
 
-  scroll() {
-    document.getElementById('my_elem').scrollLeft += 150;
-  }
-
   toggleSidebar() {
     $('#sidebar, #content').toggleClass('active');
     $('.collapse.in').toggleClass('in');

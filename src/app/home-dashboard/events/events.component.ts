@@ -13,4 +13,11 @@ export class EventsComponent implements OnInit {
   ngOnInit() {
   }
 
+  rightscroll() {
+    document.getElementById('events_cards').scrollLeft += 303;
+  }
+
+  leftscroll() {
+    document.getElementById('events_cards').scrollLeft -= 303;
+  }
 }

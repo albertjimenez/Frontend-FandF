@@ -1,7 +1,17 @@
 <section class="section-wrapper">
   <span data-text="Grupos" class="dashed-shadow hello">Grupos</span>
+  <div class="w3-container">
+    <div class="">
+      <button mat-mini-fab class="w3-button w3-left" (click)="leftscroll()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <button mat-mini-fab class="w3-button w3-right" (click)="rightscroll()">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+  </div>
   <mat-divider></mat-divider>
-  <div class="card">
+  <div class="card" id="groups_cards">
     <div class="card--content" id="content">
       <mat-card class="example-card">
         <mat-card-header>

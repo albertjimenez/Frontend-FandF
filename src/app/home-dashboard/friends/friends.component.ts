@@ -13,4 +13,12 @@ export class FriendsComponent implements OnInit {
   ngOnInit() {
   }
 
+  rightscroll() {
+    document.getElementById('friends_cards').scrollLeft += 303;
+  }
+
+  leftscroll() {
+    document.getElementById('friends_cards').scrollLeft -= 303;
+  }
+
 }
