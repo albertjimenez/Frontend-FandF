@@ -8,8 +8,8 @@ form {
   display: block;
   width: 100%;
   max-width: 400px;
-  background-color: #FFF;
   margin: 0;
+  background: #FFF;
   padding: 2.25em;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
