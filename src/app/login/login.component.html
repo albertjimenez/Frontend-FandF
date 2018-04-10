@@ -152,33 +152,34 @@
   </div>
   <h2 align="center" style="color: #4eb8dd;">Friends and Food</h2>
   <div class="inputGroup inputGroup1">
-    <label for="email">Usuario</label>
+    <label for="email">{{'Usuario'|translate}}</label>
     <input type="text" id="email" name="email" formControlName="username" class="email" maxlength="256" required/>
     <p class="helper helper1">fandfbestapp</p>
     <span class="indicator"></span>
   </div>
   <div class="inputGroup inputGroup2">
-    <label for="password">Contraseña</label>
+    <label for="password">{{'Contraseña'|translate}}</label>
     <input type="password" id="password" name="password" formControlName="password" class="password" required/>
   </div>
   <div class="inputGroup inputGroup3">
-    <button id="login" type="submit" [disabled]="loginFormControl.invalid" mat-button (click)="onLoginAccess()">Entrar
+    <button id="login" type="submit" [disabled]="loginFormControl.invalid" mat-button (click)="onLoginAccess()">
+      {{'Entrar'|translate}}
     </button>
   </div>
   <div class="inputGroup inputGroup3">
-    <button id="login2" type="submit" [routerLink]="['/register']">Registro</button>
+    <button id="login2" type="submit" [routerLink]="['/register']">{{'Registro'|translate}}</button>
   </div>
 </form>
 <swal
   #loginError
-  title="Error en las credenciales"
-  text="Usuario o contraseña incorrectos"
+  title="{{'loginErrorTitle'|translate}}"
+  text="{{'loginErrorText'|translate}}"
   type="error">
 </swal>
 
 <swal
   #loginOk
-  title="Bienvenido"
+  title="{{'loginOk'|translate}}"
   type="success"
   timer="1500">
 </swal>

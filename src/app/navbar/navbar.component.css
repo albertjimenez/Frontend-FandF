@@ -3,6 +3,16 @@
   left: auto;
 }
 
+.flag {
+  border-radius: 50%;
+
+}
+
+.flag:hover {
+  -webkit-filter: brightness(120%) drop-shadow(4px 4px 4px gray); /* Safari 6.0 - 9.0 */
+  filter: brightness(120%) drop-shadow(4px 4px 4px gray);
+
+}
 mat-toolbar {
   width: 100%;
 }

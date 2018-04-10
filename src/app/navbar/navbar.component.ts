@@ -1,19 +1,24 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CredentialsService} from '../credentials.service';
 import * as $ from 'jquery';
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
-  providers: [CredentialsService]
+  providers: [CredentialsService, TranslateService]
 })
 export class NavbarComponent implements OnInit {
 
   isMobile = false;
+  languageList = ['flag-spain', 'flag-uk', 'flag-cat'];
+  i18nLanguageList = ['es', 'en', 'ca'];
+  indexList = 0;
+  countryFlag = 'flag-spain';
 
-  constructor(private credentialsService: CredentialsService) {
+  constructor(private credentialsService: CredentialsService, private translateService: TranslateService) {
   }
 
   @HostListener('window:resize', ['$event'])
@@ -37,5 +42,12 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.toggleSidebar();
     this.credentialsService.logout();
+  }
+
+  translate() {
+    this.indexList += 1;
+    const newIndex = this.indexList % this.languageList.length;
+    this.countryFlag = this.languageList[newIndex];
+    this.translateService.use(this.i18nLanguageList[newIndex]);
   }
 }

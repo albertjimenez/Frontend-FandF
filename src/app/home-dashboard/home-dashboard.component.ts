@@ -3,12 +3,13 @@ import {CredentialsService} from '../credentials.service';
 import {Router} from '@angular/router';
 import * as $ from 'jquery';
 import '../../assets/scroller.js';
+import {WebsocketHomeService} from "../websocket-home.service";
 
 @Component({
   selector: 'app-home-dashboard',
   templateUrl: './home-dashboard.component.html',
   styleUrls: ['./home-dashboard.component.css'],
-  providers: [CredentialsService]
+  providers: [CredentialsService, WebsocketHomeService]
 })
 export class HomeDashboardComponent implements OnInit {
 
@@ -16,7 +17,7 @@ export class HomeDashboardComponent implements OnInit {
   token = '';
   email = '';
 
-  constructor(private credentialsService: CredentialsService, private router: Router) {
+  constructor(private credentialsService: CredentialsService, private router: Router, private wsservice: WebsocketHomeService) {
   }
 
   ngOnInit() {
