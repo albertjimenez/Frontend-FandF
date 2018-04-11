@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
 
 @Component({
@@ -7,11 +6,14 @@ import {Address} from 'ngx-google-places-autocomplete/objects/address';
   templateUrl: './gmaps.component.html',
   styleUrls: ['./gmaps.component.css']
 })
-export class GmapsComponent implements OnInit {
 
+
+export class GmapsComponent implements OnInit {
   tempAddress = null;
-  hours = null;
-  selectedValue: string;
+  hours = [];
+  rating;
+  state;
+  stars = [];
 
   week = [
     {value: '1', viewValue: 'Lunes'},
@@ -30,10 +32,19 @@ export class GmapsComponent implements OnInit {
   onChange(address: Address) {
     // this.number = address.reviews.length;
         this.tempAddress = address;
+        if (address.opening_hours.open_now) {
+          this.state = 'Abierto';
+        } else {
+          this.state = 'Cerrado';
+        }
         console.log(address.opening_hours);
-        console.log(address.opening_hours.periods.map(day => day.open.time + '<:>'  + day.close.time));
-        console.log(address.opening_hours.periods.map(day => day.open.time + '<:>'  + day.close.time)[parseInt(this.selectedValue, 10)]);
-
+        for (let  i = 0; i < address.opening_hours.weekday_text.length; i++) {
+          this.hours.push(address.opening_hours.weekday_text[i].split(': '));
+        }
+        this.rating = address.rating.toFixed();
+        for (let i = 0; i < this.rating; i++) {
+          this.stars.push(i);
+        }
   }
 
 }

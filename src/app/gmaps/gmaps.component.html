@@ -1,23 +1,35 @@
-<mat-form-field>
-  <mat-select placeholder="Dia de la semana" [(ngModel)]="selectedValue">
-    <mat-option *ngFor="let day of week" [value]="day.value">
-      {{ day.viewValue }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<br>
-Dia elegido: {{selectedValue}}
-<br>
-<input ngx-google-places-autocomplete [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places" (onAddressChange)="onChange($event)">
-<p>Informacion del restaurante:<br>
-  Nombre: {{this.tempAddress?.name}}<br>
-  Direccion completa: {{this.tempAddress?.formatted_address}}<br>
-  Telefono: {{this.tempAddress?.formatted_phone_number}}<br>
-  Número de comentarios: {{this.tempAddress?.reviews?.length}}<br>
-  Primer comentario realizado:<br>
-  Autor: {{this.tempAddress?.reviews[0]?.author_name}}<br>
-  Comentario:<br>{{this.tempAddress?.reviews[0]?.text}}<br>
-  Opening now: {{this.tempAddress?.opening_hours?.open_now}}<br>
-  Horario:<br>
-  {{this.tempAddress?.opening_hours?.weekday_text.toLocaleString()}}
-</p>
+<div class="main-div">
+  <div class="mat-title" style="text-align: center">
+  <mat-icon>local_dining</mat-icon>Consultar Restaurantes
+  </div>
+  <div style="text-align: center">
+    <form style="text-align: center">
+      <mat-form-field>
+        <input matInput ngx-google-places-autocomplete [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places" (onAddressChange)="onChange($event)" placeholder="Ubicación">
+      </mat-form-field>
+    </form>
+  </div>
+
+
+  <mat-card class="example-card center animated fadeInUp">
+      <mat-card-header class="background-header"><h1><mat-icon>info</mat-icon>&nbsp;&nbsp;Información general</h1>
+        <pre style='display:inline'>&#09;</pre><pre style='display:inline'>&#09;</pre><pre style='display:inline'>&#09;</pre><pre style='display:inline'>&#09;</pre><pre style='display:inline'>&#09;</pre><span *ngFor="let star of stars"><mat-icon>stars</mat-icon></span></mat-card-header>
+      <mat-card-content>
+        <br><mat-icon>restaurant</mat-icon>&nbsp;&nbsp;Nombre<br>
+        <mat-form-field>
+          <input matInput value="{{this.tempAddress?.name}}" readonly>
+        </mat-form-field><br>
+        <mat-icon>phone</mat-icon>&nbsp;&nbsp;Teléfono<br>
+        <mat-form-field>
+          <input matInput value="{{this.tempAddress?.formatted_phone_number}}" readonly>
+        </mat-form-field><br>
+        <mat-icon>book</mat-icon>&nbsp;&nbsp;Estado actual<br>
+        <mat-form-field>
+          <input matInput value="{{this.state}}" readonly>
+        </mat-form-field><br>
+        <mat-icon>room</mat-icon>&nbsp;&nbsp;Dirección<br>
+        <textarea matInput value="{{this.tempAddress?.formatted_address}}" readonly></textarea>
+      </mat-card-content>
+    </mat-card>
+</div>
+<app-footer></app-footer>

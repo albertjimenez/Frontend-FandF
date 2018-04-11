@@ -10,7 +10,9 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatExpansionModule,
+  MatGridListModule
 } from '@angular/material';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {LoginComponent} from './login/login.component';
@@ -44,12 +46,14 @@ export const routes: Routes = [
     SweetAlert2Module.forRoot(),
     HttpClientModule,
     MatFormFieldModule,
+    MatExpansionModule,
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
     MatCardModule,
+    MatGridListModule,
     GooglePlaceModule,
     ReactiveFormsModule,
     FormsModule
