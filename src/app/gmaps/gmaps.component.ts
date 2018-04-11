@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
+import {tryCatch} from 'rxjs/util/tryCatch';
 
 @Component({
   selector: 'app-gmaps',
@@ -13,13 +14,14 @@ export class GmapsComponent implements OnInit {
   hours = [];
   hour = '';
   rating;
-  state;
+  state = 'No disponible';
   stars = [];
   period_one = [['', '']];
   period_two = [['', '']];
   only_one = false;
-  is_two_empty = false;
+  is_two_empty = true;
   index = 0;
+  is_open = null;
 
   week = [
     {value: '1', viewValue: 'Lunes'},
@@ -41,11 +43,19 @@ export class GmapsComponent implements OnInit {
         this.period_one = [];
         this.period_two = [];
         this.stars = [];
-        if (address.opening_hours.open_now) {
-          this.state = 'Abierto';
-        } else {
-          this.state = 'Cerrado';
+        try {
+          this.is_open = address.opening_hours.open_now;
+        } catch (e) {
+
         }
+        if (this.is_open !== null) {
+          if (this.is_open) {
+            this.state = 'Abierto';
+          } else {
+            this.state = 'Cerrado';
+          }
+        }
+
         console.log(address.opening_hours);
         for (let  i = 0; i < address.opening_hours.weekday_text.length; i++) {
           this.hours.push([this.week[i].viewValue, address.opening_hours.weekday_text[i].split(': ')[1]]);
@@ -73,6 +83,7 @@ export class GmapsComponent implements OnInit {
               }
 
             }
+            this.is_two_empty = false;
           if (this.period_two.length === 1) {
             this.only_one = true;
           }
