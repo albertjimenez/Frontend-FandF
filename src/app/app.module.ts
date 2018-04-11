@@ -32,8 +32,10 @@ import {EventsComponent} from './home-dashboard/events/events.component';
 import {GroupsComponent} from './home-dashboard/groups/groups.component';
 import {FriendsComponent} from './home-dashboard/friends/friends.component';
 import {TopScrollComponent} from './top-scroll/top-scroll.component';
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {ToastrModule} from 'ngx-toastr';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -78,7 +80,8 @@ export const routes: Routes = [
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService],
   bootstrap: [AppComponent]
