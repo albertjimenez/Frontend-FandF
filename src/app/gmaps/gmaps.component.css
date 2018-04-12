@@ -1,0 +1,33 @@
+.example-card {
+  max-width: 800px;
+  width: 100%;
+}
+
+.info_card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.star_icon{
+  color: yellow;
+}
+
+.info_icon{
+  font-size: 36px;
+  color: blue;
+}
+
+.comment_panel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel{
+  max-width: 850px;
+  width: 100%;
+}
+
+
+

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
-import {tryCatch} from 'rxjs/util/tryCatch';
+
 
 @Component({
   selector: 'app-gmaps',
@@ -14,6 +14,7 @@ export class GmapsComponent implements OnInit {
   hours = [];
   hour = '';
   rating;
+  weekdayText = null;
   state = 'No disponible';
   stars = [];
   period_one = [['', '']];
@@ -22,6 +23,7 @@ export class GmapsComponent implements OnInit {
   is_two_empty = true;
   index = 0;
   is_open = null;
+  empty_periods = true;
 
   week = [
     {value: '1', viewValue: 'Lunes'},
@@ -45,6 +47,7 @@ export class GmapsComponent implements OnInit {
         this.stars = [];
         try {
           this.is_open = address.opening_hours.open_now;
+          this.weekdayText = address.opening_hours.weekday_text;
         } catch (e) {
 
         }
@@ -55,26 +58,20 @@ export class GmapsComponent implements OnInit {
             this.state = 'Cerrado';
           }
         }
+        if (this.weekdayText !== null) {
+          for (let  i = 0; i < this.weekdayText.length; i++) {
+            this.hours.push([this.week[i].viewValue, this.weekdayText[i].split(': ')[1]]);
+          }
+          this.hour = this.hours[0][1];
 
-        console.log(address.opening_hours);
-        for (let  i = 0; i < address.opening_hours.weekday_text.length; i++) {
-          this.hours.push([this.week[i].viewValue, address.opening_hours.weekday_text[i].split(': ')[1]]);
-        }
-        this.rating = address.rating.toFixed();
-        for (let i = 0; i < this.rating; i++) {
-          this.stars.push(i);
-        }
-        console.log(this.hours);
-        this.hour = this.hours[0][1];
-        console.log(this.hour);
-        for (this.index = 0; this.index < this.hours.length; this.index++) {
+          for (this.index = 0; this.index < this.hours.length; this.index++) {
             if (this.hours[this.index][1] === this.hour) {
               this.period_one.push(this.hours[this.index]);
             } else {
               break;
             }
-        }
-        if (this.index !== this.hours.length) {
+          }
+          if (this.index !== this.hours.length) {
             for (this.index; this.index < this.hours.length; this.index++) {
               if (this.hours[this.index][1] === 'Closed') {
                 this.period_two.push([this.hours[this.index][0], 'Cerrado']);
@@ -84,16 +81,21 @@ export class GmapsComponent implements OnInit {
 
             }
             this.is_two_empty = false;
-          if (this.period_two.length === 1) {
-            this.only_one = true;
+            if (this.period_two.length === 1) {
+              this.only_one = true;
+            }
+          } else {
+            this.is_two_empty = true;
           }
+          this.empty_periods = false;
         } else {
-          this.is_two_empty = true;
+          this.empty_periods = true;
+        }
+        this.rating = address.rating.toFixed();
+        for (let i = 0; i < this.rating; i++) {
+          this.stars.push(i);
         }
 
-        console.log(this.only_one);
-        console.log(this.period_one);
-        console.log(this.period_two);
   }
 
 }

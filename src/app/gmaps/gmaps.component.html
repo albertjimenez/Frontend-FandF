@@ -1,4 +1,4 @@
-<div class="main-div">
+<div>
   <div class="mat-title" style="text-align: center">
   <mat-icon>local_dining</mat-icon>Consultar Restaurantes
   </div>
@@ -9,14 +9,13 @@
       </mat-form-field>
     </form>
   </div>
-
-
+  <div class="info_card">
   <mat-card class="example-card center animated fadeInUp">
       <mat-card-header class="background-header">
         <table style="width: 100%">
           <tr>
-            <td><h1><mat-icon>info</mat-icon>&nbsp;&nbsp;Información general</h1></td>
-            <td style="text-align: right"><span *ngFor="let star of stars"><mat-icon>stars</mat-icon></span></td>
+            <td><h1><mat-icon class="info_icon">info</mat-icon>&nbsp;&nbsp;Información general</h1></td>
+            <td style="text-align: right"><span *ngFor="let star of stars"><mat-icon class="star_icon">star_rate</mat-icon></span></td>
           </tr>
         </table>
         </mat-card-header>
@@ -30,7 +29,7 @@
             <td><mat-form-field>
               <input matInput value="{{this.tempAddress?.name}}" readonly>
             </mat-form-field></td>
-            <td>De {{this.period_one[0][0]}} a {{this.period_one[this.period_one.length-1][0]}}:{{this.period_one[0][1]}}</td>
+            <td><span *ngIf="empty_periods; then cd1 else cd2"></span><ng-template #cd2>De {{this.period_one[0][0]}} a {{this.period_one[this.period_one.length-1][0]}}:{{this.period_one[0][1]}}</ng-template></td>
           </tr>
           <tr>
             <td><mat-icon>phone</mat-icon>&nbsp;&nbsp;Teléfono</td>
@@ -58,5 +57,43 @@
         <textarea matInput value="{{this.tempAddress?.formatted_address}}" readonly></textarea>
       </mat-card-content>
     </mat-card>
+  </div>
+
+  <br><br>
+  <div class="comment_panel">
+    <mat-accordion>
+      <mat-expansion-panel class="panel">
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            sfhxuifgdhgvf
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        nfsxkjgbshugfksvgflkgfykuesgbrus
+
+      </mat-expansion-panel>
+
+      <span *ngFor="let review of this.tempAddress?.reviews">
+      <mat-expansion-panel class="panel">
+
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{review.author_name}}
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        {{review.text}}
+
+      </mat-expansion-panel>
+      </span>
+    </mat-accordion>
+  </div>
 </div>
 <app-footer></app-footer>
