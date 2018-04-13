@@ -15,7 +15,7 @@ export class GmapsComponent implements OnInit {
   hour = '';
   rating;
   weekdayText = null;
-  state = 'No disponible';
+  state = '';
   stars = [];
   period_one = [['', '']];
   period_two = [['', '']];
@@ -24,6 +24,7 @@ export class GmapsComponent implements OnInit {
   index = 0;
   is_open = null;
   empty_periods = true;
+  phone = null;
 
   week = [
     {value: '1', viewValue: 'Lunes'},
@@ -46,10 +47,14 @@ export class GmapsComponent implements OnInit {
         this.period_two = [];
         this.stars = [];
         try {
+          this.phone = address.formatted_phone_number;
           this.is_open = address.opening_hours.open_now;
           this.weekdayText = address.opening_hours.weekday_text;
         } catch (e) {
 
+        }
+        if (this.phone == null) {
+          this.phone = 'No disponible';
         }
         if (this.is_open !== null) {
           if (this.is_open) {
@@ -57,6 +62,8 @@ export class GmapsComponent implements OnInit {
           } else {
             this.state = 'Cerrado';
           }
+        } else {
+          this.state = 'No disponible';
         }
         if (this.weekdayText !== null) {
           for (let  i = 0; i < this.weekdayText.length; i++) {

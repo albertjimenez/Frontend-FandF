@@ -1,17 +1,18 @@
 <div>
   <div class="mat-title" style="text-align: center">
-  <mat-icon>local_dining</mat-icon>Consultar Restaurantes
+    <h3><mat-icon class="restaurant_icon">local_dining</mat-icon>&nbsp;&nbsp;Consultar Restaurantes</h3>
   </div>
   <div style="text-align: center">
     <form style="text-align: center">
       <mat-form-field>
         <input matInput ngx-google-places-autocomplete [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places" (onAddressChange)="onChange($event)" placeholder="Ubicación">
+        <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </form>
   </div>
   <div class="info_card">
-  <mat-card class="example-card center animated fadeInUp">
-      <mat-card-header class="background-header">
+  <mat-card class="example-card animated fadeInUp">
+      <mat-card-header>
         <table style="width: 100%">
           <tr>
             <td><h1><mat-icon class="info_icon">info</mat-icon>&nbsp;&nbsp;Información general</h1></td>
@@ -23,13 +24,13 @@
         <table style="width: 100%">
           <tr>
             <td><mat-icon>restaurant</mat-icon>&nbsp;&nbsp;Nombre</td>
-            <td><mat-icon>schedule</mat-icon>&nbsp;&nbsp;Horario</td>
+            <td><span *ngIf="empty_periods; then co1 else co2"></span><ng-template #co2><mat-icon>schedule</mat-icon>&nbsp;&nbsp;Horario</ng-template></td>
           </tr>
           <tr>
             <td><mat-form-field>
               <input matInput value="{{this.tempAddress?.name}}" readonly>
             </mat-form-field></td>
-            <td><span *ngIf="empty_periods; then cd1 else cd2"></span><ng-template #cd2>De {{this.period_one[0][0]}} a {{this.period_one[this.period_one.length-1][0]}}:{{this.period_one[0][1]}}</ng-template></td>
+            <td><span *ngIf="empty_periods; then cd1 else cd2"></span><ng-template #cd2>De {{this.period_one[0][0]}} a {{this.period_one[this.period_one.length-1][0]}}: {{this.period_one[0][1]}}</ng-template></td>
           </tr>
           <tr>
             <td><mat-icon>phone</mat-icon>&nbsp;&nbsp;Teléfono</td>
@@ -39,7 +40,7 @@
           </tr>
           <tr>
             <td colspan="2"><mat-form-field>
-              <input matInput value="{{this.tempAddress?.formatted_phone_number}}" readonly>
+              <input matInput value="{{this.phone}}" readonly>
             </mat-form-field></td>
           </tr>
           <tr>
@@ -61,23 +62,11 @@
 
   <br><br>
   <div class="comment_panel">
-    <mat-accordion>
-      <mat-expansion-panel class="panel">
-
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            sfhxuifgdhgvf
-          </mat-panel-title>
-          <mat-panel-description>
-
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        nfsxkjgbshugfksvgflkgfykuesgbrus
-
-      </mat-expansion-panel>
-
-      <span *ngFor="let review of this.tempAddress?.reviews">
+    <mat-card class="example-card animated fadeInUp">
+      <mat-card-header><mat-icon class="comment_icon">comment</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;<h1>Comentarios</h1></mat-card-header>
+      <mat-card-content>
+        <mat-accordion>
+          <span *ngFor="let review of this.tempAddress?.reviews">
       <mat-expansion-panel class="panel">
 
         <mat-expansion-panel-header>
@@ -93,7 +82,9 @@
 
       </mat-expansion-panel>
       </span>
-    </mat-accordion>
+        </mat-accordion>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
 <app-footer></app-footer>
