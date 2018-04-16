@@ -7,6 +7,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -35,6 +36,8 @@ import {TopScrollComponent} from './top-scroll/top-scroll.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
+import {GmapsComponent} from './gmaps/gmaps.component';
+import {GooglePlaceModule} from "ngx-google-places-autocomplete";
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -46,6 +49,7 @@ export const routes: Routes = [
   {path: 'home-dashboard', component: HomeDashboardComponent},
   {path: 'sidebar', component: SidebarComponent},
   {path: 'events', component: EventsComponent},
+  {path: 'gmaps', component: GmapsComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
@@ -59,7 +63,8 @@ export const routes: Routes = [
     EventsComponent,
     GroupsComponent,
     FriendsComponent,
-    TopScrollComponent
+    TopScrollComponent,
+    GmapsComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +79,8 @@ export const routes: Routes = [
     MatToolbarModule,
     MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule,
     MatDividerModule,
+    MatExpansionModule,
+    GooglePlaceModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

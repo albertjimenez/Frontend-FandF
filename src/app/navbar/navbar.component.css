@@ -13,6 +13,7 @@
   filter: brightness(120%) drop-shadow(4px 4px 4px gray);
 
 }
+
 mat-toolbar {
   width: 100%;
 }

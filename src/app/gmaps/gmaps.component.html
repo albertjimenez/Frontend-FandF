@@ -3,12 +3,12 @@
     <h3><mat-icon class="restaurant_icon">local_dining</mat-icon>&nbsp;&nbsp;Consultar Restaurantes</h3>
   </div>
   <div style="text-align: center">
-    <form style="text-align: center">
-      <mat-form-field>
+
+    <mat-form-field>
         <input matInput ngx-google-places-autocomplete [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places" (onAddressChange)="onChange($event)" placeholder="Ubicación">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
-    </form>
+
   </div>
   <div class="info_card">
   <mat-card class="example-card animated fadeInUp">
@@ -87,4 +87,3 @@
     </mat-card>
   </div>
 </div>
-<app-footer></app-footer>

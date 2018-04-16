@@ -1,4 +1,3 @@
-
 // TODO cambiar esto cuando te conectes por el móvil
 // const API = 'http://192.168.1.5:4567/api/';
 const API = 'http://localhost:4567/api/';
