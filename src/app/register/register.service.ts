@@ -16,7 +16,7 @@ export class RegisterService {
       name: registerClass.name,
       username: registerClass.username,
       password: registerClass.password,
-      surnames: registerClass.surname,
+      surnames: registerClass.surnames,
       email: registerClass.email,
     };
     return this.httpClient.post(registerEndpoint, object, this.headerService.buildHeaderForRegister(registerClass));
@@ -25,7 +25,7 @@ export class RegisterService {
 
 export interface RegisterClass {
   name: string;
-  surname: string;
+  surnames: string;
   email: string;
   username: string;
   password: string;

@@ -1,0 +1,25 @@
+<mat-toolbar class="animated fadeInDown fandf-color">
+  <button mat-mini-fab (click)="this.toggleSidebar()"
+          matTooltip="Conmutar visión de la barra lateral">
+    <mat-icon>settings</mat-icon>
+  </button>
+  <span class="righter"></span>
+  <span *ngIf="this.hideButtonOnExistSession()">
+    <button mat-mini-fab class="nostra-color" [matMenuTriggerFor]="menu" *ngIf="this.isMobile">
+          <mat-icon>menu</mat-icon>
+    </button>
+    <a (click)="translate()" matTooltip="{{'Traducir'|translate}}">
+      <img src="../../assets/flags/{{countryFlag}}.png" class="flag" height="45" width="45">
+    </a>
+    <button mat-mini-fab class="" matTooltip="Volver al inicio" routerLink="home-dashboard">
+        <mat-icon>home</mat-icon>
+      </button>
+    <mat-menu #menu="matMenu" matTooltip="Buscar">
+      <button mat-menu-item (click)="logout()" matTooltip="Cerrar sesión">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>{{'Salir' | translate}}</span>
+      </button>
+    </mat-menu>
+
+  </span>
+</mat-toolbar>

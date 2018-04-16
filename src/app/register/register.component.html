@@ -1,64 +1,67 @@
-<div class="main-div">
-  <form [formGroup]="registerFormControl">
-    <mat-card class="example-card center animated fadeInLeft">
-      <mat-card-header class="background-header">
-        <img mat-card-image src="../../assets/food-provisional-logo.png" height="92" width="420">
-      </mat-card-header>
-
-      <mat-card-content>
-        <mat-icon>account_circle</mat-icon>
-        <mat-input-container>
-          <input matInput placeholder="Nombre" type="text" formControlName="name">
-        </mat-input-container>
-        <br>
-        <mat-icon>account_box</mat-icon>
-        <mat-input-container>
-          <input matInput placeholder="Apellidos" type="text" formControlName="surname">
-        </mat-input-container>
-        <br>
-        <mat-icon>email</mat-icon>
-        <mat-input-container>
-          <input matInput placeholder="Correo electrónico" type="email" formControlName="email">
-        </mat-input-container>
-        <br>
-        <mat-icon>assignment_ind</mat-icon>
-        <mat-input-container>
-          <input matInput placeholder="Nombre de usuario" type="text" formControlName="username">
-        </mat-input-container>
-        <br>
-        <a (click)="this.showPassword(firstInput)">
-          <mat-icon>remove_red_eye</mat-icon>
-        </a>
-        <mat-input-container>
-          <input #firstInput matInput placeholder="Contraseña" type="password" formControlName="password">
-        </mat-input-container>
-        <br>
-        <a (click)="this.showPassword(secondInput)">
-          <mat-icon>remove_red_eye</mat-icon>
-        </a>
-        <mat-input-container>
-          <input #secondInput matInput placeholder="Repite la contraseña" type="password" formControlName="rePassword">
-        </mat-input-container>
-        <br>
-        <button type="submit" mat-raised-button class="login-button lbutton"
-                (click)="this.submitRegisterForm(passwordSwal)">
-          <mat-icon>input</mat-icon>
-          Registrarse
-        </button>
-        <br>
-        <br>
-        <button mat-raised-button [routerLink]="['/login']" color="accent">
-          <mat-icon>keyboard_return</mat-icon>
-          Atrás
-        </button>
-      </mat-card-content>
-    </mat-card>
-  </form>
-</div>
+<form [formGroup]="registerFormControl">
+  <div class="inputGroup inputGroup2">
+    <label for="name">{{'Nombre'|translate}}</label>
+    <input matInput placeholder="{{'Nombre'|translate}}" id="name" type="text" formControlName="name">
+    <span class="indicator"></span>
+  </div>
+  <div class="inputGroup inputGroup2">
+    <label for="apellidos">{{'Apellidos'|translate}}</label>
+    <input matInput placeholder="{{'Apellidos'|translate}}" id="apellidos" type="text" formControlName="surname">
+  </div>
+  <mat-input-container>
+    <label for="email">Email</label>
+    <div class="inputGroup inputGroup2" style="width: 335px">
+      <input matInput id="email" type="email" formControlName="email">
+    </div>
+  </mat-input-container>
+  <div class="inputGroup inputGroup2">
+    <label for="username">{{'Nombre de usuario'|translate}}</label>
+    <input matInput placeholder="{{'Nombre de usuario'|translate}}" id="username" type="text"
+           formControlName="username">
+  </div>
+  <div class="inputGroup inputGroup2">
+    <label for="password">{{'Contraseña'|translate}}</label>
+    <input #firstInput id="password" matInput placeholder="{{'Contraseña'|translate}}" type="password"
+           formControlName="password">
+  </div>
+  <div class="inputGroup inputGroup2">
+    <label for="password2">{{'Repite la contraseña'|translate}}</label>
+    <input #secondInput matInput id="password2" placeholder="{{'Repite la contraseña'|translate}}" type="password"
+           formControlName="rePassword">
+  </div>
+  <div class="inputGroup inputGroup3">
+    <button id="login" mat-button type="submit" (click)="this.submitRegisterForm(passwordSwal)"
+            [disabled]="this.registerFormControl.invalid">{{'Registro'|translate}}
+    </button>
+  </div>
+  <div class="inputGroup inputGroup3">
+    <button id="login2" type="submit" [routerLink]="['/login']">{{'Atrás'|translate}}</button>
+  </div>
+  <div *ngIf="this.isRegistering">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+</form>
 <swal
   #passwordSwal
-  title="Las contraseñas no coinciden"
-  text="Revisa los campos de las contraseñas"
+  title="{{'passwordSwalTitle'|translate}}"
+  text="{{'passwordSwalText'|translate}}"
   type="error">
 </swal>
-<app-footer></app-footer>
+<swal
+  #loginOkSwal
+  title="{{'loginOkSwalTitle'|translate}}"
+  text="{{'loginOkSwalText'|translate}}"
+  type="success">
+</swal>
+<swal
+  #duplicatedEmail
+  title="{{'duplicatedEmailTitle'|translate}}"
+  text="{{'duplicatedEmailText'|translate}}"
+  type="error">
+</swal>
+<swal
+  #duplicatedUsername
+  title="{{'duplicatedUsernameTitle'|translate}}"
+  text="{{'duplicatedUsernameText'|translate}}"
+  type="error">
+</swal>

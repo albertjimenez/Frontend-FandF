@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatInput} from '@angular/material';
 import {SwalComponent} from '@toverux/ngx-sweetalert2';
 import {RegisterClass, RegisterService} from './register.service';
 import {HeaderService} from '../header.service';
+import {LoginService} from '../login/login.service';
+import {CredentialsService} from '../credentials.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +18,14 @@ export class RegisterComponent implements OnInit {
 
 
   registerFormControl: FormGroup;
-  anyErrors = false;
+  isRegistering = false;
+  @ViewChild('passwordSwal') passwordSwal: SwalComponent;
+  @ViewChild('loginOkSwal') loginOkSwal: SwalComponent;
+  @ViewChild('duplicatedEmail') duplicatedEmail: SwalComponent;
+  @ViewChild('duplicatedUsername') duplicatedUsername: SwalComponent;
 
-  constructor(private registerService: RegisterService) {
+  constructor(private registerService: RegisterService, private loginService: LoginService,
+              private credentialsService: CredentialsService, private router: Router) {
   }
 
   ngOnInit() {
@@ -42,32 +50,55 @@ export class RegisterComponent implements OnInit {
 
   submitRegisterForm(swal: SwalComponent) {
     const name = this.registerFormControl.value.name;
-    const surname = this.registerFormControl.value.surname;
+    const surnames = this.registerFormControl.value.surname;
     const email = this.registerFormControl.value.email;
     const username = this.registerFormControl.value.username;
     const password = this.registerFormControl.value.password;
     const rePassword = this.registerFormControl.value.rePassword;
     const registerClass: RegisterClass = {
       name: name,
-      surname: surname,
+      surnames: surnames,
       email: email,
       username: username,
       password: password
     };
+    const success = (_) => {
+      this.loginService.postLoginCredentials(registerClass.username, registerClass.password).subscribe(token =>
+        afterSuccess(token), err => console.log(err));
+    };
+    // para obtener el token, después de haberse registrado, hacemos una petición al login para
+    // tener el token y guardarlo en la sesión
+
+    const afterSuccess = (data) => {
+      this.credentialsService.storeMySession(registerClass.username, data.valueOf()['message'], password, email);
+      this.loginOkSwal.show();
+      this.isRegistering = false;
+      this.router.navigateByUrl('/sidebar');
+    };
+    const showErrors = (error) => {
+      console.log(error);
+      if (error.status === 409) {// CONFLICT
+        if (error.error.message.toString().indexOf('username') >= 0) {
+          this.duplicatedUsername.show();
+        } else {
+          this.duplicatedEmail.show();
+        }
+      }
+    };
+
     if (password === rePassword) {
-      console.log('Oquei');
-      const logRequest = (data) => {
-        console.log(data);
-      };
       if (this.registerFormControl.valid) {
         this.registerService.postRegisterData(registerClass).subscribe(
-          data => logRequest(data),
-          error => logRequest(error)
+          data => success(data),
+          error => {
+            console.log('Error', error);
+            this.isRegistering = false;
+            showErrors(error);
+          }
         );
       }
     } else {
       swal.show();
     }
-    console.log(name, surname, email, username, password, rePassword);
   }
 }

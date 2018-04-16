@@ -4,30 +4,48 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MatSelectModule,
   MatButtonModule,
   MatCardModule,
+  MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
   MatToolbarModule,
-  MatExpansionModule
+  MatTooltipModule
 } from '@angular/material';
-import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import {RegisterComponent} from './register/register.component';
-import {FooterComponent} from './footer/footer.component';
 import {LoginService} from './login/login.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
-import {FormsModule} from '@angular/forms';
-import { GmapsComponent } from './gmaps/gmaps.component';
+import {HomeDashboardComponent} from './home-dashboard/home-dashboard.component';
+import {NavbarComponent} from './navbar/navbar.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {CredentialsService} from './credentials.service';
+import {RegisterService} from './register/register.service';
+import {HeaderService} from './header.service';
+import {ProfileService} from './profile.service';
+import {EventsComponent} from './home-dashboard/events/events.component';
+import {GroupsComponent} from './home-dashboard/groups/groups.component';
+import {FriendsComponent} from './home-dashboard/friends/friends.component';
+import {TopScrollComponent} from './top-scroll/top-scroll.component';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {ToastrModule} from 'ngx-toastr';
 
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'gmaps', component: GmapsComponent},
+  {path: 'home-dashboard', component: HomeDashboardComponent},
+  {path: 'sidebar', component: SidebarComponent},
+  {path: 'events', component: EventsComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
@@ -35,8 +53,13 @@ export const routes: Routes = [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    FooterComponent,
-    GmapsComponent
+    HomeDashboardComponent,
+    NavbarComponent,
+    SidebarComponent,
+    EventsComponent,
+    GroupsComponent,
+    FriendsComponent,
+    TopScrollComponent
   ],
   imports: [
     BrowserModule,
@@ -45,18 +68,22 @@ export const routes: Routes = [
     SweetAlert2Module.forRoot(),
     HttpClientModule,
     MatFormFieldModule,
-    MatExpansionModule,
-    MatSelectModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
-    MatCardModule,
-    GooglePlaceModule,
-    ReactiveFormsModule,
-    FormsModule
+    MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule,
+    MatDividerModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    ToastrModule.forRoot(), // ToastrModule added
   ],
-  providers: [LoginService, HttpClient],
+  providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

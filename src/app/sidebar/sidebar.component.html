@@ -1,0 +1,39 @@
+<div class="wrapper" *ngIf="sessionExists(); else loginScreen">
+  <!-- Sidebar Holder -->
+  <nav id="sidebar">
+    <div class="sidebar-header item">
+      <h3>{{username}}</h3>
+      <img src="../../assets/avatar.svg" height="auto" width="128">
+    </div>
+
+    <ul class="list-unstyled components">
+      <p>{{'Menú'|translate}}</p>
+      <li class="active">
+        <a routerLink="home-dashboard">Home</a>
+      </li>
+      <li>
+        <a>{{'Mis eventos' | translate}}</a>
+        <a>{{'Mis grupos' | translate}}</a>
+      </li>
+      <li>
+        <a>{{'Mis amigos'|translate}}</a>
+      </li>
+      <li>
+        <a>{{'Restaurantes'|translate}}</a>
+      </li>
+    </ul>
+
+    <ul class="list-unstyled CTAs">
+      <li><a class="download" href="#" color="primary" (click)="logout()">{{'Salir'|translate}}</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Content Holder -->
+  <div id="content">
+    <app-navbar *ngIf="this.sessionExists()"></app-navbar>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<ng-template #loginScreen>
+  <router-outlet></router-outlet>
+</ng-template>
