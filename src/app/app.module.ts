@@ -37,7 +37,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
-import {GooglePlaceModule} from "ngx-google-places-autocomplete";
+import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
+import { CreateGroupComponent } from './home-dashboard/groups/create-group/create-group.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -50,6 +51,7 @@ export const routes: Routes = [
   {path: 'sidebar', component: SidebarComponent},
   {path: 'events', component: EventsComponent},
   {path: 'gmaps', component: GmapsComponent},
+  {path: 'create-group', component: CreateGroupComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
@@ -64,7 +66,8 @@ export const routes: Routes = [
     GroupsComponent,
     FriendsComponent,
     TopScrollComponent,
-    GmapsComponent
+    GmapsComponent,
+    CreateGroupComponent
   ],
   imports: [
     BrowserModule,
