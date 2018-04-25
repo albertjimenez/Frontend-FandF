@@ -1,14 +1,14 @@
-<div>
-  <mat-card>
+<div class="main_div">
+  <mat-card class="card animated fadeInUp">
     <mat-card-header>
-      <h1><mat-icon class="group_icon">supervisor_account</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;{{"Crear grupo"|translate}}</h1>
+      <h1><mat-icon class="group_icon">supervisor_account</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;Crear grupo</h1>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="createFrom">
         <table style="width: 100%">
           <tr>
             <td><input type="file" formControlName="image"></td>
-            <td><mat-label>{{"Nombre"|translate}}</mat-label>
+            <td><mat-label>Nombre</mat-label>
               <br>
               <mat-form-field>
                 <input matInput id="groupname" name="groupname" formControlName="groupname">
@@ -16,11 +16,62 @@
             </td>
           </tr>
         </table>
-        <mat-label>{{"Participantes"|translate}}</mat-label><br>
-        <textarea matInput formControlName="members"></textarea><br>
-        <mat-label>Sugerencias</mat-label><br>
-        <input matInput><br>
-        <button type="submit" mat-button (click)="createGroup()">{{"Crear"|translate}}</button>
+        <mat-label>Descripcion</mat-label><br>
+        <mat-form-field>
+          <textarea matInput formControlName="description"></textarea><br>
+        </mat-form-field><br>
+        <mat-label>Participantes</mat-label><br>
+        <mat-form-field>
+          <textarea matInput formControlName="members"></textarea><br>
+        </mat-form-field><br>
+        <mat-label>Buscar amigos</mat-label><br>
+        <mat-form-field>
+          <input type="text" matInput><br>
+        </mat-form-field><br>
+        <div id="privacy_select">
+        <mat-label>Selecciona la privacidad del grupo</mat-label><br>
+         <table width="100%">
+           <tr>
+             <td>
+               <mat-form-field>
+                 <mat-select [(value)]="selectedValue" name="privacy" (change)="change_privacity()">
+                   <mat-option value="private" selected>Privado</mat-option>
+                   <mat-option value="public">Público</mat-option>
+                 </mat-select>
+               </mat-form-field>
+             </td>
+             <td>
+               <div id="privacy">
+                 <span *ngIf="emptyPrivacy; then cd1 else cd2"></span>
+                 <ng-template #cd2>
+                   <span *ngIf="closedGroup; then c1 else c2"></span>
+                   <ng-template #c1>
+                     <mat-card>
+                       <mat-card-header>
+                         <mat-icon>lock</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;Grupo privado
+                       </mat-card-header>
+                       <mat-card-content>
+                         Solo el propietario del grupo puede invitar a otros usuarios.
+                       </mat-card-content>
+                     </mat-card>
+                   </ng-template>
+                   <ng-template #c2>
+                     <mat-card>
+                       <mat-card-header>
+                         <mat-icon>language</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;Grupo público
+                       </mat-card-header>
+                       <mat-card-content>
+                         Cualquier usuario puede encontrar el grupo y solicitar unirse.
+                       </mat-card-content>
+                     </mat-card>
+                   </ng-template>
+                 </ng-template>
+               </div>
+             </td>
+           </tr>
+         </table>
+        </div>
+        <br><button type="submit" mat-button (click)="createGroup()">Crear</button>
       </form>
     </mat-card-content>
   </mat-card>

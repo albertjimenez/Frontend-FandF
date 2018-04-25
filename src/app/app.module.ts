@@ -14,7 +14,8 @@ import {
   MatMenuModule,
   MatProgressSpinnerModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSelectModule
 } from '@angular/material';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -83,6 +84,7 @@ export const routes: Routes = [
     MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule,
     MatDividerModule,
     MatExpansionModule,
+    MatSelectModule,
     GooglePlaceModule,
     TranslateModule.forRoot({
       loader: {
