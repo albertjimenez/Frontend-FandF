@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
+import {Router} from '@angular/router';
+import {CredentialsService} from '../credentials.service';
 
 
 @Component({
   selector: 'app-gmaps',
   templateUrl: './gmaps.component.html',
-  styleUrls: ['./gmaps.component.css']
+  styleUrls: ['./gmaps.component.css'],
+  providers: [CredentialsService]
 })
 
 
@@ -25,6 +28,7 @@ export class GmapsComponent implements OnInit {
   is_open = null;
   empty_periods = true;
   phone = null;
+  photoArray = [];
 
   week = [
     {value: '1', viewValue: 'Lunes'},
@@ -35,73 +39,81 @@ export class GmapsComponent implements OnInit {
     {value: '6', viewValue: 'Sabado'},
     {value: '0', viewValue: 'Domingo'}
   ];
-  constructor() { }
+
+  constructor(private credentialsService: CredentialsService, private router: Router) {
+  }
 
   ngOnInit() {
-
+    if (!this.credentialsService.sessionExists()) {
+      this.router.navigateByUrl('/login');
+      return;
+    }
   }
+
   onChange(address: Address) {
-        this.tempAddress = address;
-        this.hours = [];
-        this.period_one = [];
-        this.period_two = [];
-        this.stars = [];
-        try {
-          this.phone = address.formatted_phone_number;
-          this.is_open = address.opening_hours.open_now;
-          this.weekdayText = address.opening_hours.weekday_text;
-        } catch (e) {
+    console.log(address);
+    this.tempAddress = address;
+    this.hours = [];
+    this.period_one = [];
+    this.period_two = [];
+    this.stars = [];
+    try {
+      this.phone = address.formatted_phone_number;
+      this.is_open = address.opening_hours.open_now;
+      this.weekdayText = address.opening_hours.weekday_text;
+    } catch (e) {
 
-        }
-        if (this.phone == null) {
-          this.phone = 'No disponible';
-        }
-        if (this.is_open !== null) {
-          if (this.is_open) {
-            this.state = 'Abierto';
+    }
+    if (this.phone == null) {
+      this.phone = 'No disponible';
+    }
+    if (this.is_open !== null) {
+      if (this.is_open) {
+        this.state = 'Abierto';
+      } else {
+        this.state = 'Cerrado';
+      }
+    } else {
+      this.state = 'No disponible';
+    }
+    if (this.weekdayText !== null) {
+      this.weekdayText.map((data, index) => this.hours.push([this.week[index].viewValue, data.split(': ')[1]]));
+      this.hour = this.hours[0][1];
+      for (let i = 0; i < address.photos.length; i++) {
+        console.log('Data phtos ', address.photos[i]);
+        const ph = address.photos[i] as any; // Si lo dejas en Photo no reconoce el método
+        console.log(ph.getUrl({maxWidth: 100, maxHeight: 150}));
+      }
+
+      this.hours.filter(data => data[1] === this.hour).map(data => this.period_one.push(data));
+
+      if (this.index !== this.hours.length) {
+
+        for (this.index; this.index < this.hours.length; this.index++) {
+          if (this.hours[this.index][1] === 'Closed') {
+            this.period_two.push([this.hours[this.index][0], 'Cerrado']);
+          } else if (this.hours[this.index][1] === 'Open 24 hours') {
+            this.period_two.push([this.hours[this.index][0], 'Abierto 24 horas']);
           } else {
-            this.state = 'Cerrado';
+            this.period_two.push(this.hours[this.index]);
           }
-        } else {
-          this.state = 'No disponible';
-        }
-        if (this.weekdayText !== null) {
-          for (let  i = 0; i < this.weekdayText.length; i++) {
-            this.hours.push([this.week[i].viewValue, this.weekdayText[i].split(': ')[1]]);
-          }
-          this.hour = this.hours[0][1];
 
-          for (this.index = 0; this.index < this.hours.length; this.index++) {
-            if (this.hours[this.index][1] === this.hour) {
-              this.period_one.push(this.hours[this.index]);
-            } else {
-              break;
-            }
-          }
-          if (this.index !== this.hours.length) {
-            for (this.index; this.index < this.hours.length; this.index++) {
-              if (this.hours[this.index][1] === 'Closed') {
-                this.period_two.push([this.hours[this.index][0], 'Cerrado']);
-              } else {
-                this.period_two.push(this.hours[this.index]);
-              }
-
-            }
-            this.is_two_empty = false;
-            if (this.period_two.length === 1) {
-              this.only_one = true;
-            }
-          } else {
-            this.is_two_empty = true;
-          }
-          this.empty_periods = false;
-        } else {
-          this.empty_periods = true;
         }
-        this.rating = address.rating.toFixed();
-        for (let i = 0; i < this.rating; i++) {
-          this.stars.push(i);
+        this.is_two_empty = false;
+        if (this.period_two.length === 1) {
+          this.only_one = true;
         }
+      } else {
+        this.is_two_empty = true;
+      }
+      this.empty_periods = false;
+    } else {
+      this.empty_periods = true;
+    }
+    this.rating = address.rating.toFixed();
+    for (let i = 0; i < this.rating; i++) {
+      this.stars.push(i);
+    }
 
   }
 
