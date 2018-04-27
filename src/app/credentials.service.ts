@@ -11,7 +11,6 @@ export class CredentialsService {
   }
 
   storeMySession(username: String, token: String, password: String, email: String) {
-    console.log(username, token, password, email);
     [username, token, password, email].map((data, index) =>
       localStorage.setItem(KEYS[index], data.toString()));
   }

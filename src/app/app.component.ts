@@ -12,7 +12,7 @@ export class AppComponent {
 
   constructor(private credentialsService: CredentialsService, private translateService: TranslateService) {
     this.translateService.use('es');
-    this.translateService.setDefaultLang('en');
+    this.translateService.setDefaultLang('es');
   }
 
   sessionExists() {
