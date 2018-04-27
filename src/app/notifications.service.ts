@@ -12,7 +12,12 @@ export class NotificationsService {
     if (!('Notification' in window)) {
       alert('Este navegador no soporta las notificaciones del sistema');
     } else if (this.notif.permission !== 'denied') {
-      Notification.requestPermission().then(thenFunction).catch(catchFunction);
+
+      try {
+        Notification.requestPermission().then(thenFunction).catch(catchFunction);
+      } catch {
+        console.log('Safari');
+      }
     }
   }
 
