@@ -5,7 +5,7 @@ import * as $ from 'jquery';
 import '../../assets/scroller.js';
 import {WebsocketHomeService} from '../websocket-home.service';
 import {ToastrService} from 'ngx-toastr';
-import {NotificationsService} from "../notifications.service";
+import {NotificationsService} from '../notifications.service';
 
 @Component({
   selector: 'app-home-dashboard',
@@ -34,7 +34,7 @@ export class HomeDashboardComponent implements OnInit {
     this.email = this.credentialsService.getEmail().toString();
     this.notificationService.askPermission(value => {
       console.log('Ok notificaciones', value);
-      this.notificationService.showNotification('Prueba', '');
+      this.notificationService.showNotification('Prueba', 'Esto es una prueba bro');
       return 'ok';
     }, (reason => console.log('Error, denied')));
 
