@@ -36,7 +36,7 @@ export class HomeDashboardComponent implements OnInit {
       console.log('Ok notificaciones', value);
       return 'ok';
     }, (reason => console.log('Error, denied')));
-    this.notificationService.showNotification('Prueba', 'Esto es una prueba bro');
+    // this.notificationService.showNotification('Prueba', 'Esto es una prueba bro');
   }
 
   toggleSidebar() {

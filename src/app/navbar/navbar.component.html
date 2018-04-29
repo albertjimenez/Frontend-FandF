@@ -1,4 +1,4 @@
-<mat-toolbar class="animated fadeInDown fandf-color">
+<mat-toolbar class="animated fadeInDown fandf-navbar-color rounded-navbar">
   <button mat-mini-fab (click)="this.toggleSidebar()"
           matTooltip="Conmutar visión de la barra lateral">
     <mat-icon>settings</mat-icon>
@@ -15,9 +15,17 @@
         <mat-icon>home</mat-icon>
       </button>
     <mat-menu #menu="matMenu" matTooltip="Buscar">
-      <button mat-menu-item (click)="logout()" matTooltip="Cerrar sesión">
+      <button mat-menu-item (click)="logout()" matTooltip="{{'Salir'|translate}}">
         <mat-icon>exit_to_app</mat-icon>
         <span>{{'Salir' | translate}}</span>
+      </button>
+      <button mat-menu-item routerLink="/gmaps" matTooltip="{{'Restaurantes' | translate}}">
+        <mat-icon>restaurant</mat-icon>
+        <span>{{'Restaurantes' | translate}}</span>
+      </button>
+      <button mat-menu-item routerLink="/my-profile" matTooltip="{{'Mi perfil' | translate}}">
+        <mat-icon>assignment_id</mat-icon>
+        <span>{{'Mi perfil' | translate}}</span>
       </button>
     </mat-menu>
 

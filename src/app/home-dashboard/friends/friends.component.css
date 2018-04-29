@@ -55,8 +55,8 @@
 
 .section-wrapper {
   border-radius: 25px;
-  border: solid #4eb8dd;
-  background-color: #4eb8dd;
+  /*border: solid #4eb8dd;*/
+  /*background-color: #4eb8dd;*/
 }
 
 .lobster {
@@ -126,11 +126,6 @@
   margin: 5px;
 }
 
-.section-wrapper {
-  border-radius: 25px;
-  border: solid #4eb8dd;
-  background-color: #4eb8dd;
-}
 
 .lobster {
   font-family: Lobster, sans-serif;

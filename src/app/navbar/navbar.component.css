@@ -18,8 +18,10 @@ mat-toolbar {
   width: 100%;
 }
 
-.fandf-color {
-  background: #4eb8dd;
+.fandf-navbar-color {
+  background: #555555;
+  box-shadow: 0 0 10px black;
+  z-index: 2;
 }
 
 .righter {
@@ -53,4 +55,8 @@ mat-toolbar {
 
 .my-shadow {
   text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+}
+
+.rounded-navbar {
+  border-radius: 25px;
 }

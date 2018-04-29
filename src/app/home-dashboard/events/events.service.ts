@@ -9,3 +9,11 @@ export class EventsService {
   }
 
 }
+
+export interface Event {
+  name: string;
+  date: number;
+  description: string;
+  placeId: string;
+  groupId: string;
+}

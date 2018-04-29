@@ -2,10 +2,14 @@
   <!-- Sidebar Holder -->
   <nav id="sidebar">
     <div class="sidebar-header item">
-      <h3>{{username}}</h3>
-      <img src="../../assets/avatar.svg" height="auto" width="128">
-    </div>
 
+    </div>
+    <a routerLink="/my-profile">
+      <img src="../../assets/avatar.svg" height="auto" width="128" class="rounded-img center-img">
+    </a>
+    <a routerLink="/my-profile">
+      <h3 class="deepshadow">{{username}}</h3>
+    </a>
     <ul class="list-unstyled components">
       <p>{{'Menú'|translate}}</p>
       <li class="active">

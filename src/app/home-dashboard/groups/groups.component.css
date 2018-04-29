@@ -41,8 +41,8 @@
 
 .section-wrapper {
   border-radius: 25px;
-  border: solid #4eb8dd;
-  background-color: #4eb8dd;
+  /*border: solid #4eb8dd;*/
+  /*background-color: #4eb8dd;*/
 }
 
 .lobster {
@@ -110,12 +110,6 @@
   /*Esto es lo que da la anchura al contenido*/
   min-width: 300px;
   margin: 5px;
-}
-
-.section-wrapper {
-  border-radius: 25px;
-  border: solid #4eb8dd;
-  background-color: #4eb8dd;
 }
 
 .lobster {

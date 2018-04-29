@@ -28,5 +28,6 @@
   "duplicatedEmailTitle": "Email duplicado",
   "duplicatedEmailText": "Prueba a iniciar sesión con ese email",
   "duplicatedUsernameTitle": "Nombre de usuario duplicado",
-  "duplicatedUsernameText": "Inténtalo otra vez con otro usuario"
+  "duplicatedUsernameText": "Inténtalo otra vez con otro usuario",
+  "Mi perfil": "Mi perfil"
 }

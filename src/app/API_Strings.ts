@@ -2,7 +2,8 @@
 const API = 'https://foodandfriendsapp.herokuapp.com/api/';
 export const login_endpoint = API + 'login';
 export const register_endpoint = API + 'register';
-export const home_endpoint = API + 'home';
+export const event_endpoint = API + 'event';
+export const group_endpoint = API + 'group';
 export const fetch_email = API + 'fetch_email';
-// export const WS_HELLO = 'wss://localhost:4567/api/hello';
-export const WS_HELLO = 'wss://foodandfriendsapp.herokuapp.com/api/hello';
+// export const WS_HOME = 'wss://localhost:4567/api/hello';
+export const WS_HOME = 'wss://foodandfriendsapp.herokuapp.com/api/hello';

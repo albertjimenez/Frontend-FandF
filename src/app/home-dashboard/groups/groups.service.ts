@@ -9,3 +9,10 @@ export class GroupsService {
   }
 
 }
+
+export interface Group {
+  name: string;
+  description: string;
+  closed: boolean;
+  users: [string];
+}

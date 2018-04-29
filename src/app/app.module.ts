@@ -37,7 +37,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
-import {GooglePlaceModule} from "ngx-google-places-autocomplete";
+import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
+import {MyProfileComponent} from './my-profile/my-profile.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -49,7 +50,10 @@ export const routes: Routes = [
   {path: 'home-dashboard', component: HomeDashboardComponent},
   {path: 'sidebar', component: SidebarComponent},
   {path: 'events', component: EventsComponent},
+  {path: 'groups', component: GroupsComponent},
+  {path: 'friends', component: FriendsComponent},
   {path: 'gmaps', component: GmapsComponent},
+  {path: 'my-profile', component: MyProfileComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
@@ -64,7 +68,8 @@ export const routes: Routes = [
     GroupsComponent,
     FriendsComponent,
     TopScrollComponent,
-    GmapsComponent
+    GmapsComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
