@@ -30,5 +30,7 @@
   "duplicatedUsernameTitle": "Username duplicated",
   "duplicatedUsernameText": "Try again with any other username",
   "Mi perfil": "My profile",
-  "Filtrar eventos": "Filter events"
+  "Filtrar eventos": "Filter events",
+  "Filtrar grupos": "Filter groups",
+  "Filtrar amigos": "Filter friends"
 }

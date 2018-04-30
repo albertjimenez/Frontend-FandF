@@ -30,5 +30,7 @@
   "duplicatedUsernameTitle": "Nom d' usuari duplicat",
   "duplicatedUsernameText": "Intenta-ho una altra volta amb un altre usuari",
   "Mi perfil": "Meu perfil",
-  "Filtrar eventos": "Filtrar esdeveniments"
+  "Filtrar eventos": "Filtrar esdeveniments",
+  "Filtrar grupos": "Filtrar grups",
+  "Filtrar amigos": "Filtrar amics"
 }

@@ -1,0 +1,55 @@
+<br>
+<input type="text" name="search" placeholder="{{'Filtrar grupos' |translate}}" #searchInput
+       (keyup)="filterElems(searchInput.value.toLocaleLowerCase())">
+<strong class="styled-p">{{numMatches}} {{'coincidencias'|translate}}</strong>
+
+
+<div class="my-grid" id="myUL" *ngIf="groupList.length > 0; else empty">
+  <div class="box" *ngFor="let group of groupList">
+    <div class="animated flipInY">
+      <div class="card-container">
+        <div class="card">
+          <div class="front">
+            <div class="cover blur-img">
+              <!--<img  src="../../assets/events/event.jpg"/>-->
+            </div>
+            <div class="user">
+              <img class="img-circle" src="../../assets/groups/tetio.jpg"/>
+            </div>
+            <div class="content">
+              <div class="main">
+                <h3 class="name">{{group.name}}</h3>
+                <p class="profession"></p>
+
+                <p class="text-center" style="font-size: small">{{group.description}}</p>
+              </div>
+              <div class="footer">
+                <div class="rating">
+                  <i class="fa fa-mail-forward"></i>Echa ahí
+                </div>
+              </div>
+            </div>
+          </div> <!-- end front panel -->
+          <div class="back">
+            <div class="header">
+              <h5 class="motto">Sibarita pitu eh eh</h5>
+            </div>
+            <div class="content">
+              <div class="main">
+                <h4 class="text-center">Miembros</h4>
+                <p class="text-center">{{group.users}}</p>
+              </div>
+            </div>
+            <div class="footer">
+              <div class="social-links text-center">
+              </div>
+            </div>
+          </div> <!-- end back panel -->
+        </div> <!-- end card -->
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #empty>
+  Vacío
+</ng-template>
