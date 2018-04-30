@@ -39,6 +39,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {MyProfileComponent} from './my-profile/my-profile.component';
+import {GeneralEventsComponent} from './general-events/general-events.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -69,7 +70,8 @@ export const routes: Routes = [
     FriendsComponent,
     TopScrollComponent,
     GmapsComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    GeneralEventsComponent
   ],
   imports: [
     BrowserModule,
