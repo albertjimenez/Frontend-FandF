@@ -55,6 +55,7 @@ export const routes: Routes = [
   {path: 'friends', component: FriendsComponent},
   {path: 'gmaps', component: GmapsComponent},
   {path: 'my-profile', component: MyProfileComponent},
+  {path: 'my-events', component: GeneralEventsComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
