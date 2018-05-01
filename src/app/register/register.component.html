@@ -20,12 +20,16 @@
            formControlName="username">
   </div>
   <div class="inputGroup inputGroup2">
-    <label for="password">{{'Contraseña'|translate}}</label>
+    <label for="password">{{'Contraseña'|translate}}</label><a (click)="showPassword(firstInput)">
+    <mat-icon>visibility</mat-icon>
+  </a>
     <input #firstInput id="password" matInput placeholder="{{'Contraseña'|translate}}" type="password"
            formControlName="password">
   </div>
   <div class="inputGroup inputGroup2">
-    <label for="password2">{{'Repite la contraseña'|translate}}</label>
+    <label for="password2">{{'Repite la contraseña'|translate}}</label><a (click)="showPassword(secondInput)">
+    <mat-icon>visibility</mat-icon>
+  </a>
     <input #secondInput matInput id="password2" placeholder="{{'Repite la contraseña'|translate}}" type="password"
            formControlName="rePassword">
   </div>

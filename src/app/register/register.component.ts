@@ -41,11 +41,7 @@ export class RegisterComponent implements OnInit {
   }
 
   showPassword(anInput: MatInput) {
-    if (anInput.type === 'password') {
-      anInput.type = 'text';
-    } else {
-      anInput.type = 'password';
-    }
+    anInput.type = anInput.type === 'password' ? 'text' : 'password';
   }
 
   submitRegisterForm(swal: SwalComponent) {
