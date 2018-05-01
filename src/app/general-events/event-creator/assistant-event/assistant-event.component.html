@@ -1,3 +1,63 @@
-<p>
-  assistant-event works!
-</p>
+<mat-horizontal-stepper linear="false" #stepper="matHorizontalStepper">
+  <mat-step [stepControl]="informationFormGroup">
+    <form [formGroup]="informationFormGroup">
+      <ng-template matStepLabel>Información</ng-template>
+      <mat-form-field>
+        <input maxlength="35" matInput placeholder="Nombre" formControlName="eventName" required>
+      </mat-form-field>
+      <mat-form-field>
+  <textarea matInput matTextareaAutosize placeholder="Descripción" formControlName="description"
+            matAutosizeMaxRows="5" required maxlength="140"></textarea>
+        <!--<input matInput placeholder="Descripción" formControlName="description" required>-->
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Url de la foto" formControlName="photoUrl">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="date" placeholder="Fecha del evento" [matDatepicker]="myDatepicker"
+               [min]="minDate" [max]="maxDate"
+               required (dateChange)="setMyDate($event)" (focus)="myDatepicker.open()">
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker touchUi="true" startView="month" [startAt]="this.minDate"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="hour" name="hour" matInput placeholder="Hora de realización" type="time">
+      </mat-form-field>
+      <div>
+        <button mat-flat-button [disabled]="this.informationFormGroup.invalid" matStepperNext>Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="placeIdFormGroup">
+    <form [formGroup]="placeIdFormGroup">
+      <ng-template matStepLabel>Lugar</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="placeIdFormGroup">
+    <form [formGroup]="placeIdFormGroup">
+      <ng-template matStepLabel>Grupo invitado</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Resumen</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

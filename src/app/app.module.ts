@@ -6,13 +6,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDatepickerModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatNativeDateModule,
   MatProgressSpinnerModule,
+  MatStepperModule,
   MatToolbarModule,
   MatTooltipModule
 } from '@angular/material';
@@ -90,6 +93,9 @@ export const routes: Routes = [
     HttpClientModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
@@ -105,6 +111,7 @@ export const routes: Routes = [
       }
     }),
     ToastrModule.forRoot(), // ToastrModule added
+
   ],
   providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService],
   bootstrap: [AppComponent]
