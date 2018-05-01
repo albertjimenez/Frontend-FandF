@@ -37,7 +37,6 @@ export class AssistantEventComponent implements OnInit {
 
   check() {
     // console.log(this.informationFormGroup.controls.eventName.value, this.informationFormGroup.controls,
-    // console.log(this.informationFormGroup.controls.eventName.value);
     // console.log(this.informationFormGroup.controls.description.value);
     // console.log(this.informationFormGroup.controls.photoUrl.value);
     // const numericDate = parseDateAndTime(this.selectedDate, this.informationFormGroup.controls.hour.value);

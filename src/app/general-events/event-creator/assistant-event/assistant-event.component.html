@@ -3,12 +3,13 @@
     <form [formGroup]="informationFormGroup">
       <ng-template matStepLabel>Información</ng-template>
       <mat-form-field>
-        <input maxlength="35" matInput placeholder="Nombre" formControlName="eventName" required>
+        <input maxlength="35" #eventNameInput matInput placeholder="Nombre" formControlName="eventName" required>
+        <mat-hint align="end">{{eventNameInput.value?.length || 0}}/35</mat-hint>
       </mat-form-field>
       <mat-form-field>
   <textarea matInput matTextareaAutosize placeholder="Descripción" formControlName="description"
-            matAutosizeMaxRows="5" required maxlength="140"></textarea>
-        <!--<input matInput placeholder="Descripción" formControlName="description" required>-->
+            matAutosizeMaxRows="5" #descNameInput required maxlength="140"></textarea>
+        <mat-hint align="end">{{descNameInput.value?.length || 0}}/140</mat-hint>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="Url de la foto" formControlName="photoUrl">
