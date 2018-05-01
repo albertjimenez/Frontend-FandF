@@ -1,0 +1,43 @@
+
+.my-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+
+.box {
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+}
+
+.styled-p {
+  color: grey;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  height: 40%;
+}
+
+input[type=text] {
+  width: 130px;
+  border-radius: 25px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 100%;
+}
+
+.blur-img {
+  /* Generated with http://gradient.quasi.ink */
+  background-size: cover;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAADCAYAAABfwxXFAAAAYklEQVQYVwFXAKj/AXcdov/NDecA+BApANgYCgBZZRwAQ0YaAI1hywABiBuo/8MO2ADuBxEA9wAkAOUQEgASIvwAHd4FAAF/Hpv/4gXtANcK+gAOAhgA/gAaAPzyBAAIDAQAC0kb1mYr6vcAAAAASUVORK5CYII=");
+}
+
+

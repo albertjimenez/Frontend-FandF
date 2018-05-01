@@ -28,5 +28,10 @@
   "duplicatedEmailTitle": "Email duplicated",
   "duplicatedEmailText": "Try to login or register with any other email",
   "duplicatedUsernameTitle": "Username duplicated",
-  "duplicatedUsernameText": "Try again with any other username"
+  "duplicatedUsernameText": "Try again with any other username",
+  "Mi perfil": "My profile",
+  "Filtrar eventos": "Filter events",
+  "Filtrar grupos": "Filter groups",
+  "Filtrar amigos": "Filter friends",
+  "Nuevo evento": "New event"
 }

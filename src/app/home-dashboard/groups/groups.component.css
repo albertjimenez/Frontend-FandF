@@ -20,14 +20,6 @@
   background-size: cover;
 }
 
-.card {
-  display: flex;
-  background-color: #fff;
-  min-width: 150px;
-  min-height: 150px;
-  overflow-x: auto;
-  margin: 5px;
-}
 
 .card::-webkit-scrollbar {
   display: none;
@@ -37,12 +29,15 @@
   /*Esto es lo que da la anchura al contenido*/
   min-width: 300px;
   margin: 5px;
+  border-radius: 25px;
+
+
 }
 
 .section-wrapper {
   border-radius: 25px;
-  border: solid #4eb8dd;
-  background-color: #4eb8dd;
+  /*border: solid #4eb8dd;*/
+  /*background-color: #4eb8dd;*/
 }
 
 .lobster {
@@ -50,6 +45,7 @@
 }
 
 .example-card {
+  border-radius: 25px;
   max-width: 500px;
 }
 
@@ -95,11 +91,13 @@
 
 .card {
   display: flex;
-  background-color: #fff;
+  background-color: #999999;
   min-width: 150px;
   min-height: 150px;
   overflow-x: auto;
   margin: 5px;
+  border-radius: 25px;
+
 }
 
 .card::-webkit-scrollbar {
@@ -110,12 +108,6 @@
   /*Esto es lo que da la anchura al contenido*/
   min-width: 300px;
   margin: 5px;
-}
-
-.section-wrapper {
-  border-radius: 25px;
-  border: solid #4eb8dd;
-  background-color: #4eb8dd;
 }
 
 .lobster {

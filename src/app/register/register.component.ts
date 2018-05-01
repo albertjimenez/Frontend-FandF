@@ -29,23 +29,19 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    const MIN_CHARS = 0;
+    const MIN_CHARS = 1;
     this.registerFormControl = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       surname: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       email: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS), Validators.email]),
       username: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       rePassword: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
     });
   }
 
   showPassword(anInput: MatInput) {
-    if (anInput.type === 'password') {
-      anInput.type = 'text';
-    } else {
-      anInput.type = 'password';
-    }
+    anInput.type = anInput.type === 'password' ? 'text' : 'password';
   }
 
   submitRegisterForm(swal: SwalComponent) {
@@ -70,7 +66,7 @@ export class RegisterComponent implements OnInit {
     // tener el token y guardarlo en la sesión
 
     const afterSuccess = (data) => {
-      this.credentialsService.storeMySession(registerClass.username, data.valueOf()['message'], password, email);
+      this.credentialsService.storeMySession(registerClass.username, data.valueOf()['token'], password, email);
       this.loginOkSwal.show();
       this.isRegistering = false;
       this.router.navigateByUrl('/sidebar');
@@ -78,7 +74,7 @@ export class RegisterComponent implements OnInit {
     const showErrors = (error) => {
       console.log(error);
       if (error.status === 409) {// CONFLICT
-        if (error.error.message.toString().indexOf('username') >= 0) {
+        if (error.error.message != null && error.error.message.toString().indexOf('username') >= 0) {
           this.duplicatedUsername.show();
         } else {
           this.duplicatedEmail.show();
@@ -91,7 +87,6 @@ export class RegisterComponent implements OnInit {
         this.registerService.postRegisterData(registerClass).subscribe(
           data => success(data),
           error => {
-            console.log('Error', error);
             this.isRegistering = false;
             showErrors(error);
           }

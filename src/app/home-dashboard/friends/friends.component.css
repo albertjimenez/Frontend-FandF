@@ -55,8 +55,8 @@
 
 .section-wrapper {
   border-radius: 25px;
-  border: solid #4eb8dd;
-  background-color: #4eb8dd;
+  /*border: solid #4eb8dd;*/
+  /*background-color: #4eb8dd;*/
 }
 
 .lobster {
@@ -65,42 +65,13 @@
 
 .example-card {
   max-width: 500px;
+  border-radius: 25px;
 }
 
 .example-header-image {
   background-size: cover;
 }
 
-.dashed-shadow {
-  position: relative;
-  top: 8px;
-  left: 8px;
-  display: inline-block;
-  color: #e74c3c;
-}
-
-.dashed-shadow:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  bottom: -2px;
-  right: -2px;
-}
-
-.dashed-shadow:hover:before {
-  animation: dash-animation 30s infinite linear;
-}
-
-.dashed-shadow:after {
-  content: attr(data-text);
-  position: absolute;
-  left: -1px;
-  top: -1px;
-  color: #353538;
-  text-shadow: 2px 2px #f06292;
-}
 
 .hello {
   font-family: 'Cookie', cursive;
@@ -109,11 +80,12 @@
 
 .card {
   display: flex;
-  background-color: #fff;
+  background-color: #999999;
   min-width: 150px;
   min-height: 150px;
   overflow-x: auto;
   margin: 5px;
+  border-radius: 25px;
 }
 
 .card::-webkit-scrollbar {
@@ -126,11 +98,6 @@
   margin: 5px;
 }
 
-.section-wrapper {
-  border-radius: 25px;
-  border: solid #4eb8dd;
-  background-color: #4eb8dd;
-}
 
 .lobster {
   font-family: Lobster, sans-serif;

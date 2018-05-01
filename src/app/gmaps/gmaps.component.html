@@ -4,8 +4,10 @@
   </div>
   <div style="text-align: center">
 
-    <mat-form-field>
-        <input matInput ngx-google-places-autocomplete [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places" (onAddressChange)="onChange($event)" placeholder="Ubicación">
+    <mat-form-field class="search-box">
+      <input matInput ngx-google-places-autocomplete
+             [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places"
+             (onAddressChange)="onChange($event)" placeholder="Ubicación">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
 
@@ -24,17 +26,25 @@
         <table style="width: 100%">
           <tr>
             <td><mat-icon>restaurant</mat-icon>&nbsp;&nbsp;Nombre</td>
-            <td><span *ngIf="empty_periods; then co1 else co2"></span><ng-template #co2><mat-icon>schedule</mat-icon>&nbsp;&nbsp;Horario</ng-template></td>
+            <td><span *ngIf="empty_periods; else co2"></span>
+              <ng-template #co2>
+                <mat-icon>schedule</mat-icon>&nbsp;&nbsp;Horario
+              </ng-template>
+            </td>
           </tr>
           <tr>
             <td><mat-form-field>
               <input matInput value="{{this.tempAddress?.name}}" readonly>
             </mat-form-field></td>
-            <td><span *ngIf="empty_periods; then cd1 else cd2"></span><ng-template #cd2>De {{this.period_one[0][0]}} a {{this.period_one[this.period_one.length-1][0]}}: {{this.period_one[0][1]}}</ng-template></td>
+            <td><span *ngIf="empty_periods; else cd2"></span>
+              <ng-template #cd2>De {{this.period_one[0][0]}} a {{this.period_one[this.period_one.length-1][0]}}:
+                {{this.period_one[0][1]}}
+              </ng-template>
+            </td>
           </tr>
           <tr>
             <td><mat-icon>phone</mat-icon>&nbsp;&nbsp;Teléfono</td>
-            <td><span *ngIf="is_two_empty; then c1 else c2"></span>
+            <td><span *ngIf="is_two_empty; else c2"></span>
               <ng-template #c2><span *ngIf="only_one; then cn1 else cn2"></span><ng-template #cn1>{{this.period_two[0][0]}}:{{this.period_two[0][1]}}</ng-template>
                 <ng-template #cn2>De {{this.period_two[0][0]}} a {{this.period_two[this.period_two.length-1][0]}}:{{this.period_two[0][1]}}</ng-template></ng-template></td>
           </tr>
@@ -88,3 +98,4 @@
     </mat-card>
   </div>
 </div>
+<app-top-scroll></app-top-scroll>

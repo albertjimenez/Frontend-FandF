@@ -6,17 +6,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
+  MatDatepickerModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatNativeDateModule,
   MatProgressSpinnerModule,
+  MatStepperModule,
   MatToolbarModule,
-  MatTooltipModule,
-  MatSelectModule,
-  MatAutocompleteModule
+  MatTooltipModule
 } from '@angular/material';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -40,7 +41,11 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
-import { CreateGroupComponent } from './home-dashboard/groups/create-group/create-group.component';
+import {MyProfileComponent} from './my-profile/my-profile.component';
+import {GeneralEventsComponent} from './general-events/general-events.component';
+import {GeneralGroupsComponent} from './general-groups/general-groups.component';
+import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
+import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -52,8 +57,13 @@ export const routes: Routes = [
   {path: 'home-dashboard', component: HomeDashboardComponent},
   {path: 'sidebar', component: SidebarComponent},
   {path: 'events', component: EventsComponent},
+  {path: 'groups', component: GroupsComponent},
+  {path: 'friends', component: FriendsComponent},
   {path: 'gmaps', component: GmapsComponent},
-  {path: 'create-group', component: CreateGroupComponent},
+  {path: 'my-profile', component: MyProfileComponent},
+  {path: 'my-events', component: GeneralEventsComponent},
+  {path: 'my-groups', component: GeneralGroupsComponent},
+  {path: 'assistant-event', component: AssistantEventComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
@@ -69,7 +79,11 @@ export const routes: Routes = [
     FriendsComponent,
     TopScrollComponent,
     GmapsComponent,
-    CreateGroupComponent
+    MyProfileComponent,
+    GeneralEventsComponent,
+    GeneralGroupsComponent,
+    EventCreatorComponent,
+    AssistantEventComponent
   ],
   imports: [
     BrowserModule,
@@ -79,14 +93,15 @@ export const routes: Routes = [
     HttpClientModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatIconModule,
     MatInputModule,
     MatToolbarModule,
     MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule,
     MatDividerModule,
     MatExpansionModule,
-    MatSelectModule,
-    MatAutocompleteModule,
     GooglePlaceModule,
     TranslateModule.forRoot({
       loader: {
@@ -96,6 +111,7 @@ export const routes: Routes = [
       }
     }),
     ToastrModule.forRoot(), // ToastrModule added
+
   ],
   providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService],
   bootstrap: [AppComponent]

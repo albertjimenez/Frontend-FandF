@@ -53,6 +53,7 @@ a, a:hover, a:focus {
   margin: 40px 0;
 }
 
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -63,7 +64,10 @@ a, a:hover, a:focus {
   left: 0;
   height: 100vh;
   z-index: 999;
-  background: #4eb8dd;
+  box-shadow: 0 0 10px black;
+  z-index: 2;
+  border-radius: 10px;
+  background: #546e7a;
   color: #fff;
   transition: all 0.3s;
 }

@@ -5,12 +5,13 @@ import * as $ from 'jquery';
 import '../../assets/scroller.js';
 import {WebsocketHomeService} from '../websocket-home.service';
 import {ToastrService} from 'ngx-toastr';
+import {NotificationsService} from '../notifications.service';
 
 @Component({
   selector: 'app-home-dashboard',
   templateUrl: './home-dashboard.component.html',
   styleUrls: ['./home-dashboard.component.css'],
-  providers: [CredentialsService, WebsocketHomeService, ToastrService]
+  providers: [CredentialsService, WebsocketHomeService, ToastrService, NotificationsService]
 })
 export class HomeDashboardComponent implements OnInit {
 
@@ -19,7 +20,8 @@ export class HomeDashboardComponent implements OnInit {
   email = '';
 
   constructor(private credentialsService: CredentialsService, private router: Router,
-              private wsservice: WebsocketHomeService, private toastrService: ToastrService) {
+              private wsservice: WebsocketHomeService, private toastrService: ToastrService,
+              private notificationService: NotificationsService) {
   }
 
   ngOnInit() {
@@ -30,8 +32,11 @@ export class HomeDashboardComponent implements OnInit {
     this.username = this.credentialsService.getUsername().toString();
     this.token = this.credentialsService.getToken().toString();
     this.email = this.credentialsService.getEmail().toString();
-
-
+    this.notificationService.askPermission(value => {
+      console.log('Ok notificaciones', value);
+      return 'ok';
+    }, (reason => console.log('Error, denied')));
+    // this.notificationService.showNotification('Prueba', 'Esto es una prueba bro');
   }
 
   toggleSidebar() {

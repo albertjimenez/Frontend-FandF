@@ -1,0 +1,41 @@
+<br>
+<input type="text" name="search" placeholder="{{'Filtrar eventos' |translate}}" #searchInput
+       (keyup)="filterElems(searchInput.value.toLocaleLowerCase())">
+<strong class="styled-p">{{numMatches}} {{'coincidencias'|translate}}</strong>
+
+<div class="my-grid" id="myUL" *ngIf="eventList.length > 0; else empty">
+  <div class="box" *ngFor="let event of eventList">
+    <div class="animated flipInY">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{event.name}}
+          </mat-card-title>
+          <mat-card-subtitle>{{parseUnixTime(event.date)}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="../../../assets/events/event.jpg">
+        <mat-card-content>
+          {{event.description}}
+          <div class="align-them">
+            <div class="pull-right">
+              <p class="text-right">
+                Favorito
+                <button mat-icon-button style="vertical-align: middle">
+                  <mat-icon style="color: grey">favorite</mat-icon>
+                </button>
+              </p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button style="color:limegreen">Botón</button>
+          <button mat-button style="color: red">Botón</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<ng-template #empty>
+  Vacío
+</ng-template>
+<app-event-creator></app-event-creator>

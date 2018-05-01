@@ -11,10 +11,12 @@ export class TopScrollComponent implements OnInit {
   }
 
   scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      document.getElementById('myBtn').style.display = 'block';
-    } else {
-      document.getElementById('myBtn').style.display = 'none';
+    if (document.getElementById('myBtn') != null) {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById('myBtn').style.display = 'block';
+      } else {
+        document.getElementById('myBtn').style.display = 'none';
+      }
     }
   }
 

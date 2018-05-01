@@ -17,7 +17,8 @@ export class CreateGroupComponent implements OnInit {
     'Peris',
     'Berbel',
     'Santi',
-    'Tokeisi'
+    'Tokeisi',
+    'Pereta'
   ];
   privacy = [
     {value: 'private', viewValue: 'Privado', description: 'Solo el propietario del grupo puede invitar a otros usuarios.', icon: 'lock'},
@@ -72,6 +73,8 @@ export class CreateGroupComponent implements OnInit {
   }
 
   new_friend() {
+    alert(thus.myControl.value);
+
 
   }
 
