@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.loginService.postLoginCredentials(username, password).subscribe(data => {
       this.profileService.retrieveMyEmail(username).subscribe(email_response => {
         this.credentialsService.storeMySession(username, data.toString(), password, email_response.toString());
-        this.router.navigateByUrl('/sidebar');
+        this.router.navigateByUrl('/home-dashboard');
       });
     }, error => this.loginError.show(), () => this.loginOk.show());
   }

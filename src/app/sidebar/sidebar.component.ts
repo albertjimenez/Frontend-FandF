@@ -21,11 +21,12 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     if (this.sessionExists()) {
       this.username = this.credentialService.getUsername().toString();
-      this.router.navigateByUrl('/home-dashboard');
-    } else {
-      this.toggleSidebar();
-      this.router.navigateByUrl('/login');
+      // this.router.navigateByUrl('/home-dashboard');
     }
+    // else {
+    //   this.toggleSidebar();
+    //   this.router.navigateByUrl('/login');
+    // }
   }
 
   sessionExists() {

@@ -41,6 +41,8 @@ import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {GeneralEventsComponent} from './general-events/general-events.component';
 import {GeneralGroupsComponent} from './general-groups/general-groups.component';
+import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
+import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -58,6 +60,7 @@ export const routes: Routes = [
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'my-events', component: GeneralEventsComponent},
   {path: 'my-groups', component: GeneralGroupsComponent},
+  {path: 'assistant-event', component: AssistantEventComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
@@ -75,7 +78,9 @@ export const routes: Routes = [
     GmapsComponent,
     MyProfileComponent,
     GeneralEventsComponent,
-    GeneralGroupsComponent
+    GeneralGroupsComponent,
+    EventCreatorComponent,
+    AssistantEventComponent
   ],
   imports: [
     BrowserModule,
