@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
       username: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       password: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
     });
+    if (this.credentialsService.sessionExists()) {
+      this.router.navigateByUrl('/home-dashboard');
+    }
   }
 
   ngAfterViewInit() {
