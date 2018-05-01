@@ -29,13 +29,13 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    const MIN_CHARS = 0;
+    const MIN_CHARS = 1;
     this.registerFormControl = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       surname: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       email: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS), Validators.email]),
       username: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       rePassword: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
     });
   }
