@@ -15,7 +15,8 @@ import {
   MatProgressSpinnerModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatSelectModule
+  MatSelectModule,
+  MatAutocompleteModule
 } from '@angular/material';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -85,6 +86,7 @@ export const routes: Routes = [
     MatDividerModule,
     MatExpansionModule,
     MatSelectModule,
+    MatAutocompleteModule,
     GooglePlaceModule,
     TranslateModule.forRoot({
       loader: {

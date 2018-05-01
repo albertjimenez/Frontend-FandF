@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
+import {startWith} from 'rxjs/operators/startWith';
+import {map} from 'rxjs/operators/map';
 
 @Component({
   selector: 'app-create-group',
@@ -8,7 +11,14 @@ import {FormGroup, FormControl} from '@angular/forms';
 })
 export class CreateGroupComponent implements OnInit {
 
-  favouriteFriends = ['Peris', 'Berbel', 'Santi ', 'Tokeisi'];
+  myControl: FormControl = new FormControl();
+
+  options = [
+    'Peris',
+    'Berbel',
+    'Santi',
+    'Tokeisi'
+  ];
   privacy = [
     {value: 'private', viewValue: 'Privado', description: 'Solo el propietario del grupo puede invitar a otros usuarios.', icon: 'lock'},
     {value: 'public', viewValue: 'Público', description: 'Cualquier usuario puede encontrar el grupo y solicitar unirse.', icon: 'language'}
@@ -20,11 +30,17 @@ export class CreateGroupComponent implements OnInit {
   emptyPrivacy = true;
   closedGroup: boolean;
   selectedValue: string;
+  filteredOptions: Observable<string[]>;
 
 
   constructor() { }
 
   ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(val => this.filter(val))
+      );
     this.emptyPrivacy = true;
     this.createFrom = new FormGroup({
       groupname: new FormControl(),
@@ -48,7 +64,14 @@ export class CreateGroupComponent implements OnInit {
     } else if (this.selectedValue === 'public') {
       this.closedGroup = false;
     }
+  }
 
+  filter(val: string): string[] {
+    return this.options.filter(option =>
+      option.toLowerCase().indexOf(val.toLowerCase()) === 0);
+  }
+
+  new_friend() {
 
   }
 

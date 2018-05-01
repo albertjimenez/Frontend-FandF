@@ -22,11 +22,17 @@
         </mat-form-field><br>
         <mat-label>Participantes</mat-label><br>
         <mat-form-field>
-          <textarea matInput formControlName="members"></textarea><br>
+          <textarea matInput formControlName="members" readonly></textarea><br>
         </mat-form-field><br>
         <mat-label>Buscar amigos</mat-label><br>
         <mat-form-field>
-          <input type="text" matInput><br>
+          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" (click)="new_friend()">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+          <br>
         </mat-form-field><br>
         <div id="privacy_select">
         <mat-label>Selecciona la privacidad del grupo</mat-label><br>
