@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {CredentialsService} from '../../credentials.service';
 
 @Injectable()
 export class EventsService {
 
-  constructor(private router: Router, private httpClient: HttpClient) {
+  constructor(private router: Router, private httpClient: HttpClient, private credentialsService: CredentialsService) {
   }
 
 }

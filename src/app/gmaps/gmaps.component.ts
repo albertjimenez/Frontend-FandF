@@ -68,11 +68,7 @@ export class GmapsComponent implements OnInit {
       this.phone = 'No disponible';
     }
     if (this.is_open !== null) {
-      if (this.is_open) {
-        this.state = 'Abierto';
-      } else {
-        this.state = 'Cerrado';
-      }
+      this.state = this.is_open ? 'Abierto' : 'Cerrado';
     } else {
       this.state = 'No disponible';
     }
@@ -82,7 +78,7 @@ export class GmapsComponent implements OnInit {
       for (let i = 0; i < address.photos.length; i++) {
         console.log('Data phtos ', address.photos[i]);
         const ph = address.photos[i] as any; // Si lo dejas en Photo no reconoce el método
-        console.log(ph.getUrl({maxWidth: 100, maxHeight: 150}));
+        console.log(ph.getUrl({maxWidth: 500, maxHeight: 500}));
       }
 
       this.hours.filter(data => data[1] === this.hour).map(data => this.period_one.push(data));

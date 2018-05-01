@@ -1,10 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Address} from 'ngx-google-places-autocomplete/objects/address';
+import {CredentialsService} from '../../../credentials.service';
+import {GroupsService} from '../../../home-dashboard/groups/groups.service';
 
 @Component({
   selector: 'app-assistant-event',
   templateUrl: './assistant-event.component.html',
-  styleUrls: ['./assistant-event.component.css']
+  styleUrls: ['./assistant-event.component.css'],
+  providers: [CredentialsService, GroupsService]
 })
 export class AssistantEventComponent implements OnInit {
 
@@ -13,9 +17,11 @@ export class AssistantEventComponent implements OnInit {
   selectedDate: Date;
   informationFormGroup: FormGroup;
   placeIdFormGroup: FormGroup;
-  invitedsFromGroup: FormGroup;
+  invitedsFormGroup: FormGroup;
+  placeId = '';
+  myGroups: String[];
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private groupService: GroupsService) {
   }
 
   ngOnInit() {
@@ -27,24 +33,21 @@ export class AssistantEventComponent implements OnInit {
       hour: ['', Validators.required],
     });
     this.placeIdFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      placeId: ['', Validators.required]
     });
+    this.invitedsFormGroup = this._formBuilder.group({
+      groupName: ['', Validators.required]
+    });
+    this.groupService.getMyGroups().subscribe(data => console.log(data), error => console.log('Error', error));
   }
 
   setMyDate(value) {
     this.selectedDate = value.value;
   }
 
-  check() {
-    // console.log(this.informationFormGroup.controls.eventName.value, this.informationFormGroup.controls,
-    // console.log(this.informationFormGroup.controls.description.value);
-    // console.log(this.informationFormGroup.controls.photoUrl.value);
-    // const numericDate = parseDateAndTime(this.selectedDate, this.informationFormGroup.controls.hour.value);
-    // console.log(numericDate);
-    // console.log(this.informationFormGroup.invalid);
-
+  onChange(address: Address) {
+    this.placeId = address.place_id;
   }
-
 }
 
 export function parseDateAndTime(date: Date, time: string): number {

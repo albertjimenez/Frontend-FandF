@@ -33,20 +33,25 @@
     <form [formGroup]="placeIdFormGroup">
       <ng-template matStepLabel>Lugar</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        <input matInput ngx-google-places-autocomplete placeholder="Busca el lugar del evento" formControlName="placeId"
+               required [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}"
+               #placesRef="ngx-places" (onAddressChange)="onChange($event)" placeholder="Ubicación">
+        <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="placeIdFormGroup">
-    <form [formGroup]="placeIdFormGroup">
+  <mat-step [stepControl]="invitedsFormGroup">
+    <form [formGroup]="invitedsFormGroup">
       <ng-template matStepLabel>Grupo invitado</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        <input matInput placeholder="Nombre del grupo" formControlName="groupName" required>
       </mat-form-field>
+
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
