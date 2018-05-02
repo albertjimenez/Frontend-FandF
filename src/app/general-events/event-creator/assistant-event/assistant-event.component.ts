@@ -2,14 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
 import {Group, GroupsService} from '../../../home-dashboard/groups/groups.service';
-import {parseUnixtimeToDate} from '../../../home-dashboard/events/events.service';
+import {EventsService, MyEvent, parseUnixtimeToDate} from '../../../home-dashboard/events/events.service';
 import {isUndefined} from 'util';
 
 @Component({
   selector: 'app-assistant-event',
   templateUrl: './assistant-event.component.html',
   styleUrls: ['./assistant-event.component.css'],
-  providers: [GroupsService]
+  providers: [GroupsService, EventsService]
 })
 export class AssistantEventComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class AssistantEventComponent implements OnInit {
   isLoading = true;
   addressName = '';
 
-  constructor(private _formBuilder: FormBuilder, private groupService: GroupsService) {
+  constructor(private _formBuilder: FormBuilder, private groupService: GroupsService, private eventsService: EventsService) {
     this.groupService.getMyGroups().subscribe(data => {
       const groups = data.valueOf()['groups'];
       Object.entries(groups).forEach(
@@ -93,6 +93,19 @@ export class AssistantEventComponent implements OnInit {
       return parseUnixtimeToDate(parseDateAndTime(this.selectedDate, this.informationFormGroup.controls.hour.value).toString());
     }
     return '';
+  }
+
+  postData() {
+    const photo = isUndefined(this.informationFormGroup.controls.photoUrl.value) ? '' : this.informationFormGroup.controls.photoUrl.value;
+    const myEvent: MyEvent = {
+      name: this.informationFormGroup.controls.eventName.value,
+      date: parseDateAndTime(this.selectedDate, this.informationFormGroup.controls.hour.value),
+      description: this.informationFormGroup.controls.description.value,
+      placeId: this.placeId,
+      groupId: this.groupId,
+      image: photo
+    };
+    this.eventsService.postNewEvent(myEvent).subscribe(data => console.log(data), error2 => console.log('Error ', error2));
   }
 }
 

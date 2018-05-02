@@ -1,4 +1,4 @@
-<mat-horizontal-stepper linear="false" #stepper="matHorizontalStepper">
+<mat-horizontal-stepper linear="true" #stepper="matHorizontalStepper">
   <mat-step [stepControl]="informationFormGroup">
     <form [formGroup]="informationFormGroup">
       <ng-template matStepLabel>Información</ng-template>
@@ -40,8 +40,8 @@
       </mat-form-field>
 
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext>Siguiente</button>
       </div>
     </form>
   </mat-step>
@@ -76,8 +76,8 @@
         </mat-list>
       </ng-template>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext [disabled]="this.groupId === ''">Siguiente</button>
       </div>
     </form>
   </mat-step>
@@ -134,8 +134,8 @@
       </mat-list>
     </mat-card>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button matStepperPrevious>Atrás</button>
+      <button mat-flat-button color="accent" (click)="postData()">Crear evento</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {CredentialsService} from '../../credentials.service';
+import {post_events_endpoint} from '../../API_Strings';
 
 @Injectable()
 export class EventsService {
@@ -9,6 +10,9 @@ export class EventsService {
   constructor(private router: Router, private httpClient: HttpClient, private credentialsService: CredentialsService) {
   }
 
+  postNewEvent(event: MyEvent) {
+    return this.httpClient.post(post_events_endpoint, event);
+  }
 }
 
 export interface MyEvent {
@@ -17,6 +21,7 @@ export interface MyEvent {
   description: string;
   placeId: string;
   groupId: string;
+  image: string;
 }
 
 export function parseUnixtimeToDate(time: string) {
