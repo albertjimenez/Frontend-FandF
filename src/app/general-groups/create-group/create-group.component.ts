@@ -18,7 +18,9 @@ export class CreateGroupComponent implements OnInit {
     'Berbel',
     'Santi',
     'Tokeisi',
-    'Pereta'
+    'Pereta',
+    'Pedriza',
+    'Harry'
   ];
   privacy = [
     {value: 'private', viewValue: 'Privado', description: 'Solo el propietario del grupo puede invitar a otros usuarios.', icon: 'lock'},
@@ -26,11 +28,12 @@ export class CreateGroupComponent implements OnInit {
   ];
   createFrom: FormGroup;
   groupName = '';
+  image: string;
+  is_image_upload: boolean;
   description = '';
   dateOfCreation: Date;
-  emptyPrivacy = true;
   closedGroup: boolean;
-  selectedValue: string;
+  selectedValue = 'private';
   filteredOptions: Observable<string[]>;
 
 
@@ -42,10 +45,12 @@ export class CreateGroupComponent implements OnInit {
         startWith(''),
         map(val => this.filter(val))
       );
-    this.emptyPrivacy = true;
+    this.closedGroup = true;
+    this.is_image_upload = false;
     this.createFrom = new FormGroup({
       groupname: new FormControl(),
-      image: new FormControl(),
+      imageBeforeUpload: new FormControl(),
+      imageAfterUpload: new FormControl(),
       members: new FormControl(),
       description: new FormControl()
     });
@@ -59,7 +64,6 @@ export class CreateGroupComponent implements OnInit {
       }
 
   change_privacy() {
-    this.emptyPrivacy = false;
     if (this.selectedValue === 'private') {
       this.closedGroup = true;
     } else if (this.selectedValue === 'public') {
@@ -73,9 +77,35 @@ export class CreateGroupComponent implements OnInit {
   }
 
   new_friend() {
-    alert(thus.myControl.value);
-
+    if (this.createFrom.value.members === null) {
+      this.createFrom.patchValue({
+        members: this.myControl.value
+      });
+    } else {
+      this.createFrom.patchValue({
+        members: this.createFrom.value.members + '\n' + this.myControl.value
+      });
+    }
 
   }
+
+  handle_upload() {
+    document.getElementById('upload').click();
+  }
+
+  before_upload_image() {
+    this.is_image_upload = true;
+    alert(this.createFrom.value.imageBeforeUpload);
+    this.image = this.createFrom.value.imageBeforeUpload;
+  }
+
+  after_upload_image() {
+    this.image = this.createFrom.value.imageAfterUpload;
+  }
+
+  handle_image() {
+    document.getElementById('upload2').click();
+  }
+
 
 }

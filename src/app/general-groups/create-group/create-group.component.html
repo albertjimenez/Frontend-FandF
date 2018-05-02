@@ -7,7 +7,23 @@
       <form [formGroup]="createFrom">
         <table style="width: 100%">
           <tr>
-            <td><input type="file" formControlName="image"></td>
+            <td class="button_site">
+              <span *ngIf="is_image_upload;then y else n"></span>
+              <ng-template #n>
+                <button class="upload_button" mat-button (click)="handle_upload()">
+                  <mat-icon>file_upload</mat-icon>
+                  Subir foto
+                </button>
+                <input id="upload" type="file" style="display: none" formControlName="imageBeforeUpload"
+                       (change)="before_upload_image()">
+              </ng-template>
+              <ng-template #y>
+                <img src="../../../assets/santi.jpg" class="group_img" (click)="handle_image()"/>
+                <input id="upload2" type="file" style="display: none" formControlName="imageAfterUpload"
+                       (change)="after_upload_image()">
+              </ng-template>
+
+            </td>
             <td><mat-label>Nombre</mat-label>
               <br>
               <mat-form-field>
@@ -17,17 +33,17 @@
           </tr>
         </table>
         <mat-label>Descripcion</mat-label><br>
-        <mat-form-field>
-          <textarea matInput formControlName="description"></textarea><br>
+        <mat-form-field class="input_area_class">
+          <textarea class="text_area_heigth" matInput formControlName="description"></textarea><br>
         </mat-form-field><br>
         <mat-label>Participantes</mat-label><br>
-        <mat-form-field>
-          <textarea matInput formControlName="members" readonly></textarea><br>
+        <mat-form-field class="input_area_class">
+          <textarea class="text_area_heigth" matInput formControlName="members" readonly></textarea><br>
         </mat-form-field><br>
         <mat-label>Buscar amigos</mat-label><br>
-        <mat-form-field>
-          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" (click)="new_friend()">
-          <mat-autocomplete #auto="matAutocomplete">
+        <mat-form-field class="input_area_class">
+          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="new_friend()">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
               {{ option }}
             </mat-option>
@@ -40,17 +56,16 @@
            <tr>
              <td>
                <mat-form-field>
-                 <mat-select [(value)]="selectedValue" name="privacy" (change)="change_privacity()">
-                   <mat-option value="private" selected>Privado</mat-option>
+                 <mat-select [(value)]="selectedValue" name="privacy" (change)="change_privacy()">
+                   <mat-option value="private">Privado</mat-option>
                    <mat-option value="public">Público</mat-option>
                  </mat-select>
                </mat-form-field>
              </td>
              <td>
                <div id="privacy">
-                 <span *ngIf="emptyPrivacy; then cd1 else cd2"></span>
-                 <ng-template #cd2>
-                   <span *ngIf="closedGroup; then c1 else c2"></span>
+
+                 <span *ngIf="closedGroup; then c1 else c2"></span>
                    <ng-template #c1>
                      <mat-card>
                        <mat-card-header>
@@ -71,13 +86,16 @@
                        </mat-card-content>
                      </mat-card>
                    </ng-template>
-                 </ng-template>
+
                </div>
              </td>
            </tr>
          </table>
         </div>
-        <br><button type="submit" mat-button (click)="createGroup()">Crear</button>
+        <br>
+        <div class="create_button_site">
+          <button class="create_button" type="submit" mat-button (click)="createGroup()">Crear</button>
+        </div>
       </form>
     </mat-card-content>
   </mat-card>

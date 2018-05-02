@@ -2,7 +2,14 @@
   font-size: 48px;
 }
 
-
+.group_img {
+  display: block;
+  width: 250px;
+  height: 250px;
+  margin: 1em auto;
+  background-size: cover;
+  background: no-repeat center center;
+}
 .main_div{
   display: flex;
   padding: 80px;
@@ -12,5 +19,40 @@
 .card{
   max-width: 800px;
   width: 100%;
+}
+
+.input_area_class {
+  width: 100%;
+}
+
+.text_area_heigth {
+  height: 100px;
+}
+
+.button_site {
+  display: block;
+  text-align: center;
+
+}
+
+.upload_button {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border-radius: 6px;
+  font-weight: bolder;
+}
+
+.create_button {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border-radius: 4px;
+  font-weight: bolder;
+}
+
+.create_button_site {
+  display: block;
+  text-align: right;
 }
 

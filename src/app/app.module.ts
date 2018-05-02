@@ -17,7 +17,9 @@ import {
   MatProgressSpinnerModule,
   MatStepperModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatAutocompleteModule,
+  MatSelectModule
 } from '@angular/material';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -41,11 +43,12 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
-import {MyProfileComponent} from './my-profile/my-profile.component';
+// import {MyProfileComponent} from './my-profile/my-profile.component';
 import {GeneralEventsComponent} from './general-events/general-events.component';
 import {GeneralGroupsComponent} from './general-groups/general-groups.component';
 import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
 import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
+import {CreateGroupComponent} from './general-groups/create-group/create-group.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -60,9 +63,10 @@ export const routes: Routes = [
   {path: 'groups', component: GroupsComponent},
   {path: 'friends', component: FriendsComponent},
   {path: 'gmaps', component: GmapsComponent},
-  {path: 'my-profile', component: MyProfileComponent},
+  // {path: 'my-profile', component: MyProfileComponent},
   {path: 'my-events', component: GeneralEventsComponent},
   {path: 'my-groups', component: GeneralGroupsComponent},
+  {path: 'create-group', component: CreateGroupComponent},
   {path: 'assistant-event', component: AssistantEventComponent},
   {path: '**', redirectTo: 'login'}
 ];
@@ -79,11 +83,12 @@ export const routes: Routes = [
     FriendsComponent,
     TopScrollComponent,
     GmapsComponent,
-    MyProfileComponent,
+    // MyProfileComponent,
     GeneralEventsComponent,
     GeneralGroupsComponent,
     EventCreatorComponent,
-    AssistantEventComponent
+    AssistantEventComponent,
+    CreateGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +107,8 @@ export const routes: Routes = [
     MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule,
     MatDividerModule,
     MatExpansionModule,
+    MatAutocompleteModule,
+    MatSelectModule,
     GooglePlaceModule,
     TranslateModule.forRoot({
       loader: {

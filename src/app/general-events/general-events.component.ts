@@ -12,6 +12,7 @@ export class GeneralEventsComponent implements OnInit {
 
   eventList = Array<MyEvent>();
   numMatches = this.eventList.length;
+
   constructor() {
   }
 
