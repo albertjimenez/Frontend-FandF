@@ -6,22 +6,24 @@ import '../../assets/scroller.js';
 import {WebsocketHomeService} from '../websocket-home.service';
 import {ToastrService} from 'ngx-toastr';
 import {NotificationsService} from '../notifications.service';
+import {Group, GroupsService} from './groups/groups.service';
 
 @Component({
   selector: 'app-home-dashboard',
   templateUrl: './home-dashboard.component.html',
   styleUrls: ['./home-dashboard.component.css'],
-  providers: [CredentialsService, WebsocketHomeService, ToastrService, NotificationsService]
+  providers: [CredentialsService, WebsocketHomeService, ToastrService, NotificationsService, GroupsService]
 })
 export class HomeDashboardComponent implements OnInit {
 
   username = '';
   token = '';
   email = '';
+  myGroups: Group[] = [];
 
   constructor(private credentialsService: CredentialsService, private router: Router,
               private wsservice: WebsocketHomeService, private toastrService: ToastrService,
-              private notificationService: NotificationsService) {
+              private notificationService: NotificationsService, private groupsService: GroupsService) {
   }
 
   ngOnInit() {
@@ -36,6 +38,7 @@ export class HomeDashboardComponent implements OnInit {
       console.log('Ok notificaciones', value);
       return 'ok';
     }, (reason => console.log('Error, denied')));
+
     // this.notificationService.showNotification('Prueba', 'Esto es una prueba bro');
   }
 

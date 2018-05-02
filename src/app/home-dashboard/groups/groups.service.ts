@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {groups_endpoint} from '../../API_Strings';
 import {Observable} from 'rxjs/Observable';
 
@@ -12,6 +12,11 @@ export class GroupsService {
 
   getMyGroups(): Observable<Object> {
     return this.httpClient.get(groups_endpoint);
+  }
+
+  getHomeGroups(): Observable<Object> {
+    const params = new HttpParams().set('last', '5');
+    return this.httpClient.get(groups_endpoint, {params: params});
   }
 
 }

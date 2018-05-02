@@ -12,6 +12,14 @@
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 }
 
+.dashed-shadow {
+  position: relative;
+  top: 8px;
+  left: 8px;
+  display: inline-block;
+  color: #e74c3c;
+}
+
 .rounded-img-online {
   display: block;
   width: 250px;

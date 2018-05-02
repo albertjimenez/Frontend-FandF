@@ -10,6 +10,48 @@
   border-radius: 99em;
   border: 5px solid #eee;
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+  text-align: center;
+
+}
+
+.text {
+  color: white;
+  font-size: 18px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.subtext {
+  color: white;
+  font-size: 18px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.overlay {
+  position: absolute;
+  border-radius: 25px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.card--content:hover .overlay {
+  opacity: 1;
+
 }
 
 .example-card {
@@ -47,6 +89,7 @@
 .example-card {
   border-radius: 25px;
   max-width: 500px;
+  height: 100%;
 }
 
 .example-header-image {
@@ -58,7 +101,7 @@
   top: 8px;
   left: 8px;
   display: inline-block;
-  color: #e74c3c;
+  color: #eeeeee;
 }
 
 .dashed-shadow:before {
@@ -75,15 +118,6 @@
   animation: dash-animation 30s infinite linear;
 }
 
-.dashed-shadow:after {
-  content: attr(data-text);
-  position: absolute;
-  left: -1px;
-  top: -1px;
-  color: #353538;
-  text-shadow: 2px 2px #f06292;
-}
-
 .hello {
   font-family: 'Cookie', cursive;
   font-size: 50pt;
@@ -91,7 +125,7 @@
 
 .card {
   display: flex;
-  background-color: #999999;
+  background-color: #C4D9EB;
   min-width: 150px;
   min-height: 150px;
   overflow-x: auto;

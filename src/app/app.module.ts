@@ -48,6 +48,7 @@ import {GeneralGroupsComponent} from './general-groups/general-groups.component'
 import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
 import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
 import {AuthInterceptorService} from './auth-interceptor.service';
+import {AvatarModule} from 'ngx-avatar';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -114,6 +115,7 @@ export const routes: Routes = [
       }
     }),
     ToastrModule.forRoot(), // ToastrModule added
+    AvatarModule
 
   ],
   providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService,

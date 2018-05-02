@@ -47,21 +47,21 @@ body {
 }
 
 .bg-events {
-  background: #555555;
+  background: #C4D9EB;
   border: solid #4eb8dd;
   box-shadow: 0 0 10px black;
   z-index: 2;
 }
 
 .bg-groups {
-  background: #555555;
+  background: #777777;
   border: solid #4eb8dd;
   box-shadow: 0 0 10px black;
   z-index: 2;
 }
 
 .bg-friends {
-  background: #555555;
+  background: #C4D9EB;;
   border: solid #4eb8dd;
   box-shadow: 0 0 10px black;
   z-index: 2;
