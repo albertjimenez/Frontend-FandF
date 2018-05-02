@@ -59,7 +59,8 @@
         </mat-form-field>
         <mat-list role="list" class="lista">
           <h3 matSubheader>Mis grupos</h3>
-          <mat-list-item *ngFor="let g of autocompleteGroups" (click)="onClickGroup(g._id, g.name)">
+          <mat-list-item class="assistant-item" *ngFor="let g of autocompleteGroups"
+                         (click)="onClickGroup(g._id, g.name)">
 
             <img *ngIf="g.image.length < 1; else imgGroup"
                  src="https://www.shareicon.net/download/2017/01/06/869210_party.ico" matListAvatar #imgGroup>
@@ -82,7 +83,56 @@
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Resumen</ng-template>
-    You are now done.
+
+
+    <mat-card class="z-depth-3">
+      <mat-list>
+        <mat-list-item>
+          <mat-icon>mode_edit</mat-icon>
+          <h3 mat-line>Nombre del evento</h3>
+          <p mat-line>
+            <span>{{this.informationFormGroup.controls?.eventName?.value}}</span>
+          </p>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon>insert_comment</mat-icon>
+          <h3 mat-line>Descripción</h3>
+          <p mat-line>
+            <span>{{this.informationFormGroup.controls?.description?.value}}</span>
+          </p>
+        </mat-list-item>
+
+        <mat-list-item>
+          <mat-icon>insert_photo</mat-icon>
+          <h3 mat-line>Enlace de foto</h3>
+          <p mat-line>
+            <a>{{this.informationFormGroup.controls?.photoUrl?.value}}</a>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>event_note</mat-icon>
+          <h3 mat-line>Fecha y hora</h3>
+          <p mat-line>
+            <span>{{this.parseDateToStr()}}</span>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>place</mat-icon>
+          <h3 mat-line>Lugar</h3>
+          <p mat-line>
+            <span>{{this.addressName}}</span>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon>people</mat-icon>
+          <h3 mat-line>Grupo invitado</h3>
+          <p mat-line>
+            <span>{{this.invitedsFormGroup.controls?.groupName?.value}}</span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>

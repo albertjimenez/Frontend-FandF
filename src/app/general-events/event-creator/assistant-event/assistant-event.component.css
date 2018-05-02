@@ -6,11 +6,11 @@ input {
   width: 75%;
 }
 
-mat-list-item {
+.assistant-item {
   cursor: pointer;
 }
 
-mat-list-item:hover {
+.assistant-item:hover {
   background-color: #bbbbbb;
   transition: all 0.5s ease;
   border-radius: 25px;

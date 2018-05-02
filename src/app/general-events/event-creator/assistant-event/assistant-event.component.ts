@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
 import {Group, GroupsService} from '../../../home-dashboard/groups/groups.service';
+import {parseUnixtimeToDate} from '../../../home-dashboard/events/events.service';
+import {isUndefined} from 'util';
 
 @Component({
   selector: 'app-assistant-event',
@@ -22,10 +24,10 @@ export class AssistantEventComponent implements OnInit {
   myGroups: Group[] = [];
   autocompleteGroups: Group[] = [];
   isLoading = true;
+  addressName = '';
 
   constructor(private _formBuilder: FormBuilder, private groupService: GroupsService) {
     this.groupService.getMyGroups().subscribe(data => {
-      console.log('Hay cosillas ->', data);
       const groups = data.valueOf()['groups'];
       Object.entries(groups).forEach(
         ([key, value]) => {
@@ -41,7 +43,6 @@ export class AssistantEventComponent implements OnInit {
             _id: value._id
           };
           this.myGroups.push(g);
-          console.log(this.myGroups);
         }
       );
     }, error => {
@@ -74,6 +75,7 @@ export class AssistantEventComponent implements OnInit {
   }
 
   onChange(address: Address) {
+    this.addressName = address.name;
     this.placeId = address.place_id;
   }
 
@@ -84,6 +86,13 @@ export class AssistantEventComponent implements OnInit {
   onClickGroup(id, name) {
     this.groupId = id;
     this.invitedsFormGroup.controls.groupName.patchValue(name);
+  }
+
+  parseDateToStr(): string {
+    if (!isUndefined(this.selectedDate) && !isUndefined(this.informationFormGroup.controls.hour.value)) {
+      return parseUnixtimeToDate(parseDateAndTime(this.selectedDate, this.informationFormGroup.controls.hour.value).toString());
+    }
+    return '';
   }
 }
 
