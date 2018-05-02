@@ -7,14 +7,14 @@
 <div class="my-grid" id="myUL" *ngIf="groupList.length > 0; else empty">
   <div class="box" *ngFor="let group of groupList">
     <div class="animated flipInY">
-      <div class="card-container">
+      <div class="card-container manual-flip" #Card>
         <div class="card">
           <div class="front">
             <div class="cover blur-img">
               <!--<img  src="../../assets/events/event.jpg"/>-->
             </div>
             <div class="user">
-              <img class="img-circle" src="../../assets/groups/tetio.jpg"/>
+              <img class="img-circle" src="{{group.image}}"/>
             </div>
             <div class="content">
               <div class="main">
@@ -25,7 +25,11 @@
               </div>
               <div class="footer">
                 <div class="rating">
-                  <i class="fa fa-mail-forward"></i>Echa ahí
+                  <i class="fa fa-mail-forward">
+                    <button class="btn btn-simple" (click)="rotateCard(Card)">
+                      <i class="fa fa-mail-forward"></i>Girar
+                    </button>
+                  </i>
                 </div>
               </div>
             </div>
@@ -41,8 +45,11 @@
               </div>
             </div>
             <div class="footer">
-              <div class="social-links text-center">
-              </div>
+              <i class="fa fa-mail-forward">
+                <button class="btn btn-simple" (click)="rotateCard(Card)">
+                  <i class="fa fa-mail-forward"></i>Girar
+                </button>
+              </i>
             </div>
           </div> <!-- end back panel -->
         </div> <!-- end card -->

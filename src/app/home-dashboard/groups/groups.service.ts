@@ -1,20 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {groups_endpoint} from '../../API_Strings';
-import {CredentialsService} from '../../credentials.service';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class GroupsService {
 
-  constructor(private router: Router, private httpClient: HttpClient, private credentialsService: CredentialsService) {
+  constructor(private router: Router, private httpClient: HttpClient) {
   }
 
   getMyGroups(): Observable<Object> {
-    const myHeaders = new HttpHeaders().set('Authorization', this.credentialsService.getToken().toString());
-    console.log(myHeaders.get('Authorization'));
-    return this.httpClient.get(groups_endpoint, {headers: myHeaders});
+    return this.httpClient.get(groups_endpoint);
   }
 
 }
@@ -24,4 +21,9 @@ export interface Group {
   description: string;
   closed: boolean;
   users: [string];
+  dateOfCreation: number;
+  createdBy: string;
+  image: string;
+  updateDate: number;
+  _id: string;
 }

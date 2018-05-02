@@ -12,6 +12,7 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatListModule,
   MatMenuModule,
   MatNativeDateModule,
   MatProgressSpinnerModule,
@@ -23,7 +24,7 @@ import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
 import {RegisterComponent} from './register/register.component';
 import {LoginService} from './login/login.service';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HomeDashboardComponent} from './home-dashboard/home-dashboard.component';
 import {NavbarComponent} from './navbar/navbar.component';
@@ -46,6 +47,7 @@ import {GeneralEventsComponent} from './general-events/general-events.component'
 import {GeneralGroupsComponent} from './general-groups/general-groups.component';
 import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
 import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
+import {AuthInterceptorService} from './auth-interceptor.service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -101,6 +103,7 @@ export const routes: Routes = [
     MatToolbarModule,
     MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule,
     MatDividerModule,
+    MatListModule,
     MatExpansionModule,
     GooglePlaceModule,
     TranslateModule.forRoot({
@@ -113,7 +116,13 @@ export const routes: Routes = [
     ToastrModule.forRoot(), // ToastrModule added
 
   ],
-  providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService],
+  providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

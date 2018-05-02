@@ -19,7 +19,12 @@ export class GeneralGroupsComponent implements OnInit {
       name: 'Tetío y neuronía',
       description: 'Sólo chorradas',
       closed: true,
-      users: ['Santi', 'El adris', 'Vervhel']
+      users: ['Santi', 'El adris', 'Vervhel'],
+      dateOfCreation: 1525252545,
+      createdBy: 'beruto',
+      image: 'https://cdn.memegenerator.es/imagenes/memes/full/26/55/26550209.jpg',
+      updateDate: 1525252988,
+      _id: 'Tiusa'
     };
     this.groupList.push(group, group, group, group);
   }
@@ -40,6 +45,15 @@ export class GeneralGroupsComponent implements OnInit {
       } else {
         card[i].style.display = 'none';
       }
+    }
+  }
+
+  rotateCard(btn) {
+    const $card = $(btn).closest('.card-container');
+    if ($card.hasClass('hover')) {
+      $card.removeClass('hover');
+    } else {
+      $card.addClass('hover');
     }
   }
 }

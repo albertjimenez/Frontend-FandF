@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
-import {CredentialsService} from '../../../credentials.service';
-import {GroupsService} from '../../../home-dashboard/groups/groups.service';
+import {Group, GroupsService} from '../../../home-dashboard/groups/groups.service';
 
 @Component({
   selector: 'app-assistant-event',
   templateUrl: './assistant-event.component.html',
   styleUrls: ['./assistant-event.component.css'],
-  providers: [CredentialsService, GroupsService]
+  providers: [GroupsService]
 })
 export class AssistantEventComponent implements OnInit {
 
@@ -19,9 +18,39 @@ export class AssistantEventComponent implements OnInit {
   placeIdFormGroup: FormGroup;
   invitedsFormGroup: FormGroup;
   placeId = '';
-  myGroups: String[];
+  groupId = '';
+  myGroups: Group[] = [];
+  autocompleteGroups: Group[] = [];
+  isLoading = true;
 
   constructor(private _formBuilder: FormBuilder, private groupService: GroupsService) {
+    this.groupService.getMyGroups().subscribe(data => {
+      console.log('Hay cosillas ->', data);
+      const groups = data.valueOf()['groups'];
+      Object.entries(groups).forEach(
+        ([key, value]) => {
+          const g: Group = {
+            name: value.name,
+            description: value.description,
+            closed: value.closed,
+            users: value.users,
+            dateOfCreation: value.dateOfCreation,
+            createdBy: value.createdBy,
+            image: value.image,
+            updateDate: value.updateDate,
+            _id: value._id
+          };
+          this.myGroups.push(g);
+          console.log(this.myGroups);
+        }
+      );
+    }, error => {
+      console.log('Error', error);
+      this.isLoading = false;
+    }, () => {
+      this.isLoading = false;
+      this.autocompleteGroups = this.myGroups;
+    });
   }
 
   ngOnInit() {
@@ -38,7 +67,6 @@ export class AssistantEventComponent implements OnInit {
     this.invitedsFormGroup = this._formBuilder.group({
       groupName: ['', Validators.required]
     });
-    this.groupService.getMyGroups().subscribe(data => console.log(data), error => console.log('Error', error));
   }
 
   setMyDate(value) {
@@ -47,6 +75,15 @@ export class AssistantEventComponent implements OnInit {
 
   onChange(address: Address) {
     this.placeId = address.place_id;
+  }
+
+  filterGroups(inputText) {
+    this.autocompleteGroups = this.myGroups.filter(g => g.name.toLowerCase().indexOf(inputText.toLowerCase()) > -1);
+  }
+
+  onClickGroup(id, name) {
+    this.groupId = id;
+    this.invitedsFormGroup.controls.groupName.patchValue(name);
   }
 }
 
