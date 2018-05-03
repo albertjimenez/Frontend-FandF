@@ -1,18 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MyEvent, parseUnixtimeToDate} from '../home-dashboard/events/events.service';
+import {GmapsIdToAddressService} from './gmaps-id-to-address.service';
+import {Subscription} from 'rxjs/Subscription';
 
 declare const $: any;
 
 @Component({
   selector: 'app-general-events',
   templateUrl: './general-events.component.html',
-  styleUrls: ['./general-events.component.css']
+  styleUrls: ['./general-events.component.css'],
+  providers: [GmapsIdToAddressService]
 })
-export class GeneralEventsComponent implements OnInit {
+export class GeneralEventsComponent implements OnInit, OnDestroy {
 
   eventList = Array<MyEvent>();
   numMatches = this.eventList.length;
-  constructor() {
+  subscriptionGmaps: Subscription = null;
+
+  constructor(private gmapsService: GmapsIdToAddressService) {
   }
 
   ngOnInit() {
@@ -20,7 +25,7 @@ export class GeneralEventsComponent implements OnInit {
       name: 'Kebab preuji',
       date: 1525006449,
       description: 'Descripción del evento',
-      placeId: 'Casa santi',
+      placeId: 'ChIJzXM7TocoQg0RfWsMusnsJkg',
       groupId: 'Grupisme',
       image: ''
     };
@@ -49,6 +54,12 @@ export class GeneralEventsComponent implements OnInit {
       } else {
         card[i].style.display = 'none';
       }
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscriptionGmaps !== null) {
+      this.subscriptionGmaps.unsubscribe();
     }
   }
 }
