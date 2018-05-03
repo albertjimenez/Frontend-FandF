@@ -18,7 +18,7 @@
                        (change)="before_upload_image()">
               </ng-template>
               <ng-template #y>
-                <img src="../../../assets/santi.jpg" class="group_img" (click)="handle_image()"/>
+                <img src="../../../../assets/santi.jpg" class="group_img" (click)="handle_image()"/>
                 <input id="upload2" type="file" style="display: none" formControlName="imageAfterUpload"
                        (change)="after_upload_image()">
               </ng-template>
@@ -94,7 +94,9 @@
         </div>
         <br>
         <div class="create_button_site">
-          <button class="create_button" type="submit" mat-button (click)="createGroup()">Crear</button>
+          <button class="create_button" type="submit" [disabled]="createFrom.invalid" mat-flat-button
+                  (click)="createGroup()">Crear
+          </button>
         </div>
       </form>
     </mat-card-content>

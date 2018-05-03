@@ -44,11 +44,11 @@
 }
 
 .create_button {
-  padding: 10px 20px;
-  background-color: blue;
-  color: white;
-  border-radius: 4px;
+  padding: 5px 10px;
+  border-radius: 2px;
   font-weight: bolder;
+  background: blue;
+  color: white;
 }
 
 .create_button_site {

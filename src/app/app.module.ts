@@ -48,7 +48,8 @@ import {GeneralEventsComponent} from './general-events/general-events.component'
 import {GeneralGroupsComponent} from './general-groups/general-groups.component';
 import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
 import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
-import {CreateGroupComponent} from './general-groups/create-group/create-group.component';
+import {CreateGroupComponent} from './general-groups/creategroupbutton/create-group/create-group.component';
+import {CreategroupbuttonComponent} from './general-groups/creategroupbutton/creategroupbutton.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -66,8 +67,8 @@ export const routes: Routes = [
   // {path: 'my-profile', component: MyProfileComponent},
   {path: 'my-events', component: GeneralEventsComponent},
   {path: 'my-groups', component: GeneralGroupsComponent},
-  {path: 'create-group', component: CreateGroupComponent},
   {path: 'assistant-event', component: AssistantEventComponent},
+  {path: 'create-group', component: CreateGroupComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
@@ -88,7 +89,8 @@ export const routes: Routes = [
     GeneralGroupsComponent,
     EventCreatorComponent,
     AssistantEventComponent,
-    CreateGroupComponent
+    CreateGroupComponent,
+    CreategroupbuttonComponent
   ],
   imports: [
     BrowserModule,

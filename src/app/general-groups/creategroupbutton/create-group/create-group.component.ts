@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
@@ -40,6 +40,9 @@ export class CreateGroupComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    const MIN_CHAR = 1;
+    const MAX_DESCRIPTION_CHAR = 150;
+    const MAX_NAME_CHAR = 25;
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
@@ -48,11 +51,15 @@ export class CreateGroupComponent implements OnInit {
     this.closedGroup = true;
     this.is_image_upload = false;
     this.createFrom = new FormGroup({
-      groupname: new FormControl(),
+      groupname: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(MIN_CHAR),
+        Validators.maxLength(MAX_NAME_CHAR)
+      ])),
       imageBeforeUpload: new FormControl(),
       imageAfterUpload: new FormControl(),
-      members: new FormControl(),
-      description: new FormControl()
+      members: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.maxLength(MAX_DESCRIPTION_CHAR))
     });
 
   }
@@ -77,7 +84,7 @@ export class CreateGroupComponent implements OnInit {
   }
 
   new_friend() {
-    if (this.createFrom.value.members === null) {
+    if (this.createFrom.value.members === '') {
       this.createFrom.patchValue({
         members: this.myControl.value
       });
