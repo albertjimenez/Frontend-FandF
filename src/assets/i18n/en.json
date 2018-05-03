@@ -33,5 +33,20 @@
   "Filtrar eventos": "Filter events",
   "Filtrar grupos": "Filter groups",
   "Filtrar amigos": "Filter friends",
-  "Nuevo evento": "New event"
+  "Nuevo evento": "New event",
+  "Información": "Information",
+  "Nombre en blanco": "Blank name",
+  "Descripción": "Description",
+  "Descripción en blanco": "Blank Description",
+  "Url de la foto": "Photo Url",
+  "Fecha del evento": "Event's Date",
+  "Hora de realización": "Hour",
+  "Siguiente": "Next",
+  "Nombre del grupo": "Group name",
+  "Resumen": "Overview",
+  "Nombre del evento": "Event's name",
+  "Lugar": "Place",
+  "Crear evento": "Create event",
+  "eventOk": "Event created successfully",
+  "eventError": "Could not create the event, please try again in a few minutes"
 }

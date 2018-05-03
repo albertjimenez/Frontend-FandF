@@ -33,5 +33,20 @@
   "Filtrar eventos": "Filtrar eventos",
   "Filtrar grupos": "Filtrar eventos",
   "Filtrar amigos": "Filtrar eventos",
-  "Nuevo evento": "Nuevo evento"
+  "Nuevo evento": "Nuevo evento",
+  "Información": "Información",
+  "Nombre en blanco": "Nombre en blanco",
+  "Descripción": "Descripción",
+  "Descripción en blanco": "Descripción en blanco",
+  "Url de la foto": "Url de la foto",
+  "Fecha del evento": "Fecha del evento",
+  "Hora de realización": "Hora de realización",
+  "Siguiente": "Siguiente",
+  "Nombre del grupo": "Nombre del grupo",
+  "Resumen": "Resumen",
+  "Nombre del evento": "Nombre del evento",
+  "Lugar": "Lugar",
+  "Crear evento": "Crear evento",
+  "eventOk": "Evento creado correctamente",
+  "eventError": "No se ha podido crear el evento, pruebe más tarde"
 }

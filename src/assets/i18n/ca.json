@@ -33,5 +33,20 @@
   "Filtrar eventos": "Filtrar esdeveniments",
   "Filtrar grupos": "Filtrar grups",
   "Filtrar amigos": "Filtrar amics",
-  "Nuevo evento": "Nou esdeveniment"
+  "Nuevo evento": "Nou esdeveniment",
+  "Información": "Informació",
+  "Nombre en blanco": "Nom en blanc",
+  "Descripción": "Descripció",
+  "Descripción en blanco": "Descripció en blanc",
+  "Url de la foto": "Url de la foto",
+  "Fecha del evento": "Data del esdeveniment",
+  "Hora de realización": "Hora",
+  "Siguiente": "Següent",
+  "Nombre del grupo": "Nom del grup",
+  "Resumen": "Resum",
+  "Nombre del evento": "Nom de l'esdeveniment",
+  "Lugar": "Lloc",
+  "Crear evento": "Crear esdeveniment",
+  "eventOk": "Esdeveniment creat satisfactoriament",
+  "eventError": "No s'ha pogut crear el esdeveniment, intente-ho més tard"
 }

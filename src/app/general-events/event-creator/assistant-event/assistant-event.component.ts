@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Address} from 'ngx-google-places-autocomplete/objects/address';
 import {Group, GroupsService} from '../../../home-dashboard/groups/groups.service';
 import {EventsService, MyEvent, parseUnixtimeToDate} from '../../../home-dashboard/events/events.service';
 import {isUndefined} from 'util';
+import {SwalComponent} from '@toverux/ngx-sweetalert2';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-assistant-event',
@@ -26,7 +28,11 @@ export class AssistantEventComponent implements OnInit {
   isLoading = true;
   addressName = '';
 
-  constructor(private _formBuilder: FormBuilder, private groupService: GroupsService, private eventsService: EventsService) {
+  @ViewChild('eventOk') eventOk: SwalComponent;
+  @ViewChild('eventError') eventError: SwalComponent;
+
+  constructor(private _formBuilder: FormBuilder, private groupService: GroupsService, private eventsService: EventsService,
+              private router: Router) {
     this.groupService.getMyGroups().subscribe(data => {
       const groups = data.valueOf()['groups'];
       Object.entries(groups).forEach(
@@ -105,7 +111,11 @@ export class AssistantEventComponent implements OnInit {
       groupId: this.groupId,
       image: photo
     };
-    this.eventsService.postNewEvent(myEvent).subscribe(data => console.log(data), error2 => console.log('Error ', error2));
+    this.eventsService.postNewEvent(myEvent).subscribe(data => this.eventOk.show(), error2 => this.eventError.show());
+  }
+
+  redirectIfSuccess() {
+    this.router.navigateByUrl('/my-events');
   }
 }
 
