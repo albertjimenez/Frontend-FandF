@@ -1,17 +1,21 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {CredentialsService} from '../../credentials.service';
 import {post_events_endpoint} from '../../API_Strings';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class EventsService {
 
-  constructor(private router: Router, private httpClient: HttpClient, private credentialsService: CredentialsService) {
+  constructor(private router: Router, private httpClient: HttpClient) {
   }
 
-  postNewEvent(event: MyEvent) {
+  postNewEvent(event: MyEvent): Observable<Object> {
     return this.httpClient.post(post_events_endpoint, event);
+  }
+
+  getMyEvents() {
+    // TODO acabar cuando vervhel te diga
   }
 }
 

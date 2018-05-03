@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MyEvent, parseUnixtimeToDate} from '../home-dashboard/events/events.service';
+import {EventsService, MyEvent, parseUnixtimeToDate} from '../home-dashboard/events/events.service';
 import {GmapsIdToAddressService} from './gmaps-id-to-address.service';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -9,27 +9,19 @@ declare const $: any;
   selector: 'app-general-events',
   templateUrl: './general-events.component.html',
   styleUrls: ['./general-events.component.css'],
-  providers: [GmapsIdToAddressService]
+  providers: [GmapsIdToAddressService, EventsService]
 })
 export class GeneralEventsComponent implements OnInit, OnDestroy {
 
   eventList = Array<MyEvent>();
   numMatches = this.eventList.length;
-  subscriptionGmaps: Subscription = null;
+  // TODO meter el resultado de cada llamado aquí y luego en el ngOnDestroy haces unsuscribe
+  subscriptionList: Array<Subscription> = Array<Subscription>();
 
-  constructor(private gmapsService: GmapsIdToAddressService) {
+  constructor(private gmapsService: GmapsIdToAddressService, private eventsService: EventsService) {
   }
 
   ngOnInit() {
-    const event: MyEvent = {
-      name: 'Kebab preuji',
-      date: 1525006449,
-      description: 'Descripción del evento',
-      placeId: 'ChIJzXM7TocoQg0RfWsMusnsJkg',
-      groupId: 'Grupisme',
-      image: ''
-    };
-    this.eventList.push(event, event, event, event);
   }
 
   parseUnixTime(time: string) {
@@ -58,8 +50,5 @@ export class GeneralEventsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.subscriptionGmaps !== null) {
-      this.subscriptionGmaps.unsubscribe();
-    }
   }
 }
