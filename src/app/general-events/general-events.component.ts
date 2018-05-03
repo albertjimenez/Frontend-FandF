@@ -22,6 +22,15 @@ export class GeneralEventsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const event: MyEvent = {
+      name: 'Kebab preuji',
+      date: 1525006449,
+      description: 'Descripción del evento',
+      placeId: 'Casa santi',
+      groupId: 'Grupisme',
+      image: ''
+    };
+    this.eventList.push(event, event, event, event);
   }
 
   parseUnixTime(time: string) {
