@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CredentialsService} from '../credentials.service';
 import * as $ from 'jquery';
-import {TranslateService} from "@ngx-translate/core";
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isMobile = window.innerWidth < 700;
   }
 
   hideButtonOnExistSession(): Boolean {

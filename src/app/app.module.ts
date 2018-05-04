@@ -55,8 +55,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-export const Vibrant = require('node-vibrant');
-
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
