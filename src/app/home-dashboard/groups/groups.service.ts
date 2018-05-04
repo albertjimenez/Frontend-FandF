@@ -31,4 +31,5 @@ export interface Group {
   image: string;
   updateDate: number;
   _id: string;
+  headerImg?: string;
 }

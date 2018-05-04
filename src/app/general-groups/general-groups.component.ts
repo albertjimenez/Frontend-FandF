@@ -1,35 +1,45 @@
 import {Component, OnInit} from '@angular/core';
-import {Group} from '../home-dashboard/groups/groups.service';
+import {Group, GroupsService} from '../home-dashboard/groups/groups.service';
+import {parseUnixtimeToDate} from '../home-dashboard/events/events.service';
 
 @Component({
   selector: 'app-general-groups',
   templateUrl: './general-groups.component.html',
-  styleUrls: ['./general-groups.component.css']
+  styleUrls: ['./general-groups.component.css'],
+  providers: [GroupsService]
 })
 export class GeneralGroupsComponent implements OnInit {
 
   groupList = Array<Group>();
   numMatches = this.groupList.length;
+  private numImages = 10;
 
-  constructor() {
+  constructor(private groupsService: GroupsService) {
   }
 
   ngOnInit() {
-    const group: Group = {
-      name: 'Tetío y neuronía',
-      description: 'Sólo chorradas',
-      closed: true,
-      users: ['Santi', 'El adris', 'Vervhel'],
-      dateOfCreation: 1525252545,
-      createdBy: 'beruto',
-      image: 'https://cdn.memegenerator.es/imagenes/memes/full/26/55/26550209.jpg',
-      updateDate: 1525252988,
-      _id: 'Tiusa'
-    };
-    this.groupList.push(group, group, group, group);
+    this.groupsService.getMyGroups().subscribe(data => {
+      const groups = data.valueOf()['groups'];
+      Object.entries(groups).forEach(
+        ([key, value]) => {
+          const g: Group = {
+            name: value.name,
+            description: value.description,
+            closed: value.closed,
+            users: value.users,
+            dateOfCreation: value.dateOfCreation,
+            createdBy: value.createdBy,
+            image: value.image,
+            updateDate: value.updateDate,
+            _id: value._id,
+            headerImg: `${this.randomBgHeader()}.jpg`
+          };
+          this.groupList.push(g);
+        }
+      );
+    }, error => console.log(error));
   }
 
-  // TODO revisar por qué al poner 'chorr' ya sólo sale un elemento, falla en el content
   filterElems(filter: string) {
     this.numMatches = 0;
     let ul, li, i, card, title;
@@ -55,5 +65,13 @@ export class GeneralGroupsComponent implements OnInit {
     } else {
       $card.addClass('hover');
     }
+  }
+
+  randomBgHeader(): number {
+    return Math.floor(Math.random() * (this.numImages));
+  }
+
+  parseUnixTime(time: string, shortDate?: boolean) {
+    return parseUnixtimeToDate(time, shortDate);
   }
 }

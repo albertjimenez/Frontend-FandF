@@ -28,7 +28,7 @@ export interface MyEvent {
   image: string;
 }
 
-export function parseUnixtimeToDate(time: string) {
+export function parseUnixtimeToDate(time: string, shortDate?: boolean) {
   const locale = 'es';
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
   const myTime = +time;
@@ -36,6 +36,9 @@ export function parseUnixtimeToDate(time: string) {
   const hours = date.getHours();
   const minutes = '0' + date.getMinutes();
   const seconds = '0' + date.getSeconds();
+  if (shortDate) {
+    return date.toLocaleDateString(locale, options);
+  }
   return date.toLocaleDateString(locale, options) + ' ' + hours + ':' + minutes.substr(-2) + ':' +
     seconds.substr(-2);
 }

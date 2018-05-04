@@ -10,9 +10,8 @@
       <div class="card-container manual-flip" #Card>
         <div class="card">
           <div class="front">
-            <div class="cover blur-img">
-              <!--<img  src="../../assets/events/event.jpg"/>-->
-            </div>
+            <img src="../../assets/events/{{group.headerImg}}" class="blur-me"/>
+            <!--<img  src="{{group.image}}" class="blur-me"/>-->
             <div class="user">
               <img class="img-circle" src="{{group.image}}"/>
             </div>
@@ -27,7 +26,7 @@
                 <div class="rating">
                   <i class="fa fa-mail-forward">
                     <button class="btn btn-simple" (click)="rotateCard(Card)">
-                      <i class="fa fa-mail-forward"></i>Girar
+                      <i class="fa fa-mail-forward"></i>Más
                     </button>
                   </i>
                 </div>
@@ -36,18 +35,31 @@
           </div> <!-- end front panel -->
           <div class="back">
             <div class="header">
-              <h5 class="motto">Sibarita pitu eh eh</h5>
+              <h5 class="motto">Creado por <strong>{{group.createdBy}}</strong></h5>
             </div>
             <div class="content">
               <div class="main">
-                <h4 class="text-center">Miembros</h4>
-                <p class="text-center">{{group.users}}</p>
+                <div *ngIf="group.users.length <= 3; else numUsers">
+                  <h4 class="text-center">Miembros</h4>
+                  <div *ngFor="let u of group.users">
+                  <span>
+                    {{u}}
+                  </span>
+                  </div>
+                </div>
+                <ng-template #numUsers>
+                  <p class="motto">Número de usuarios</p>
+                  <ngx-avatar value="{{group.users.length}}"></ngx-avatar>
+                  <span class="motto">Creado el {{parseUnixTime(group.dateOfCreation, true)}}</span>
+                </ng-template>
+
+
               </div>
             </div>
             <div class="footer">
               <i class="fa fa-mail-forward">
                 <button class="btn btn-simple" (click)="rotateCard(Card)">
-                  <i class="fa fa-mail-forward"></i>Girar
+                  <i class="fa fa-mail-forward"></i>Menos
                 </button>
               </i>
             </div>
@@ -58,5 +70,21 @@
   </div>
 </div>
 <ng-template #empty>
-  Vacío
+  <h1>{{'Cargando...'|translate}}</h1>
+  <div id="cooking">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div id="area">
+      <div id="sides">
+        <div id="pan"></div>
+        <div id="handle"></div>
+      </div>
+      <div id="pancake">
+        <div id="pastry"></div>
+      </div>
+    </div>
+  </div>
 </ng-template>
