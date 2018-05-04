@@ -48,5 +48,13 @@
   "Lugar": "Place",
   "Crear evento": "Create event",
   "eventOk": "Event created successfully",
-  "eventError": "Could not create the event, please try again in a few minutes"
+  "eventError": "Could not create the event, please try again in a few minutes",
+  "coincidencias": "matches",
+  "Más": "More",
+  "Menos": "Less",
+  "Creado por": "Created by",
+  "Miembros": "Members",
+  "Número de usuarios": "Number of users",
+  "Creado el": "Created on",
+  "No tienes grupos": "You don't have groups yet"
 }

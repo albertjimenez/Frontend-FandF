@@ -15,17 +15,29 @@
         <mat-icon>home</mat-icon>
       </button>
     <mat-menu #menu="matMenu" matTooltip="Buscar">
-      <button mat-menu-item (click)="logout()" matTooltip="{{'Salir'|translate}}">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>{{'Salir' | translate}}</span>
+      <button disabled="true" mat-menu-item routerLink="/my-profile" matTooltip="{{'Mi perfil' | translate}}">
+        <mat-icon>assignment_id</mat-icon>
+        <span>{{'Mi perfil' | translate}}</span>
+      </button>
+      <button mat-menu-item routerLink="/my-events" matTooltip="{{'Mis eventos' | translate}}">
+        <mat-icon>event</mat-icon>
+        <span>{{'Mis eventos' | translate}}</span>
+      </button>
+      <button mat-menu-item routerLink="/my-groups" matTooltip="{{'Mis grupos' | translate}}">
+        <mat-icon>people</mat-icon>
+        <span>{{'Mis grupos' | translate}}</span>
+      </button>
+      <button disabled="true" mat-menu-item routerLink="/my-friends" matTooltip="{{'Mis amigos' | translate}}">
+        <mat-icon>face</mat-icon>
+        <span>{{'Mis amigos' | translate}}</span>
       </button>
       <button mat-menu-item routerLink="/gmaps" matTooltip="{{'Restaurantes' | translate}}">
         <mat-icon>restaurant</mat-icon>
         <span>{{'Restaurantes' | translate}}</span>
       </button>
-      <button mat-menu-item routerLink="/my-profile" matTooltip="{{'Mi perfil' | translate}}">
-        <mat-icon>assignment_id</mat-icon>
-        <span>{{'Mi perfil' | translate}}</span>
+      <button mat-menu-item (click)="logout()" matTooltip="{{'Salir'|translate}}">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>{{'Salir' | translate}}</span>
       </button>
     </mat-menu>
 

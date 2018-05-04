@@ -48,5 +48,13 @@
   "Lugar": "Lloc",
   "Crear evento": "Crear esdeveniment",
   "eventOk": "Esdeveniment creat satisfactoriament",
-  "eventError": "No s'ha pogut crear el esdeveniment, intente-ho més tard"
+  "eventError": "No s'ha pogut crear el esdeveniment, intente-ho més tard",
+  "coincidencias": "coincidències",
+  "Más": "Més",
+  "Menos": "Menys",
+  "Creado por": "Creat per",
+  "Miembros": "Membres",
+  "Número de usuarios": "Nombre d'usuaris",
+  "Creado el": "Creat el",
+  "No tienes grupos": "No tens grups"
 }

@@ -48,5 +48,13 @@
   "Lugar": "Lugar",
   "Crear evento": "Crear evento",
   "eventOk": "Evento creado correctamente",
-  "eventError": "No se ha podido crear el evento, pruebe más tarde"
+  "eventError": "No se ha podido crear el evento, pruebe más tarde",
+  "coincidencias": "coincidencias",
+  "Más": "Más",
+  "Menos": "Menos",
+  "Creado por": "Creado por",
+  "Miembros": "Miembros",
+  "Número de usuarios": "Número de usuarios",
+  "Creado el": "Creado el",
+  "No tienes grupos": "No tienes grupos"
 }

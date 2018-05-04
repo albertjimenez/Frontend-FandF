@@ -13,6 +13,7 @@ export class GeneralGroupsComponent implements OnInit {
   groupList = Array<Group>();
   numMatches = this.groupList.length;
   private numImages = 10;
+  isLoading = true;
 
   constructor(private groupsService: GroupsService) {
   }
@@ -37,7 +38,11 @@ export class GeneralGroupsComponent implements OnInit {
           this.groupList.push(g);
         }
       );
-    }, error => console.log(error));
+      this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.isLoading = false;
+    });
   }
 
   filterElems(filter: string) {
