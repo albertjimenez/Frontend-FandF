@@ -19,7 +19,7 @@
           <mat-card-title>{{group.name}}</mat-card-title>
           <mat-card-subtitle>{{parseUnixTimeToStr(group.dateOfCreation)}}</mat-card-subtitle>
         </mat-card-header>
-        <img src="{{group.image}}" class="rounded-img" mat-card-image *ngIf="validateImg(group.image); else defaultImg">
+        <img src="{{group.image}}" mat-card-image *ngIf="validateImg(group.image); else defaultImg">
         <ng-template #defaultImg>
           <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-drives/1024/Group-icon.png"
                class="rounded-img" mat-card-image>

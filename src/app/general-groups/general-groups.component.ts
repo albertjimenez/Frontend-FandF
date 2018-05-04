@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Group, GroupsService} from '../home-dashboard/groups/groups.service';
 import {parseUnixtimeToDate} from '../home-dashboard/events/events.service';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-general-groups',
@@ -70,6 +71,10 @@ export class GeneralGroupsComponent implements OnInit {
     } else {
       $card.addClass('hover');
     }
+  }
+
+  validateImg(img: string) {
+    return !isNullOrUndefined(img) && img.length >= 15;
   }
 
   randomBgHeader(): number {

@@ -32,7 +32,13 @@
             <img src="../../assets/events/{{group.headerImg}}" class="blur-me"/>
             <!--<img  src="{{group.image}}" class="blur-me"/>-->
             <div class="user">
-              <img class="img-circle" src="{{group.image}}"/>
+              <img src="{{group.image}}" class="rounded-img" mat-card-image
+                   *ngIf="validateImg(group.image); else defaultImg">
+              <ng-template #defaultImg>
+                <img
+                  src="http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-drives/1024/Group-icon.png"
+                  class="rounded-img" mat-card-image>
+              </ng-template>
             </div>
             <div class="content">
               <div class="main">
