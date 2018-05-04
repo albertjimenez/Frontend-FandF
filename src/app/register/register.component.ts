@@ -30,11 +30,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     const MIN_CHARS = 1;
+    const MAX_USERNAME_LENGTH = 18;
     this.registerFormControl = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       surname: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
       email: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS), Validators.email]),
-      username: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
+      username: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS), Validators.maxLength(MAX_USERNAME_LENGTH)]),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       rePassword: new FormControl('', [Validators.required, Validators.minLength(MIN_CHARS)]),
     });
@@ -48,7 +49,7 @@ export class RegisterComponent implements OnInit {
     const name = this.registerFormControl.value.name;
     const surnames = this.registerFormControl.value.surname;
     const email = this.registerFormControl.value.email;
-    const username = this.registerFormControl.value.username;
+    const username = this.registerFormControl.value.username.toLowerCase();
     const password = this.registerFormControl.value.password;
     const rePassword = this.registerFormControl.value.rePassword;
     const registerClass: RegisterClass = {
@@ -69,7 +70,7 @@ export class RegisterComponent implements OnInit {
       this.credentialsService.storeMySession(registerClass.username, data.valueOf()['token'], password, email);
       this.loginOkSwal.show();
       this.isRegistering = false;
-      this.router.navigateByUrl('/sidebar');
+      this.router.navigateByUrl('/home-dashboard');
     };
     const showErrors = (error) => {
       console.log(error);

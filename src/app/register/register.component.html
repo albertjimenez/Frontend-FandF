@@ -1,23 +1,32 @@
 <form [formGroup]="registerFormControl">
   <div class="inputGroup inputGroup2">
     <label for="name">{{'Nombre'|translate}}</label>
-    <input matInput placeholder="{{'Nombre'|translate}}" id="name" type="text" formControlName="name">
+    <input matInput placeholder="{{'Nombre'|translate}}" id="name" type="text" formControlName="name"
+           pattern="^[A-z]+$">
+    <mat-error *ngIf="registerFormControl.controls.name.errors?.pattern">El nombre sólo debe contener letras</mat-error>
     <span class="indicator"></span>
   </div>
   <div class="inputGroup inputGroup2">
     <label for="apellidos">{{'Apellidos'|translate}}</label>
-    <input matInput placeholder="{{'Apellidos'|translate}}" id="apellidos" type="text" formControlName="surname">
+    <input matInput placeholder="{{'Apellidos'|translate}}" id="apellidos" type="text" formControlName="surname"
+           pattern="^[A-z]+$">
+    <mat-error *ngIf="registerFormControl.controls.surname.errors?.pattern">Los apellidos sólo debe contener letras
+    </mat-error>
   </div>
   <mat-input-container>
     <label for="email">Email</label>
     <div class="inputGroup inputGroup2" style="width: 335px">
       <input matInput id="email" type="email" formControlName="email">
     </div>
+    <mat-error *ngIf="registerFormControl.controls.email.invalid">Email inválido</mat-error>
+
   </mat-input-container>
   <div class="inputGroup inputGroup2">
     <label for="username">{{'Nombre de usuario'|translate}}</label>
     <input matInput placeholder="{{'Nombre de usuario'|translate}}" id="username" type="text"
-           formControlName="username">
+           formControlName="username" pattern="^[a-zA-Z0-9_]*$">
+    <mat-error *ngIf="registerFormControl.controls.username.errors?.pattern">Solo se aceptan números, letras y _
+    </mat-error>
   </div>
   <div class="inputGroup inputGroup2">
     <label for="password">{{'Contraseña'|translate}}</label><a (click)="showPassword(firstInput)">
@@ -25,13 +34,21 @@
   </a>
     <input #firstInput id="password" matInput placeholder="{{'Contraseña'|translate}}" type="password"
            formControlName="password">
+    <mat-error *ngIf="registerFormControl.controls.password?.invalid && registerFormControl.controls.password.touched ">
+      Contraseña menor de 8 caractéres
+    </mat-error>
   </div>
   <div class="inputGroup inputGroup2">
-    <label for="password2">{{'Repite la contraseña'|translate}}</label><a (click)="showPassword(secondInput)">
+    <label for="password2">{{'Repite la contraseña'|translate}}</label>
+    <a (click)="showPassword(secondInput)">
     <mat-icon>visibility</mat-icon>
   </a>
     <input #secondInput matInput id="password2" placeholder="{{'Repite la contraseña'|translate}}" type="password"
            formControlName="rePassword">
+    <mat-error
+      *ngIf="registerFormControl.controls.rePassword?.invalid && registerFormControl.controls.rePassword.touched ">
+      Contraseña menor de 8 caractéres
+    </mat-error>
   </div>
   <div class="inputGroup inputGroup3">
     <button id="login" mat-button type="submit" (click)="this.submitRegisterForm(passwordSwal)"

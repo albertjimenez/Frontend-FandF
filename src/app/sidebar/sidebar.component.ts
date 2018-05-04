@@ -22,9 +22,6 @@ export class SidebarComponent implements OnInit {
     if (this.sessionExists()) {
       this.username = this.credentialService.getUsername().toString();
     }
-    this.router.events.subscribe((event) => {
-      console.log(event);
-    });
   }
 
   sessionExists() {
