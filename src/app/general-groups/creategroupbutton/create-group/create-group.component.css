@@ -1,7 +1,9 @@
 .group_icon{
   font-size: 48px;
 }
-
+.warning_text{
+  color: red;
+}
 .group_img {
   display: block;
   width: 250px;

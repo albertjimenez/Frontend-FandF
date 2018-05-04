@@ -14,34 +14,35 @@
                   <mat-icon>file_upload</mat-icon>
                   Subir foto
                 </button>
-                <input id="upload" type="file" style="display: none" formControlName="imageBeforeUpload"
-                       (change)="before_upload_image()">
               </ng-template>
               <ng-template #y>
-                <img src="../../../../assets/santi.jpg" class="group_img" (click)="handle_image()"/>
-                <input id="upload2" type="file" style="display: none" formControlName="imageAfterUpload"
-                       (change)="after_upload_image()">
+                <img id='group_img' src="" class="group_img" (click)="handle_upload()"/>
               </ng-template>
+              <input id="upload" type="file" style="display: none" formControlName="imageBeforeUpload"
+                     (change)="before_upload_image()">
 
             </td>
-            <td><mat-label>Nombre</mat-label>
+            <td><mat-label>Nombre (*)</mat-label>
               <br>
-              <mat-form-field>
-                <input matInput id="groupname" name="groupname" formControlName="groupname">
+              <mat-form-field hintLabel="Min: 2 caracteres">
+                <input matInput id="groupname" name="groupname" #groupNameInput formControlName="groupname">
+                <mat-hint align="end">{{groupNameInput.value?.length || 0}}/35</mat-hint>
               </mat-form-field>
             </td>
           </tr>
         </table>
         <mat-label>Descripcion</mat-label><br>
-        <mat-form-field class="input_area_class">
-          <textarea class="text_area_heigth" matInput formControlName="description"></textarea><br>
-        </mat-form-field><br>
-        <mat-label>Participantes</mat-label><br>
+        <mat-form-field class="input_area_class" hintLabel="Max: 140 caracteres">
+          <textarea class="text_area_heigth" matInput  #descriptionInput formControlName="description"></textarea>
+          <mat-hint align="end">{{descriptionInput?.value?.length || 0}}/140</mat-hint>
+          <br>
+        </mat-form-field><br><br>
+        <mat-label>Participantes (*)</mat-label><br>
         <mat-form-field class="input_area_class">
           <textarea class="text_area_heigth" matInput formControlName="members" readonly></textarea><br>
         </mat-form-field><br>
         <mat-label>Buscar amigos</mat-label><br>
-        <mat-form-field class="input_area_class">
+        <mat-form-field class="input_area_class" hintLabel="Min: 1 participante">
           <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="new_friend()">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -49,7 +50,7 @@
             </mat-option>
           </mat-autocomplete>
           <br>
-        </mat-form-field><br>
+        </mat-form-field><br><br>
         <div id="privacy_select">
         <mat-label>Selecciona la privacidad del grupo</mat-label><br>
          <table width="100%">

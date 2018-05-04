@@ -41,8 +41,8 @@ export class CreateGroupComponent implements OnInit {
 
   ngOnInit() {
     const MIN_CHAR = 1;
-    const MAX_DESCRIPTION_CHAR = 150;
-    const MAX_NAME_CHAR = 25;
+    const MAX_DESCRIPTION_CHAR = 140;
+    const MAX_NAME_CHAR = 35;
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
@@ -57,7 +57,6 @@ export class CreateGroupComponent implements OnInit {
         Validators.maxLength(MAX_NAME_CHAR)
       ])),
       imageBeforeUpload: new FormControl(),
-      imageAfterUpload: new FormControl(),
       members: new FormControl('', Validators.required),
       description: new FormControl('', Validators.maxLength(MAX_DESCRIPTION_CHAR))
     });
@@ -88,12 +87,11 @@ export class CreateGroupComponent implements OnInit {
       this.createFrom.patchValue({
         members: this.myControl.value
       });
-    } else {
+    } else if(this.createFrom.value.members.indexOf(this.myControl.value) === -1) {
       this.createFrom.patchValue({
         members: this.createFrom.value.members + '\n' + this.myControl.value
       });
     }
-
   }
 
   handle_upload() {
@@ -102,17 +100,16 @@ export class CreateGroupComponent implements OnInit {
 
   before_upload_image() {
     this.is_image_upload = true;
-    alert(this.createFrom.value.imageBeforeUpload);
-    this.image = this.createFrom.value.imageBeforeUpload;
-  }
+    const input: any = document.getElementById('upload');
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = this.fileOnLoad;
+    reader.readAsDataURL(file);
 
-  after_upload_image() {
-    this.image = this.createFrom.value.imageAfterUpload;
   }
-
-  handle_image() {
-    document.getElementById('upload2').click();
+  fileOnLoad(e) {
+    const result = e.target.result;
+    document.getElementById('group_img').setAttribute('src', result);
   }
-
 
 }
