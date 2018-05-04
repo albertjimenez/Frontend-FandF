@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Group, GroupsService} from './groups.service';
 import {parseUnixtimeToDate} from '../events/events.service';
+import {isNullOrUndefined} from 'util';
 
 
 @Component({
@@ -52,6 +53,6 @@ export class GroupsComponent implements OnInit {
   }
 
   validateImg(img: string) {
-    return img.length >= 15;
+    return !isNullOrUndefined(img) && img.length >= 15;
   }
 }
