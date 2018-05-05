@@ -3,6 +3,7 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
+import {Group} from '../../../home-dashboard/groups/groups.service';
 
 @Component({
   selector: 'app-create-group',
@@ -63,10 +64,17 @@ export class CreateGroupComponent implements OnInit {
 
   }
 
-  createGroup() {
+  create_group() {
     this.groupName = this.createFrom.value.groupname;
     this.description = this.createFrom.value.description;
     this.dateOfCreation = new Date();
+    const newGroup: Group = {
+      name: this.groupName,
+      description: this.description,
+      closed: this.closedGroup,
+      users: this.createFrom.value.members.split('\n')
+    };
+    console.log(newGroup);
       }
 
   change_privacy() {
@@ -92,6 +100,7 @@ export class CreateGroupComponent implements OnInit {
         members: this.createFrom.value.members + '\n' + this.myControl.value
       });
     }
+    this.myControl.setValue('');
   }
 
   handle_upload() {
