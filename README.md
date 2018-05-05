@@ -1,5 +1,11 @@
 # Frontendfandf
 
+[![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/albertjimenez/foodandfriends)
+[![Bitbucket Pipelines](https://img.shields.io/bitbucket/pipelines/atlassian/adf-builder-javascript.svg)](https://bitbucket.org/tallerfandf/frontendfandf/addon/pipelines/home)
+[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg?label=my-website)](https://foodandfriendsapp.firebaseapp.com/)
+
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 ## Development server
