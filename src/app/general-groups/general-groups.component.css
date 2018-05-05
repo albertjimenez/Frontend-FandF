@@ -5,6 +5,33 @@
   grid-gap: 10px;
 }
 
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+
+}
+
+mat-card {
+  background-color: #C4D9EB;
+  box-shadow: 0 0 10px black;
+  z-index: 2;
+}
+
+.grid-item {
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+
+}
 .box {
   border-radius: 5px;
   padding: 20px;

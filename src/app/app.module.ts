@@ -6,10 +6,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
+  MatChipsModule,
   MatDatepickerModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
@@ -108,6 +110,8 @@ export const routes: Routes = [
     MatDividerModule,
     MatListModule,
     MatExpansionModule,
+    MatGridListModule,
+    MatChipsModule,
     GooglePlaceModule,
     TranslateModule.forRoot({
       loader: {

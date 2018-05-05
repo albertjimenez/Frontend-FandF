@@ -49,8 +49,9 @@ export class GeneralGroupsComponent implements OnInit {
       //   image: 'https://cdn.memegenerator.es/imagenes/memes/full/26/55/26550209.jpg',
       //   updateDate: 1525252988,
       //   _id: 'Tiusa',
+      //   headerImg: 'https://cdn.memegenerator.es/imagenes/memes/full/26/55/26550209.jpg'
       // };
-      // this.groupList.push(group, group, group, group);
+      // this.groupList.push(group, group);
       this.isLoading = false;
     }, error => {
       console.log(error);
