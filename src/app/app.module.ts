@@ -51,6 +51,7 @@ import {EventCreatorComponent} from './general-events/event-creator/event-creato
 import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
 import {AuthInterceptorService} from './auth-interceptor.service';
 import {AvatarModule} from 'ngx-avatar';
+import {LogospinnerComponent} from './logospinner/logospinner.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -90,7 +91,8 @@ export const routes: Routes = [
     GeneralEventsComponent,
     GeneralGroupsComponent,
     EventCreatorComponent,
-    AssistantEventComponent
+    AssistantEventComponent,
+    LogospinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {post_events_endpoint} from '../../API_Strings';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {events_endpoint, post_events_endpoint} from '../../API_Strings';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -14,8 +14,13 @@ export class EventsService {
     return this.httpClient.post(post_events_endpoint, event);
   }
 
-  getMyEvents() {
-    // TODO acabar cuando vervhel te diga
+  getMyEvents(): Observable<Object> {
+    return this.httpClient.get(events_endpoint);
+  }
+
+  getMyLastEvents(): Observable<Object> { // For the home-dashboard
+    const param = new HttpParams().set('last', '5');
+    return this.httpClient.get(events_endpoint, {params: param});
   }
 }
 
@@ -26,6 +31,8 @@ export interface MyEvent {
   placeId: string;
   groupId: string;
   image: string;
+  createdBy?: string;
+  _id?: string;
 }
 
 export function parseUnixtimeToDate(time: string, shortDate?: boolean) {

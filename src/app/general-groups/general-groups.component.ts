@@ -39,6 +39,8 @@ export class GeneralGroupsComponent implements OnInit {
           this.groupList.push(g);
         }
       );
+      this.isLoading = false;
+
       // const group: Group = {
       //   name: 'Tetío y neuronía',
       //   description: 'Sólo chorradas y poco más',
@@ -52,7 +54,6 @@ export class GeneralGroupsComponent implements OnInit {
       //   headerImg: 'https://cdn.memegenerator.es/imagenes/memes/full/26/55/26550209.jpg'
       // };
       // this.groupList.push(group, group);
-      this.isLoading = false;
     }, error => {
       console.log(error);
       this.isLoading = false;
