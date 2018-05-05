@@ -36,9 +36,21 @@ export class GeneralGroupsComponent implements OnInit {
             _id: value._id,
             headerImg: `${this.randomBgHeader()}.jpg`
           };
-          this.groupList.push(g);
+          // this.groupList.push(g);
         }
       );
+      const group: Group = {
+        name: 'Tetío y neuronía',
+        description: 'Sólo chorradas y poco más',
+        closed: true,
+        users: ['Santi', 'El adris', 'Vervhel'],
+        dateOfCreation: 1525252545,
+        createdBy: 'beruto',
+        image: 'https://cdn.memegenerator.es/imagenes/memes/full/26/55/26550209.jpg',
+        updateDate: 1525252988,
+        _id: 'Tiusa',
+      };
+      this.groupList.push(group, group, group, group);
       this.isLoading = false;
     }, error => {
       console.log(error);

@@ -29,8 +29,11 @@
       <div class="card-container manual-flip" #Card>
         <div class="card">
           <div class="front">
-            <img src="../../assets/events/{{group.headerImg}}" class="blur-me"/>
-            <!--<img  src="{{group.image}}" class="blur-me"/>-->
+            <img src="{{group.headerImg}}" class="blur-me"
+                 *ngIf="validateImg(group.headerImg?.toString()); else defaultHeaderImg"/>
+            <ng-template #defaultHeaderImg>
+              <img src="../../assets/logo/fandflogo.png" class="blur-me"/>
+            </ng-template>
             <div class="user">
               <img src="{{group.image}}" class="rounded-img" mat-card-image
                    *ngIf="validateImg(group.image); else defaultImg">
@@ -45,16 +48,11 @@
                 <h3 class="name">{{group.name}}</h3>
                 <p class="profession"></p>
 
-                <p class="text-center" style="font-size: small">{{group.description}}</p>
-              </div>
-              <div class="footer">
-                <div class="rating">
-                  <i class="fa fa-mail-forward">
-                    <button class="btn btn-simple" (click)="rotateCard(Card)">
-                      <i class="fa fa-mail-forward"></i>{{'Más'|translate}}
-                    </button>
-                  </i>
-                </div>
+                <span class="text-center" style="font-size: small">{{group.description}}</span>
+                <button class="text-center btn btn-simple" (click)="rotateCard(Card)">
+                  <mat-icon>expand_more</mat-icon>
+                  {{'Más'|translate}}
+                </button>
               </div>
             </div>
           </div> <!-- end front panel -->
@@ -82,10 +80,12 @@
               </div>
             </div>
             <div class="footer">
+              <button class="btn btn-simple" (click)="rotateCard(Card)">
+                <mat-icon>expand_more</mat-icon>
+                {{'Menos'|translate}}
+              </button>
               <i class="fa fa-mail-forward">
-                <button class="btn btn-simple" (click)="rotateCard(Card)">
-                  <i class="fa fa-mail-forward"></i>{{'Menos'|translate}}
-                </button>
+
               </i>
             </div>
           </div> <!-- end back panel -->
