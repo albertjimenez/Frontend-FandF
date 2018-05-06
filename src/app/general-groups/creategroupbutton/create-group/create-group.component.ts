@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
@@ -24,8 +24,18 @@ export class CreateGroupComponent implements OnInit {
     'Harry'
   ];
   privacy = [
-    {value: 'private', viewValue: 'Privado', description: 'Solo el propietario del grupo puede invitar a otros usuarios.', icon: 'lock'},
-    {value: 'public', viewValue: 'Público', description: 'Cualquier usuario puede encontrar el grupo y solicitar unirse.', icon: 'language'}
+    {
+      value: 'private',
+      viewValue: 'Privado',
+      description: 'Solo el propietario del grupo puede invitar a otros usuarios.',
+      icon: 'lock'
+    },
+    {
+      value: 'public',
+      viewValue: 'Público',
+      description: 'Cualquier usuario puede encontrar el grupo y solicitar unirse.',
+      icon: 'language'
+    }
   ];
   createFrom: FormGroup;
   groupName = '';
@@ -38,7 +48,8 @@ export class CreateGroupComponent implements OnInit {
   filteredOptions: Observable<string[]>;
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     const MIN_CHAR = 1;
@@ -72,10 +83,12 @@ export class CreateGroupComponent implements OnInit {
       name: this.groupName,
       description: this.description,
       closed: this.closedGroup,
-      users: this.createFrom.value.members.split('\n')
+      users: this.createFrom.value.members.split('\n'),
+      image: '',
+      _id: '',
     };
     console.log(newGroup);
-      }
+  }
 
   change_privacy() {
     if (this.selectedValue === 'private') {
@@ -95,7 +108,7 @@ export class CreateGroupComponent implements OnInit {
       this.createFrom.patchValue({
         members: this.myControl.value
       });
-    } else if(this.createFrom.value.members.indexOf(this.myControl.value) === -1) {
+    } else if (this.createFrom.value.members.indexOf(this.myControl.value) === -1) {
       this.createFrom.patchValue({
         members: this.createFrom.value.members + '\n' + this.myControl.value
       });
@@ -116,6 +129,7 @@ export class CreateGroupComponent implements OnInit {
     reader.readAsDataURL(file);
 
   }
+
   fileOnLoad(e) {
     const result = e.target.result;
     document.getElementById('group_img').setAttribute('src', result);

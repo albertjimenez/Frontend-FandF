@@ -26,10 +26,10 @@ export interface Group {
   description: string;
   closed: boolean;
   users: [string];
-  dateOfCreation: number;
-  createdBy: string;
+  dateOfCreation?: number;
+  createdBy?: string;
   image: string;
-  updateDate: number;
-  _id: string;
+  updateDate?: number;
+  _id?: string;
   headerImg?: string;
 }

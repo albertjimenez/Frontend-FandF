@@ -4,6 +4,7 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
   MatChipsModule,
@@ -18,11 +19,10 @@ import {
   MatMenuModule,
   MatNativeDateModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
   MatStepperModule,
   MatToolbarModule,
-  MatTooltipModule,
-  MatAutocompleteModule,
-  MatSelectModule
+  MatTooltipModule
 } from '@angular/material';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -71,6 +71,7 @@ export const routes: Routes = [
   {path: 'my-events', component: GeneralEventsComponent},
   {path: 'my-groups', component: GeneralGroupsComponent},
   {path: 'assistant-event', component: AssistantEventComponent},
+  {path: 'create-group', component: CreateGroupComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({
