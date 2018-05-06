@@ -20,7 +20,9 @@ import {
   MatProgressSpinnerModule,
   MatStepperModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatAutocompleteModule,
+  MatSelectModule
 } from '@angular/material';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -51,13 +53,12 @@ import {AssistantEventComponent} from './general-events/event-creator/assistant-
 import {AuthInterceptorService} from './auth-interceptor.service';
 import {AvatarModule} from 'ngx-avatar';
 import {LogospinnerComponent} from './logospinner/logospinner.component';
-
+import {CreateGroupComponent} from './general-groups/creategroupbutton/create-group/create-group.component';
+import {CreategroupbuttonComponent} from './general-groups/creategroupbutton/creategroupbutton.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
-
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
@@ -89,7 +90,9 @@ export const routes: Routes = [
     GeneralGroupsComponent,
     EventCreatorComponent,
     AssistantEventComponent,
-    LogospinnerComponent
+    LogospinnerComponent,
+    CreateGroupComponent,
+    CreategroupbuttonComponent
   ],
   imports: [
     BrowserModule,
@@ -107,10 +110,12 @@ export const routes: Routes = [
     MatToolbarModule,
     MatCardModule, ReactiveFormsModule, MatMenuModule, MatTooltipModule, MatProgressSpinnerModule,
     MatDividerModule,
-    MatListModule,
     MatExpansionModule,
+    MatListModule,
     MatGridListModule,
     MatChipsModule,
+    MatAutocompleteModule,
+    MatSelectModule,
     GooglePlaceModule,
     TranslateModule.forRoot({
       loader: {
@@ -121,7 +126,6 @@ export const routes: Routes = [
     }),
     ToastrModule.forRoot(), // ToastrModule added
     AvatarModule
-
   ],
   providers: [LoginService, HttpClient, CredentialsService, RegisterService, HeaderService, ProfileService,
     {

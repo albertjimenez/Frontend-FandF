@@ -1,31 +1,34 @@
 <div>
-  <div class="mat-title" style="text-align: center">
-    <h3>
-      <mat-icon class="restaurant_icon">local_dining</mat-icon>
-      Consultar Restaurantes
-    </h3>
-  </div>
-  <div style="text-align: center">
+  <br>
+  <mat-card class="animated fadeInDown">
+    <mat-card-header>
+      <div class="mat-title" style="text-align: center">
+        <h3>
+          <mat-icon class="restaurant_icon">local_dining</mat-icon>&nbsp;&nbsp;Consultar Restaurantes
+        </h3>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="text-align: center">
 
-    <mat-form-field class="search-box">
-      <input matInput ngx-google-places-autocomplete
-             [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places"
-             (onAddressChange)="onChange($event)" placeholder="Ubicación">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
+        <mat-form-field class="search-box">
+          <input matInput ngx-google-places-autocomplete
+                 [options]="{types: ['establishment'],componentRestrictions:{country:'ES'}}" #placesRef="ngx-places"
+                 (onAddressChange)="onChange($event)" placeholder="Ubicación">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
 
-  </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <br>
   <div class="info_card">
   <mat-card class="example-card animated fadeInUp">
       <mat-card-header>
         <table style="width: 100%">
           <tr>
-            <td>
-              <h1>
-                <mat-icon class="info_icon">info</mat-icon>
-                Información general
-              </h1>
-            </td>
+            <td><h1><mat-icon class="info_icon">info</mat-icon>&nbsp;&nbsp;Información general</h1></td>
             <td style="text-align: right"><span *ngFor="let star of stars"><mat-icon class="star_icon">star_rate</mat-icon></span></td>
           </tr>
         </table>
@@ -81,6 +84,7 @@
   <br><br>
   <div class="comment_panel">
     <mat-card class="example-card animated fadeInUp">
+
       <mat-card-header><mat-icon class="comment_icon">comment</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;<h1>Comentarios</h1></mat-card-header>
       <mat-card-content>
         <mat-accordion>
