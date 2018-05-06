@@ -44,7 +44,6 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
-import {MyProfileComponent} from './my-profile/my-profile.component';
 import {GeneralEventsComponent} from './general-events/general-events.component';
 import {GeneralGroupsComponent} from './general-groups/general-groups.component';
 import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
@@ -68,7 +67,6 @@ export const routes: Routes = [
   {path: 'groups', component: GroupsComponent},
   {path: 'friends', component: FriendsComponent},
   {path: 'gmaps', component: GmapsComponent},
-  {path: 'my-profile', component: MyProfileComponent},
   {path: 'my-events', component: GeneralEventsComponent},
   {path: 'my-groups', component: GeneralGroupsComponent},
   {path: 'assistant-event', component: AssistantEventComponent},
@@ -87,7 +85,6 @@ export const routes: Routes = [
     FriendsComponent,
     TopScrollComponent,
     GmapsComponent,
-    MyProfileComponent,
     GeneralEventsComponent,
     GeneralGroupsComponent,
     EventCreatorComponent,
