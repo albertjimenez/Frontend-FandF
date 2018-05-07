@@ -12,6 +12,18 @@
             <mat-card-title>{{event.name}}
             </mat-card-title>
             <mat-card-subtitle>{{event.date}} {{'Creado por'|translate}} {{event?.createdBy}}</mat-card-subtitle>
+            <mat-icon [matMenuTriggerFor]="menu" style="cursor: pointer">more_vert</mat-icon>
+            <mat-menu #menu="matMenu" matTooltip="{{'Opciones'|translate}}">
+              <button mat-menu-item [disabled]="!isMyEvent(event.createdBy)">
+                <mat-icon>edit</mat-icon>
+                {{'Editar'|translate}}
+              </button>
+              <button mat-menu-item [disabled]="!isMyEvent(event.createdBy)"
+                      (click)="storeEventIdForRemoving(event._id)">
+                <mat-icon>delete</mat-icon>
+                {{'Eliminar'|translate}}
+              </button>
+            </mat-menu>
           </mat-card-header>
           <img mat-card-image src="{{event.image}}" *ngIf="validateImg(event.image); else fallbackImg">
           <ng-template #fallbackImg>
@@ -44,3 +56,11 @@
   </ng-template>
 </ng-template>
 <app-event-creator></app-event-creator>
+<swal
+  #removeEvent
+  title="¿Desea borrar el evento?"
+  text="Esta acción no se puede deshacer"
+  type="warning"
+  (confirm)="removeMyEvent()"
+  [showCancelButton]="true">
+</swal>

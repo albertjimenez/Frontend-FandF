@@ -57,6 +57,9 @@
   "Número de usuarios": "Number of users",
   "Creado el": "Created on",
   "No tienes grupos": "You don't have groups yet",
-  "Cargando": "Loading"
+  "Cargando": "Loading",
+  "Opciones": "Options",
+  "Editar": "Edit",
+  "Eliminar": "Delete"
 
 }

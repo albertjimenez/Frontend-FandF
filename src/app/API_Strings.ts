@@ -4,6 +4,7 @@ export const login_endpoint = API + 'login';
 export const register_endpoint = API + 'register';
 export const events_endpoint = API + 'events';
 export const post_events_endpoint = API + 'event';
+export const delete_events_endpoint = API + 'event/';
 export const groups_endpoint = API + 'groups';
 export const fetch_email = API + 'fetch_email';
 // export const WS_HOME = 'wss://localhost:4567/api/hello';
