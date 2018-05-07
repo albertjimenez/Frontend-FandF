@@ -53,7 +53,7 @@
 
       <div>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button [disabled]="this.placeIdFormGroup.invalid" matStepperNext>Siguiente</button>
+        <button mat-flat-button [disabled]="this.placeIdFormGroup.invalid" matStepperNext>Siguiente</button>
       </div>
     </form>
   </mat-step>
@@ -96,7 +96,7 @@
       </ng-template>
       <div>
         <button mat-button matStepperPrevious>{{'Atrás'|translate}}</button>
-        <button mat-button matStepperNext [disabled]="this.groupId === ''">{{'Siguiente'|translate}}</button>
+        <button mat-flat-button matStepperNext [disabled]="this.groupId === ''">{{'Siguiente'|translate}}</button>
       </div>
     </form>
   </mat-step>
