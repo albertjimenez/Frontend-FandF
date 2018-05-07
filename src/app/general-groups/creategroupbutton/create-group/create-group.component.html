@@ -43,14 +43,11 @@
         </mat-form-field><br><br>
         <mat-label class="label_features">Participantes (*)</mat-label>
         <br>
+
+        <textarea mat-autosize class="text_area_heigth" matInput formControlName="members" readonly></textarea><br>
+
         <mat-form-field class="input_area_class" hintLabel="Min: 1 participante">
-          <textarea class="text_area_heigth" matInput formControlName="members" readonly></textarea><br>
-        </mat-form-field>
-        <br><br>
-        <mat-label class="label_features">Buscar amigos</mat-label>
-        <br>
-        <mat-form-field class="input_area_class">
-          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto" placeholder="buscar amgigos"><mat-icon matSuffix>search</mat-icon>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="new_friend()">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
               {{ option }}
@@ -58,7 +55,7 @@
           </mat-autocomplete>
           <br>
         </mat-form-field>
-        <br>
+        <br><br>
         <div id="privacy_select">
           <mat-label class="label_features">Selecciona la privacidad del grupo</mat-label>
           <br>
