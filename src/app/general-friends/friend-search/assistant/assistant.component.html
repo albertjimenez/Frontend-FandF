@@ -1,0 +1,3 @@
+<input type="text" name="search" placeholder="{{'Filtrar amigos' |translate}}" #searchInput
+       (keyup)="filterElems(searchInput.value.toLocaleLowerCase())">
+<strong class="styled-p">{{numMatches}} {{'coincidencias'|translate}}</strong>
