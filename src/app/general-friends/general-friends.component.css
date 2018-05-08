@@ -1,25 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
 .my-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 10px;
-}
-
-.box {
-  border-radius: 5px;
-  padding: 20px;
-  font-size: 150%;
 }
 
 .styled-p {
   color: #eeeeee;
-}
-
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
-  height: 40%;
 }
 
 input[type=text] {
@@ -29,18 +16,22 @@ input[type=text] {
   transition: width 0.4s ease-in-out;
 }
 
-/* When the input field gets focus, change its width to 100% */
 input[type=text]:focus {
   width: 100%;
 }
 
 .rounded-img {
   display: block;
-  width: 75px;
-  height: 75px;
+  width: 250px;
+  height: 250px;
   margin: 1em auto;
+  background-size: cover;
   background: no-repeat center center;
-  text-align: left;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+  border-radius: 99em;
+  border: 5px solid #eee;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 }
 
 .dashed-shadow {
@@ -50,7 +41,6 @@ input[type=text]:focus {
   display: inline-block;
   color: #e74c3c;
 }
-
 
 .example-card {
   max-width: 500px;
@@ -91,7 +81,6 @@ input[type=text]:focus {
 
 .example-card {
   max-width: 500px;
-  width: 100%;
   border-radius: 25px;
 }
 
@@ -130,6 +119,18 @@ input[type=text]:focus {
   font-family: Lobster, sans-serif;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
 
+}
+
+.grid-item {
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+
+}
 
 
