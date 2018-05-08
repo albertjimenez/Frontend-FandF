@@ -40,9 +40,10 @@
             </div>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-fab style="background-color: limegreen" matTooltip="Google Maps">
-              <mat-icon>place</mat-icon>
-
+            <button mat-mini-fab="" style="background-color: limegreen" matTooltip="Google Maps">
+              <a href="https://www.google.com/maps/place/?q=place_id:{{event.placeId}}" target="_blank">
+                <mat-icon>place</mat-icon>
+              </a>
             </button>
           </mat-card-actions>
         </mat-card>
