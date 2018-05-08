@@ -70,6 +70,7 @@
                   </span>
                   </div>
                 </div>
+                <span class="motto">{{'Creado el'|translate}} {{parseUnixTime(group.dateOfCreation, true)}}</span>
                 <ng-template #numUsers>
                   <p class="motto">{{'Número de usuarios'|translate}}</p>
                   <ngx-avatar value="{{group.users.length}}"></ngx-avatar>
@@ -85,7 +86,6 @@
                 {{'Menos'|translate}}
               </button>
               <i class="fa fa-mail-forward">
-
               </i>
             </div>
           </div> <!-- end back panel -->

@@ -100,10 +100,16 @@ export class CreateGroupComponent implements OnInit {
     const myGroup: Group = {
       name: this.infoFormGroup.controls.groupName.value.toString(),
       description: this.infoFormGroup.controls.description.value.toString(),
-      closed: false,
+      closed: true,
       users: this.fruits,
       image: this.infoFormGroup.controls.photoUrl.value.toString(),
     };
-    console.log(myGroup);
+    this.groupService.postNewGroup(myGroup).subscribe(
+      () => {
+        this.toastrService.success('Grupo creado correctamente');
+        this.router.navigateByUrl('/my-groups');
+      },
+      error => console.log('Error ', error)
+    );
   }
 }
