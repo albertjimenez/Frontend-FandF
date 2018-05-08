@@ -1,6 +1,4 @@
-.styled-p {
-  color: #eeeeee;
-}
+
 
 input[type=text] {
   width: 130px;
@@ -12,3 +10,5 @@ input[type=text] {
 input[type=text]:focus {
   width: 100%;
 }
+
+

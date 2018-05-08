@@ -1,4 +1,9 @@
 <br>
 <input type="text" name="search" placeholder="{{'Filtrar amigos' |translate}}" #searchInput
-       (keyup)="filterElems(searchInput.value.toLocaleLowerCase())">
-<strong class="styled-p">{{numMatches}} {{'coincidencias'|translate}}</strong>
+       (keyup)="filterElems(searchInput.value.toLocaleLowerCase())" [matAutocomplete]="auto">
+<mat-autocomplete id="autocomplete" #auto="matAutocomplete">
+  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+    {{ option }}
+  </mat-option>
+</mat-autocomplete>
+<br><br>
