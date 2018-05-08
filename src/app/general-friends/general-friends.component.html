@@ -3,47 +3,24 @@
        (keyup)="filterElems(searchInput.value.toLocaleLowerCase())">
 <strong class="styled-p">{{numMatches}} {{'coincidencias'|translate}}</strong>
 <div class="card" id="friends_cards">
+
   <div class="card--content">
     <mat-card class="example-card">
+
       <mat-card-header>
-        <mat-card-title><strong>Tokeisi</strong></mat-card-title>
+       <p></p>
       </mat-card-header>
-      <img src="../../../assets/tokeisi.jpg" class="rounded-img" mat-card-image>
       <mat-card-content>
-        <p>
-        </p>
+        <table>
+          <tr>
+            <td><img src="../../../assets/santi.jpg" class="rounded-img" mat-card-image></td>
+            <td><mat-card-title><strong>Santi</strong></mat-card-title></td>
+          </tr>
+        </table>
       </mat-card-content>
       <mat-card-actions>
       </mat-card-actions>
     </mat-card>
   </div>
-  <div class="card--content">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title><strong>Berbel</strong></mat-card-title>
-      </mat-card-header>
-      <img src="../../../assets/berbel.jpg" class="rounded-img" mat-card-image>
-      <mat-card-content>
-        <p>
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-  <div class="card--content">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title><strong>Santi</strong></mat-card-title>
-      </mat-card-header>
-      <img src="../../../assets/santi.jpg" class="rounded-img" mat-card-image>
-      <mat-card-content>
-        <p>
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-</div>
+</div><br>
 <app-friend-search></app-friend-search>
