@@ -42,6 +42,14 @@
           </mat-card-actions>
         </mat-card>
       </div>
+      <div *ngIf="eventList.length === 0">
+        <h3 style="text-align: center">No tienes eventos, crea uno pulsando aquí</h3>
+        <button mat-fab style="background-color: limegreen" routerLink="/assistant-event">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
     </ng-template>
+
+
   </div>
 </section>

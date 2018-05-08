@@ -32,7 +32,7 @@ export class CreateGroupComponent implements OnInit {
   @ViewChild('postNewGroupSwal') postNewGroupSwal: SwalComponent;
 
   allFruits = [
-    'Berbel', 'Tokis', 'Peris'
+    'berbel', 'toquis', 'kaiser', 'poeeeee', 'uji', 'shanty', 'beruto'
   ];
 
 

@@ -13,6 +13,12 @@
   <mat-divider></mat-divider>
   <div class="card" id="groups_cards">
     <app-logospinner *ngIf="isLoading"></app-logospinner>
+    <div *ngIf="myGroups.length === 0">
+      <h3 style="text-align: center">No tienes grupos, crea uno pulsando aquí</h3>
+      <button mat-fab style="background-color: limegreen" routerLink="/create-group">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
     <div class="card--content" id="content" *ngFor="let group of myGroups">
       <mat-card class="example-card">
         <mat-card-header>
