@@ -3,7 +3,7 @@
        (keyup)="filterElems(searchInput.value.toLocaleLowerCase())">
 <strong class="styled-p">{{numMatches}} {{'coincidencias'|translate}}</strong>
 <br><br>
-<div class="my-grid" *ngIf="friendsList.length > 2; else empty">
+<div class="my-grid" id="myUL"*ngIf="friendsList.length > 2; else empty">
   <div id="friend_card" *ngFor="let friend of friendsList">
     <div class="card--content">
       <mat-card class="example-card">
