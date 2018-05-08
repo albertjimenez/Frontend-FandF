@@ -1,114 +1,265 @@
-<div class="main_div">
-  <mat-card class="card animated fadeInUp">
-    <mat-card-header>
-      <h1><mat-icon class="group_icon">supervisor_account</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;Crear grupo</h1>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="createFrom">
-        <table style="width: 100%">
-          <tr>
-            <td class="button_site">
-              <span *ngIf="is_image_upload;then y else n"></span>
-              <ng-template #n>
-                <button class="upload_button" mat-button (click)="handle_upload()">
-                  <mat-icon>file_upload</mat-icon>
-                  Subir foto
-                </button>
-              </ng-template>
-              <ng-template #y>
-                <img id='group_img' src="" class="group_img" (click)="handle_upload()"/>
-              </ng-template>
-              <input id="upload" type="file" style="display: none" formControlName="imageBeforeUpload"
-                     (change)="before_upload_image()">
+<mat-horizontal-stepper linear="false" #stepper>
+  <mat-step [stepControl]="infoFormGroup">
+    <form [formGroup]="infoFormGroup">
+      <ng-template matStepLabel>{{'Información'|translate}}</ng-template>
+      <mat-form-field>
+        <input matInput #groupNameInput placeholder="{{'Nombre del grupo'|translate}}"
+               formControlName="groupName" required maxlength="35">
+        <mat-hint align="end">{{groupNameInput.value?.length || 0}}/35</mat-hint>
+        <mat-error *ngIf="infoFormGroup.controls.groupName.invalid">
+          {{'Nombre en blanco'|translate}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput #descNameInput placeholder="{{'Descripción'|translate}}" formControlName="description" required>
+        <mat-hint align="end">{{descNameInput.value?.length || 0}}/140</mat-hint>
+        <mat-error *ngIf="infoFormGroup.controls.description.invalid">
+          {{'Descripción en blanco'|translate}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="{{'Url de la foto'|translate}}" formControlName="photoUrl">
+      </mat-form-field>
+      <div>
+        <button mat-flat-button matStepperNext [disabled]="infoFormGroup.invalid">{{'Siguiente'|translate}}</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="friendsFormGroup">
+    <form [formGroup]="friendsFormGroup">
+      <ng-template matStepLabel>{{'Amigos'|translate}}</ng-template>
+      <!--<mat-form-field class="demo-chip-list">-->
+      <!--<mat-chip-list #chipList>-->
+      <!--<mat-chip-->
+      <!--*ngFor="let friend of auxFriendList">-->
+      <!--{{friend.username}}-->
+      <!--<mat-icon matChipRemove>cancel</mat-icon>-->
+      <!--</mat-chip>-->
+      <!--<input-->
+      <!--#friendInput-->
+      <!--placeholder="{{'Amigos'|translate}}"-->
+      <!--[matAutocomplete]="auto"-->
+      <!--[matChipInputFor]="chipList"-->
+      <!--[matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
+      <!--(matChipInputTokenEnd)="add($event)"-->
+      <!--/>-->
+      <!--</mat-chip-list>-->
+      <!--<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">-->
+      <!--<mat-option *ngFor="let friend of friendsList" [value]="friend">-->
+      <!--{{ friend.username }}-->
+      <!--</mat-option>-->
+      <!--</mat-autocomplete>-->
+      <!--</mat-form-field>-->
+      <!--<div>-->
+      <!--<button mat-button matStepperPrevious>{{'Atrás'|translate}}</button>-->
+      <!--<button mat-flat-button  matStepperNext>{{'Siguiente'|translate}}</button>-->
+      <!--</div>-->
+      <!--</form>-->
+      <!--</mat-step>-->
+      <mat-form-field class="demo-chip-list">
+        <mat-chip-list #chipList>
+          <mat-chip
+            *ngFor="let fruit of fruits"
+            [selectable]="selectable"
+            [removable]="removable"
+            (remove)="remove(fruit)">
+            {{fruit}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input
+            placeholder="{{'Amigos'|translate}}"
+            #fruitInput
+            [formControl]="fruitCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+            {{ fruit }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+    <div>
+      <button mat-button matStepperPrevious>{{'Atrás'|translate}}</button>
+      <button mat-flat-button [disabled]="fruits.length === 0" matStepperNext>{{'Siguiente'|translate}}</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>{{'Resumen'|translate}}</ng-template>
+    <mat-card class="z-depth-3">
+      <mat-list>
+        <mat-list-item>
+          <mat-icon>mode_edit</mat-icon>
+          <h3 mat-line>{{'Nombre del grupo'|translate}}</h3>
+          <p mat-line>
+            <span>{{this.infoFormGroup.controls?.groupName?.value}}</span>
+          </p>
+        </mat-list-item>
 
-            </td>
-            <td>
-              <mat-label class="label_features">Nombre (*)</mat-label>
-              <br>
-              <mat-form-field style="width: 100%" hintLabel="Min: 2 caracteres">
-                <input maxlength="35" matInput id="groupname" name="groupname" #groupNameInput
-                       formControlName="groupname">
-                <mat-hint align="end">{{groupNameInput.value?.length || 0}}/35</mat-hint>
-              </mat-form-field>
-            </td>
-          </tr>
-        </table>
-        <mat-label class="label_features">Descripcion</mat-label>
-        <br>
-        <mat-form-field class="input_area_class" hintLabel="Max: 140 caracteres">
-          <textarea class="text_area_heigth" matInput maxlength="140" #descriptionInput
-                    formControlName="description"></textarea>
-          <mat-hint align="end">{{descriptionInput?.value?.length || 0}}/140</mat-hint>
-          <br>
-        </mat-form-field><br><br>
-        <mat-label class="label_features">Participantes (*)</mat-label>
-        <br>
-        <mat-form-field class="input_area_class" hintLabel="Min: 1 participante">
-          <textarea class="text_area_heigth" matInput formControlName="members" readonly></textarea><br>
-        </mat-form-field>
-        <br><br>
-        <mat-label class="label_features">Buscar amigos</mat-label>
-        <br>
-        <mat-form-field class="input_area_class">
-          <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="new_friend()">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{ option }}
-            </mat-option>
-          </mat-autocomplete>
-          <br>
-        </mat-form-field>
-        <br>
-        <div id="privacy_select">
-          <mat-label class="label_features">Selecciona la privacidad del grupo</mat-label>
-          <br>
-         <table width="100%">
-           <tr>
-             <td>
-               <mat-form-field>
-                 <mat-select [(value)]="selectedValue" name="privacy" (change)="change_privacy()">
-                   <mat-option value="private">Privado</mat-option>
-                   <mat-option value="public">Público</mat-option>
-                 </mat-select>
-               </mat-form-field>
-             </td>
-             <td>
-               <div id="privacy">
+        <mat-list-item>
+          <mat-icon>insert_comment</mat-icon>
+          <h3 mat-line>{{'Descripción'|translate}}</h3>
+          <p mat-line>
+            <span>{{this.infoFormGroup.controls?.description?.value}}</span>
+          </p>
+        </mat-list-item>
 
-                 <span *ngIf="closedGroup; then c1 else c2"></span>
-                   <ng-template #c1>
-                     <mat-card>
-                       <mat-card-header>
-                         <mat-icon>lock</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;Grupo privado
-                       </mat-card-header>
-                       <mat-card-content>
-                         Solo el propietario del grupo puede invitar a otros usuarios.
-                       </mat-card-content>
-                     </mat-card>
-                   </ng-template>
-                   <ng-template #c2>
-                     <mat-card>
-                       <mat-card-header>
-                         <mat-icon>language</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;Grupo público
-                       </mat-card-header>
-                       <mat-card-content>
-                         Cualquier usuario puede encontrar el grupo y solicitar unirse.
-                       </mat-card-content>
-                     </mat-card>
-                   </ng-template>
+        <mat-list-item>
+          <img mat-card-avatar *ngIf="validateImg(this.infoFormGroup.controls?.photoUrl?.value); else defaultImg"
+               src="{{this.infoFormGroup.controls?.photoUrl?.value}}">
+          <ng-template #defaultImg>
+            <img mat-card-avatar src="../../../../assets/logo/fandflogo.png">
+          </ng-template>
+          <h3 mat-line>{{'Url de la foto'|translate}}</h3>
+          <p mat-line>
+            <a href="{{this.infoFormGroup.controls?.photoUrl?.value}}" target="_blank">{{this.infoFormGroup.controls?.photoUrl?.value}}</a>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <div *ngFor="let f of fruits">
+            <mat-chip-list>
+              <mat-chip>
+                {{f}}
+              </mat-chip>
+            </mat-chip-list>
 
-               </div>
-             </td>
-           </tr>
-         </table>
-        </div>
-        <br>
-        <div class="create_button_site">
-          <button class="create_button" type="submit" [disabled]="createFrom.invalid" (click)="create_group()"
-                  mat-flat-button>Crear
-          </button>
-        </div>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div>
+          </div>
+
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+    <div>
+      <button mat-button matStepperPrevious>{{'Atrás'|translate}}</button>
+      <button mat-flat-button color="accent" [swal]="postNewGroupSwal" (confirm)="postNewGroup()"
+      >{{'Crear grupo'|translate}}
+      </button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+<swal
+  #postNewGroupSwal
+  title="¿Quieres crear el grupo {{this.infoFormGroup.controls.groupName.value}}?"
+  type="info"
+
+  [showCancelButton]="true">
+</swal>
+
+<!--<div class="main_div">-->
+<!--<mat-card class="card animated fadeInUp">-->
+<!--<mat-card-header>-->
+<!--<h1><mat-icon class="group_icon">supervisor_account</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;Crear grupo</h1>-->
+<!--</mat-card-header>-->
+<!--<mat-card-content>-->
+<!--<form [formGroup]="createFrom">-->
+<!--<table style="width: 100%">-->
+<!--<tr>-->
+<!--<td class="button_site">-->
+<!--<span *ngIf="is_image_upload;then y else n"></span>-->
+<!--<ng-template #n>-->
+<!--<button class="upload_button" mat-button (click)="handle_upload()">-->
+<!--<mat-icon>file_upload</mat-icon>-->
+<!--Subir foto-->
+<!--</button>-->
+<!--</ng-template>-->
+<!--<ng-template #y>-->
+<!--<img id='group_img' src="" class="group_img" (click)="handle_upload()"/>-->
+<!--</ng-template>-->
+<!--<input id="upload" type="file" accept="image/*" style="display: none" formControlName="imageBeforeUpload"-->
+<!--(change)="before_upload_image()">-->
+
+<!--</td>-->
+<!--<td>-->
+<!--<mat-label class="label_features">Nombre (*)</mat-label>-->
+<!--<br>-->
+<!--<mat-form-field style="width: 100%" hintLabel="Min: 2 caracteres">-->
+<!--<input maxlength="35" matInput id="groupname" name="groupname" #groupNameInput-->
+<!--formControlName="groupname">-->
+<!--<mat-hint align="end">{{groupNameInput.value?.length || 0}}/35</mat-hint>-->
+<!--</mat-form-field>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--<mat-label class="label_features">Descripcion</mat-label>-->
+<!--<br>-->
+<!--<mat-form-field class="input_area_class" hintLabel="Max: 140 caracteres">-->
+<!--<textarea class="text_area_heigth" matInput maxlength="140" #descriptionInput-->
+<!--formControlName="description"></textarea>-->
+<!--<mat-hint align="end">{{descriptionInput?.value?.length || 0}}/140</mat-hint>-->
+<!--<br>-->
+<!--</mat-form-field><br><br>-->
+<!--<mat-label class="label_features">Participantes (*)</mat-label>-->
+<!--<br>-->
+<!--<mat-form-field class="input_area_class" hintLabel="Min: 1 participante">-->
+<!--<textarea class="text_area_heigth" matInput formControlName="members" readonly></textarea><br>-->
+<!--</mat-form-field>-->
+<!--<br><br>-->
+<!--<mat-label class="label_features">Buscar amigos</mat-label>-->
+<!--<br>-->
+<!--<mat-form-field class="input_area_class">-->
+<!--<input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">-->
+<!--<mat-autocomplete #auto="matAutocomplete" (optionSelected)="new_friend()">-->
+<!--<mat-option *ngFor="let option of filteredOptions | async" [value]="option">-->
+<!--{{ option }}-->
+<!--</mat-option>-->
+<!--</mat-autocomplete>-->
+<!--<br>-->
+<!--</mat-form-field>-->
+<!--<br>-->
+<!--<div id="privacy_select">-->
+<!--<mat-label class="label_features">Selecciona la privacidad del grupo</mat-label>-->
+<!--<br>-->
+<!--<table width="100%">-->
+<!--<tr>-->
+<!--<td>-->
+<!--<mat-form-field>-->
+<!--<mat-select [(value)]="selectedValue" name="privacy" (change)="change_privacy()">-->
+<!--<mat-option value="private">Privado</mat-option>-->
+<!--<mat-option value="public">Público</mat-option>-->
+<!--</mat-select>-->
+<!--</mat-form-field>-->
+<!--</td>-->
+<!--<td>-->
+<!--<div id="privacy">-->
+
+<!--<span *ngIf="closedGroup; then c1 else c2"></span>-->
+<!--<ng-template #c1>-->
+<!--<mat-card>-->
+<!--<mat-card-header>-->
+<!--<mat-icon>lock</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;Grupo privado-->
+<!--</mat-card-header>-->
+<!--<mat-card-content>-->
+<!--Solo el propietario del grupo puede invitar a otros usuarios.-->
+<!--</mat-card-content>-->
+<!--</mat-card>-->
+<!--</ng-template>-->
+<!--<ng-template #c2>-->
+<!--<mat-card>-->
+<!--<mat-card-header>-->
+<!--<mat-icon>language</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;Grupo público-->
+<!--</mat-card-header>-->
+<!--<mat-card-content>-->
+<!--Cualquier usuario puede encontrar el grupo y solicitar unirse.-->
+<!--</mat-card-content>-->
+<!--</mat-card>-->
+<!--</ng-template>-->
+
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</div>-->
+<!--<br>-->
+<!--<div class="create_button_site">-->
+<!--<button class="create_button" type="submit" [disabled]="createFrom.invalid" (click)="create_group()"-->
+<!--mat-flat-button>Crear-->
+<!--</button>-->
+<!--</div>-->
+<!--</form>-->
+<!--</mat-card-content>-->
+<!--</mat-card>-->
+<!--</div>-->

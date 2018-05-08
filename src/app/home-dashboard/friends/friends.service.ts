@@ -9,3 +9,8 @@ export class FriendsService {
   }
 
 }
+
+export interface MyFriend {
+  username: string;
+  since: number;
+}

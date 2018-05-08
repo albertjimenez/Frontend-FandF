@@ -25,7 +25,7 @@ export interface Group {
   name: string;
   description: string;
   closed: boolean;
-  users: [string];
+  users: string[];
   dateOfCreation?: number;
   createdBy?: string;
   image: string;
