@@ -9,12 +9,13 @@ import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material
 import {isNullOrUndefined} from 'util';
 import {ToastrService} from 'ngx-toastr';
 import {SwalComponent} from '@toverux/ngx-sweetalert2';
+import {FriendsService} from '../../../home-dashboard/friends/friends.service';
 
 @Component({
   selector: 'app-create-group',
   templateUrl: './create-group.component.html',
   styleUrls: ['./create-group.component.css'],
-  providers: [GroupsService, ToastrService]
+  providers: [GroupsService, ToastrService, FriendsService]
 })
 export class CreateGroupComponent implements OnInit {
 
@@ -31,13 +32,14 @@ export class CreateGroupComponent implements OnInit {
   @ViewChild('fruitInput') fruitInput: ElementRef;
   @ViewChild('postNewGroupSwal') postNewGroupSwal: SwalComponent;
 
-  allFruits = [
-    'berbel', 'toquis', 'kaiser', 'poeeeee', 'uji', 'shanty', 'beruto'
-  ];
+  // allFruits = [
+  //   'berbel', 'toquis', 'kaiser', 'poeeeee', 'uji', 'shanty', 'beruto'
+  // ];
+  allFruits: string[] = [];
 
 
   constructor(private _formBuilder: FormBuilder, private groupService: GroupsService, private router: Router,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService, private friendsService: FriendsService) {
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
@@ -52,6 +54,14 @@ export class CreateGroupComponent implements OnInit {
     this.friendsFormGroup = this._formBuilder.group({
       friends: ['', Validators.required]
     });
+    this.friendsService.getMyFriends().subscribe(
+      data => {
+        console.log(data);
+        const arrayFriends = data.valueOf()['friends'];
+        this.allFruits = arrayFriends.map(a => a.username);
+      },
+      error2 => console.log(error2)
+    );
   }
 
   add(event: MatChipInputEvent): void {

@@ -19,7 +19,7 @@ export class EventsService {
   }
 
   getMyLastEvents(): Observable<Object> { // For the home-dashboard
-    const param = new HttpParams().set('last', '5');
+    const param = new HttpParams().set('next', '5');
     return this.httpClient.get(events_endpoint, {params: param});
   }
 

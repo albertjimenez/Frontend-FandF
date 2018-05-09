@@ -8,5 +8,6 @@ export const delete_events_endpoint = API + 'event/';
 export const groups_endpoint = API + 'groups';
 export const post_new_group_endpoint = API + 'group';
 export const fetch_email = API + 'fetch_email';
+export const friends_enpoint = API + 'friends';
 // export const WS_HOME = 'wss://localhost:4567/api/hello';
 export const WS_HOME = 'wss://foodandfriendsapp.herokuapp.com/api/hello';
