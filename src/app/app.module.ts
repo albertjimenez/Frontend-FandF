@@ -22,7 +22,7 @@ import {
   MatSelectModule,
   MatStepperModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
 } from '@angular/material';
 import {LoginComponent} from './login/login.component';
 import {RouterModule, Routes} from '@angular/router';
@@ -47,7 +47,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {GeneralEventsComponent} from './general-events/general-events.component';
-import {GeneralGroupsComponent} from './general-groups/general-groups.component';
+import {DialogCallComponent, GeneralGroupsComponent} from './general-groups/general-groups.component';
 import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
 import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
 import {AuthInterceptorService} from './auth-interceptor.service';
@@ -93,8 +93,10 @@ export const routes: Routes = [
     AssistantEventComponent,
     LogospinnerComponent,
     CreateGroupComponent,
-    CreategroupbuttonComponent
+    CreategroupbuttonComponent,
+    DialogCallComponent
   ],
+  entryComponents: [GeneralGroupsComponent, DialogCallComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

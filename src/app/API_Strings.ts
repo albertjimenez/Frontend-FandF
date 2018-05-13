@@ -10,4 +10,6 @@ export const post_new_group_endpoint = API + 'group';
 export const fetch_email = API + 'fetch_email';
 export const friends_enpoint = API + 'friends';
 // export const WS_HOME = 'wss://localhost:4567/api/hello';
+// export const WS_LOGIN = 'ws://localhost:4567/api/loginWS';
+export const WS_LOGIN = 'wss://foodandfriendsapp.herokuapp.com/api/loginWS';
 export const WS_HOME = 'wss://foodandfriendsapp.herokuapp.com/api/hello';

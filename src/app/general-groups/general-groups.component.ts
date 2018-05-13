@@ -1,13 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Group, GroupsService} from '../home-dashboard/groups/groups.service';
 import {parseUnixtimeToDate} from '../home-dashboard/events/events.service';
 import {isNullOrUndefined} from 'util';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import * as SimpleWebRTC from 'simplewebrtc';
+
+declare let chatGroup: any;
 
 @Component({
   selector: 'app-general-groups',
   templateUrl: './general-groups.component.html',
   styleUrls: ['./general-groups.component.css'],
-  providers: [GroupsService]
+  providers: [GroupsService],
+
 })
 export class GeneralGroupsComponent implements OnInit {
 
@@ -16,7 +21,8 @@ export class GeneralGroupsComponent implements OnInit {
   private numImages = 10;
   isLoading = true;
 
-  constructor(private groupsService: GroupsService) {
+  constructor(private groupsService: GroupsService, public dialog: MatDialog) {
+
   }
 
   ngOnInit() {
@@ -98,4 +104,45 @@ export class GeneralGroupsComponent implements OnInit {
   parseUnixTime(time: string, shortDate?: boolean) {
     return parseUnixtimeToDate(time, shortDate);
   }
+
+  openDialog(_id: string) {
+    this.dialog.open(DialogCallComponent, {
+      width: '400px',
+      height: '640px',
+      data: {_id: _id}
+    });
+  }
+}
+
+@Component({
+  selector: 'app-dialog-call-component',
+  templateUrl: 'dialog-call.html',
+})
+export class DialogCallComponent {
+
+  webrtc: any;
+
+  constructor(public dialogRef: MatDialogRef<DialogCallComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.webrtc = new SimpleWebRTC({
+      localVideoEl: 'localVideo',
+      remoteVideosEl: 'remoteVideos',
+      autoRequestMedia: true
+    });
+    this.webrtc.on('readyToCall', () => {
+      this.webrtc.joinRoom(data._id);
+    });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+    console.log('Closed');
+    this.webrtc.disconnect();
+    this.webrtc.stopLocalVideo();
+  }
+
+  printData() {
+    console.log(this.data);
+  }
+
 }
