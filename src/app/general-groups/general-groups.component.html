@@ -53,7 +53,7 @@
                   <mat-icon>expand_more</mat-icon>
                   {{'Más'|translate}}
                 </button>
-                <button mat-icon-button (click)="openDialog(group._id)">
+                <button mat-icon-button (click)="openDialog(group._id, getMyUsername(), group.name)">
                   <mat-icon>pregnant_woman</mat-icon>
                   Surprais
                 </button>
