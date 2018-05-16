@@ -3,6 +3,7 @@ const API = 'https://foodandfriendsapp.herokuapp.com/api/';
 export const login_endpoint = API + 'login';
 export const register_endpoint = API + 'register';
 export const events_endpoint = API + 'events';
+export const put_event_endpoint = API + 'event/';
 export const post_events_endpoint = API + 'event';
 export const delete_events_endpoint = API + 'event/';
 export const groups_endpoint = API + 'groups';

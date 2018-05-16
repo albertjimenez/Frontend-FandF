@@ -46,7 +46,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
-import {GeneralEventsComponent} from './general-events/general-events.component';
+import {DialogEditEventComponent, GeneralEventsComponent} from './general-events/general-events.component';
 import {DialogCallComponent, GeneralGroupsComponent} from './general-groups/general-groups.component';
 import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
 import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
@@ -94,9 +94,10 @@ export const routes: Routes = [
     LogospinnerComponent,
     CreateGroupComponent,
     CreategroupbuttonComponent,
-    DialogCallComponent
+    DialogCallComponent,
+    DialogEditEventComponent
   ],
-  entryComponents: [GeneralGroupsComponent, DialogCallComponent],
+  entryComponents: [GeneralGroupsComponent, DialogCallComponent, GeneralEventsComponent, DialogEditEventComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

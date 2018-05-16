@@ -61,5 +61,9 @@
   "Opciones": "Opcions",
   "Editar": "Editar",
   "Eliminar": "Esborrar",
-  "Crear grupo": "Crear grup"
+  "Crear grupo": "Crear grup",
+  "Cancelar": "Cancel·lar",
+  "Actualizar": "Actualitzar",
+  "eventUpdatedOk": "Esdeveniment actualitzat correctament",
+  "eventUpdatedError": "No s'ha pogut actualitzar l'esdeveniment, provi-ho més tard"
 }
