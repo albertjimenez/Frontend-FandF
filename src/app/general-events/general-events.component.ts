@@ -131,10 +131,19 @@ export class GeneralEventsComponent implements OnInit, OnDestroy {
   }
 
   openDialog(event: MyEvent) {
-    this.dialog.open(DialogEditEventComponent, {
+    const d = this.dialog.open(DialogEditEventComponent, {
       width: '750px',
       height: '650px',
       data: {eventData: event},
+    });
+    d.afterClosed().subscribe((value) => {
+      console.log(value);
+      if (value) {
+        this.eventsService.getMyEvents().subscribe(events => this.getMyEvents(events), error => {
+          console.log('Error', error);
+          this.isLoading = false;
+        });
+      }
     });
   }
 }
@@ -272,7 +281,7 @@ export class DialogEditEventComponent {
   }
 
   redirectIfSuccess() {
-    this.router.navigateByUrl('/my-events');
+    this.dialogRef.close('true');
   }
 
   checkPhoto(): string {
