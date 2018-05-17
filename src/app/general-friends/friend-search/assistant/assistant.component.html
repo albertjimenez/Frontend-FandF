@@ -1,9 +1,26 @@
 <br>
-<input type="text" name="search" placeholder="{{'Filtrar amigos' |translate}}" #searchInput
-       (keyup)="filterElems(searchInput.value.toLocaleLowerCase())" [matAutocomplete]="auto">
-<mat-autocomplete id="autocomplete" #auto="matAutocomplete">
+<input type="text" name="search" placeholder="Buscar amigos" #searchInput [matAutocomplete]="auto" (keyup)="change_option()" [formControl]="myControl">
+<mat-autocomplete id="autocomplete" #auto="matAutocomplete" (optionSelected)="search()">
   <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-    {{ option }}
+    <mat-icon matPrefix>search</mat-icon>{{ option }}
   </mat-option>
 </mat-autocomplete>
 <br><br>
+<span *ngIf="firstSearched; else c1"></span>
+<ng-template #c1>
+  <div class="card--content">
+    <mat-card class="example-card animated fadeInUp">
+      <mat-card-header>
+        <mat-card-title><strong>{{user.name}}</strong></mat-card-title>
+        <mat-card-subtitle>{{user.lastConexion}}</mat-card-subtitle>
+      </mat-card-header>
+      <img src="{{user.image}}" class="rounded-img" mat-card-image>
+      <mat-card-content>
+        <p>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</ng-template>

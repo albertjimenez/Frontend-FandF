@@ -21,7 +21,8 @@ export class AssistantComponent implements OnInit {
   ];
 
   dbUsers = [];
-  numMatches = 0;
+  firstSearched = true;
+  user = null;
   filteredOptions: Observable<string[]>;
   constructor() { }
 
@@ -58,5 +59,19 @@ export class AssistantComponent implements OnInit {
   filter(val: string): string[] {
     return this.dbNames.filter(option =>
       option.toLowerCase().indexOf(val.toLowerCase()) === 0);
+  }
+
+  search() {
+    const friendName = this.myControl.value;
+    this.firstSearched = false;
+    for (let i = 0; i < this.dbUsers.length; i++) {
+      if (this.dbUsers[i].name === friendName) {
+        this.user = this.dbUsers[i];
+        break;
+      }
+    }
+  }
+  change_option() {
+    this.firstSearched = true;
   }
 }

@@ -1,14 +1,39 @@
 
-
 input[type=text] {
-  width: 130px;
+  width: 100%;
   border-radius: 25px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
 }
 
-input[type=text]:focus {
-  width: 100%;
+.rounded-img {
+  display: block;
+  width: 250px;
+  height: 250px;
+  margin: 1em auto;
+  background-size: cover;
+  background: no-repeat center center;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+  border-radius: 99em;
+  border: 5px solid #eee;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 }
+
+.example-card {
+  max-width: 500px;
+}
+
+.card--content {
+  /*Esto es lo que da la anchura al contenido*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 300px;
+  margin: 5px;
+}
+
+
+
 
 
