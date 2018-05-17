@@ -11,7 +11,7 @@ import {map} from 'rxjs/operators/map';
 })
 export class AssistantComponent implements OnInit {
 
-  myControl: FormControl = new FormControl();
+  myControl: FormControl = new FormControl('');
 
   dbNames = [
     'Santi',
@@ -23,6 +23,7 @@ export class AssistantComponent implements OnInit {
   dbUsers = [];
   firstSearched = true;
   user = null;
+  registered: boolean;
   filteredOptions: Observable<string[]>;
   constructor() { }
 
@@ -73,5 +74,13 @@ export class AssistantComponent implements OnInit {
   }
   change_option() {
     this.firstSearched = true;
+  }
+
+  handle_add() {
+    alert('Enviando solicitud de amistad');
+  }
+
+  handle_see_profile() {
+    alert('Ver perfil del usuario');
   }
 }

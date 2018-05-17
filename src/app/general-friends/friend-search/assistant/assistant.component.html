@@ -5,6 +5,11 @@
     <mat-icon matPrefix>search</mat-icon>{{ option }}
   </mat-option>
 </mat-autocomplete>
+<div *ngIf="(filteredOptions | async)?.length === 0">
+  <h3>El usuario que buscas no esta registrado</h3>
+  <img class="rounded-img grey-filter-img"
+       src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ3IDQ3IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NyA0NzsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxnPgoJPHBhdGggc3R5bGU9ImZpbGw6I0ZGRDU4MTsiIGQ9Ik00NCwxOS42NjJMNDQsMTkuNjYyYy0xLjc0LTkuODQzLTEwLjE1OC0xNy0yMC41LTE3UzQuNzQsOS44MTksMywxOS42NjJsMCwwICAgYy0xLjY2MywwLjY2MS0zLDIuNjAyLTMsNC41YzAsMS45NzgsMS4yODQsMy42MzksMy4wNTgsNC4yNDJDNS4yMSwzNy43MTUsMTMuNTM2LDQ0LjY2MiwyMy41LDQ0LjY2MiAgIGM5Ljk2NSwwLDE4LjI5LTYuOTQ4LDIwLjQ0Mi0xNi4yNThsMCwwLjAwMUM0NS43MTYsMjcuODAxLDQ3LDI2LjE0LDQ3LDI0LjE2MkM0NywyMi4yNjQsNDUuNjYzLDIwLjMyMyw0NCwxOS42NjJ6Ii8+Cgk8cGF0aCBzdHlsZT0iZmlsbDojQ0I4MjUyOyIgZD0iTTMxLDM5LjY2M2MtMC41NTMsMC0xLTAuNDQ3LTEtMWMwLTMuMzA5LTIuNjkxLTYtNi02cy02LDIuNjkxLTYsNmMwLDAuNTUzLTAuNDQ3LDEtMSwxICAgcy0xLTAuNDQ3LTEtMWMwLTQuNDExLDMuNTg5LTgsOC04czgsMy41ODksOCw4QzMyLDM5LjIxNiwzMS41NTMsMzkuNjYzLDMxLDM5LjY2M3oiLz4KCTxjaXJjbGUgc3R5bGU9ImZpbGw6IzQxNDE0MTsiIGN4PSIxNyIgY3k9IjI1LjY2MiIgcj0iMiIvPgoJPGNpcmNsZSBzdHlsZT0iZmlsbDojNDE0MTQxOyIgY3g9IjMxIiBjeT0iMjUuNjYyIiByPSIyIi8+Cgk8cGF0aCBzdHlsZT0iZmlsbDojNDE0MTQxOyIgZD0iTTQ0LDE5LjY2MmwwLDAuMDAxQzQyLjI2LDkuODIxLDMzLjY4NCwyLjMzOCwyMy4zNDIsMi4zMzhTNC43NCw5LjgxOSwzLDE5LjY2MiAgIGMwLDAsMTYuOTA2LDQuMzMsMjguMjQyLTQuNzI2YzAuNTU1LTAuNDQ0LDEuMzYyLTAuMzQsMS43NTgsMC4yNUMzNS4wNDksMTguMjM4LDM4LjgyOCwyMS45NDIsNDQsMTkuNjYyeiIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo="/>
+</div>
 <br><br>
 <span *ngIf="firstSearched; else c1"></span>
 <ng-template #c1>
@@ -14,7 +19,16 @@
         <mat-card-title><strong>{{user.name}}</strong></mat-card-title>
         <mat-card-subtitle>{{user.lastConexion}}</mat-card-subtitle>
       </mat-card-header>
-      <img src="{{user.image}}" class="rounded-img" mat-card-image>
+      <img src="{{user.image}}" class="rounded-img" mat-card-image><br>
+      <div class="my-grid">
+        <button class="profile_button" mat-button (click)="handle_see_profile()">
+          <mat-icon matPrefix>person</mat-icon>
+          Ver perfil
+        </button>
+        <button class="add_button" mat-button (click)="handle_add()">
+          <mat-icon matPrefix>person_add</mat-icon>&nbsp;&nbsp;Agregar
+        </button>
+      </div>
       <mat-card-content>
         <p>
         </p>

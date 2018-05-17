@@ -24,6 +24,19 @@ input[type=text] {
   max-width: 500px;
 }
 
+.card {
+  display: flex;
+  background-color: #fff;
+  min-width: 150px;
+  min-height: 150px;
+  overflow-x: auto;
+  margin: 5px;
+}
+
+.card::-webkit-scrollbar {
+  display: none;
+}
+
 .card--content {
   /*Esto es lo que da la anchura al contenido*/
   display: flex;
@@ -32,6 +45,73 @@ input[type=text] {
   min-width: 300px;
   margin: 5px;
 }
+
+.section-wrapper {
+  border-radius: 25px;
+  /*border: solid #4eb8dd;*/
+  /*background-color: #4eb8dd;*/
+}
+
+.lobster {
+  font-family: Lobster, sans-serif;
+}
+
+.example-card {
+  max-width: 500px;
+  border-radius: 25px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.hello {
+  font-family: 'Cookie', cursive;
+  font-size: 50pt;
+}
+
+.card {
+  display: flex;
+  background-color: #999999;
+  min-width: 150px;
+  min-height: 150px;
+  overflow-x: auto;
+  margin: 5px;
+  border-radius: 25px;
+}
+
+.card::-webkit-scrollbar {
+  display: none;
+}
+
+.card--content {
+  /*Esto es lo que da la anchura al contenido*/
+  min-width: 300px;
+  margin: 5px;
+}
+
+.lobster {
+  font-family: Lobster, sans-serif;
+}
+
+.profile_button {
+  padding: 3px;
+  background: red;
+  color: white;
+}
+
+.add_button {
+  padding: 3px;
+  background: blue;
+  color: white;
+}
+
+.my-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 60px;
+}
+
 
 
 

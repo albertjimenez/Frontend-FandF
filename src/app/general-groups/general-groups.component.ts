@@ -3,7 +3,7 @@ import {Group, GroupsService} from '../home-dashboard/groups/groups.service';
 import {parseUnixtimeToDate} from '../home-dashboard/events/events.service';
 import {isNullOrUndefined} from 'util';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-import * as SimpleWebRTC from 'simplewebrtc';
+// import * as SimpleWebRTC from 'simplewebrtc';
 import {CredentialsService} from '../credentials.service';
 
 declare let chatGroup: any;
