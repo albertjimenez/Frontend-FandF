@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {delete_events_endpoint, events_endpoint, post_events_endpoint} from '../../API_Strings';
+import {delete_events_endpoint, events_endpoint, post_events_endpoint, put_event_endpoint} from '../../API_Strings';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -19,12 +19,16 @@ export class EventsService {
   }
 
   getMyLastEvents(): Observable<Object> { // For the home-dashboard
-    const param = new HttpParams().set('last', '5');
+    const param = new HttpParams().set('next', '5');
     return this.httpClient.get(events_endpoint, {params: param});
   }
 
   removeMyEvent(_id: string): Observable<Object> {
     return this.httpClient.delete(delete_events_endpoint + _id);
+  }
+
+  updateEvent(id: string, event: MyEvent): Observable<Object> {
+    return this.httpClient.put(put_event_endpoint + id, event);
   }
 }
 

@@ -1,13 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Group, GroupsService} from '../home-dashboard/groups/groups.service';
 import {parseUnixtimeToDate} from '../home-dashboard/events/events.service';
 import {isNullOrUndefined} from 'util';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import * as SimpleWebRTC from 'simplewebrtc';
+import {CredentialsService} from '../credentials.service';
+
+declare let chatGroup: any;
 
 @Component({
   selector: 'app-general-groups',
   templateUrl: './general-groups.component.html',
   styleUrls: ['./general-groups.component.css'],
-  providers: [GroupsService]
+  providers: [GroupsService, CredentialsService],
+
 })
 export class GeneralGroupsComponent implements OnInit {
 
@@ -16,7 +22,8 @@ export class GeneralGroupsComponent implements OnInit {
   private numImages = 10;
   isLoading = true;
 
-  constructor(private groupsService: GroupsService) {
+  constructor(private groupsService: GroupsService, public dialog: MatDialog, private credentialsService: CredentialsService) {
+
   }
 
   ngOnInit() {
@@ -98,4 +105,58 @@ export class GeneralGroupsComponent implements OnInit {
   parseUnixTime(time: string, shortDate?: boolean) {
     return parseUnixtimeToDate(time, shortDate);
   }
+
+  openDialog(_id: string, username: string, groupname: string) {
+    this.dialog.open(DialogCallComponent, {
+      width: '1000px',
+      height: '500',
+      data: {_id: _id, username: username, groupname: groupname},
+      closeOnNavigation: true,
+      disableClose: true,
+      hasBackdrop: true
+    });
+  }
+
+  getMyUsername(): string {
+    return this.credentialsService.getUsername().toString();
+  }
+}
+
+@Component({
+  selector: 'app-dialog-call-component',
+  templateUrl: 'dialog-call.html',
+  styleUrls: ['./dialog-call.css'],
+})
+export class DialogCallComponent {
+
+  webrtc: any;
+
+  constructor(public dialogRef: MatDialogRef<DialogCallComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.webrtc = new SimpleWebRTC({
+      localVideoEl: 'localVideo',
+      remoteVideosEl: 'remoteVideos',
+      autoRequestMedia: true,
+      adjustPeerVolume: true
+    });
+    this.webrtc.on('readyToCall', () => {
+      this.webrtc.joinRoom(data._id);
+    });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+    console.log('Closed');
+    this.webrtc.disconnect();
+    this.webrtc.stopLocalVideo();
+  }
+
+  pauseVideo() {
+    this.webrtc.pause();
+  }
+
+  resumeVideo() {
+    this.webrtc.resume();
+  }
+
 }

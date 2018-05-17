@@ -13,7 +13,7 @@ import {isNullOrUndefined} from 'util';
 export class GroupsComponent implements OnInit {
 
   myGroups: Group[] = [];
-
+  isLoading = true;
   constructor(private groupsService: GroupsService) {
   }
 
@@ -36,8 +36,12 @@ export class GroupsComponent implements OnInit {
             };
             this.myGroups.push(g);
           });
+        this.isLoading = false;
       },
-      error => console.log('errror ', error)
+      error => {
+        console.log('errror ', error);
+        this.isLoading = false;
+      }
     );
   }
   rightscroll() {

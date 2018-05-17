@@ -64,6 +64,7 @@
 .hello {
   font-family: 'Cookie', cursive;
   font-size: 50pt;
+  cursor: pointer;
 }
 
 .card {

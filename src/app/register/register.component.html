@@ -2,14 +2,14 @@
   <div class="inputGroup inputGroup2">
     <label for="name">{{'Nombre'|translate}}</label>
     <input matInput placeholder="{{'Nombre'|translate}}" id="name" type="text" formControlName="name"
-           pattern="^[A-z]+$">
+           pattern="^[A-zÀ-ÿ\s]+$">
     <mat-error *ngIf="registerFormControl.controls.name.errors?.pattern">El nombre sólo debe contener letras</mat-error>
     <span class="indicator"></span>
   </div>
   <div class="inputGroup inputGroup2">
     <label for="apellidos">{{'Apellidos'|translate}}</label>
     <input matInput placeholder="{{'Apellidos'|translate}}" id="apellidos" type="text" formControlName="surname"
-           pattern="^[A-z]+$">
+           pattern="^[A-zÀ-ÿ\s]+$">
     <mat-error *ngIf="registerFormControl.controls.surname.errors?.pattern">Los apellidos sólo debe contener letras
     </mat-error>
   </div>

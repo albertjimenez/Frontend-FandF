@@ -1,0 +1,19 @@
+<h1 mat-dialog-title class="deepshadow">VideoChat -> {{data.groupname}}</h1>
+<div mat-dialog-content>
+  <div>
+    <video id="localVideo" style="border-radius: 25px"></video>
+    <h6>{{data.username}}</h6>
+  </div>
+  <div id="remoteVideos"></div>
+</div>
+<div mat-dialog-actions>
+  <button mat-icon-button (click)="onNoClick()" style="background-color: red">
+    <mat-icon>close</mat-icon>
+  </button>
+  <button mat-icon-button (click)="pauseVideo()" style="background-color: #2C93FF">
+    <mat-icon>pause</mat-icon>
+  </button>
+  <button mat-icon-button (click)="resumeVideo()" style="background-color: #4caf50">
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+</div>

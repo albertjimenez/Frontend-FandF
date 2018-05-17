@@ -5,7 +5,7 @@
       <mat-form-field>
         <input maxlength="35" #eventNameInput matInput placeholder="{{'Nombre' |translate}}" formControlName="eventName"
                required>
-        <mat-hint align="end">{{eventNameInput.value?.length || 0}}/35</mat-hint>
+        <mat-hint align="end">{{eventNameInput?.value?.length || 0}}/35</mat-hint>
         <mat-error *ngIf="informationFormGroup.controls.eventName.invalid">
           {{'Nombre en blanco'|translate}}
         </mat-error>
@@ -14,7 +14,7 @@
       <mat-form-field>
   <textarea matInput matTextareaAutosize placeholder="{{'Descripción'|translate}}" formControlName="description"
             matAutosizeMaxRows="5" #descNameInput required maxlength="140"></textarea>
-        <mat-hint align="end">{{descNameInput.value?.length || 0}}/140</mat-hint>
+        <mat-hint align="end">{{descNameInput?.value?.length || 0}}/140</mat-hint>
         <mat-error *ngIf="informationFormGroup.controls.description.invalid">
           {{'Descripción en blanco'|translate}}
         </mat-error>
@@ -53,7 +53,7 @@
 
       <div>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button [disabled]="this.placeIdFormGroup.invalid" matStepperNext>Siguiente</button>
+        <button mat-flat-button [disabled]="this.placeIdFormGroup.invalid" matStepperNext>Siguiente</button>
       </div>
     </form>
   </mat-step>
@@ -80,7 +80,7 @@
             <mat-list-item class="assistant-item" *ngFor="let g of autocompleteGroups"
                            (click)="onClickGroup(g._id, g.name)">
 
-              <img *ngIf="g.image.length < 1; else imgGroup"
+              <img *ngIf="g.image?.length < 1; else imgGroup"
                    src="https://www.shareicon.net/download/2017/01/06/869210_party.ico" matListAvatar #imgGroup>
               <ng-template #imgGroup>
                 <img src="{{g.image}}" matListAvatar>
@@ -96,7 +96,7 @@
       </ng-template>
       <div>
         <button mat-button matStepperPrevious>{{'Atrás'|translate}}</button>
-        <button mat-button matStepperNext [disabled]="this.groupId === ''">{{'Siguiente'|translate}}</button>
+        <button mat-flat-button matStepperNext [disabled]="this.groupId === ''">{{'Siguiente'|translate}}</button>
       </div>
     </form>
   </mat-step>

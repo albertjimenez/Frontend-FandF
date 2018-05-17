@@ -14,7 +14,7 @@
             <mat-card-subtitle>{{event.date}} {{'Creado por'|translate}} {{event?.createdBy}}</mat-card-subtitle>
             <mat-icon [matMenuTriggerFor]="menu" style="cursor: pointer">more_vert</mat-icon>
             <mat-menu #menu="matMenu" matTooltip="{{'Opciones'|translate}}">
-              <button mat-menu-item [disabled]="!isMyEvent(event.createdBy)">
+              <button mat-menu-item [disabled]="!isMyEvent(event.createdBy)" (click)="openDialog(event)">
                 <mat-icon>edit</mat-icon>
                 {{'Editar'|translate}}
               </button>
@@ -40,9 +40,10 @@
             </div>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-fab style="background-color: limegreen" matTooltip="Google Maps">
-              <mat-icon>place</mat-icon>
-
+            <button mat-mini-fab="" style="background-color: limegreen" matTooltip="Google Maps">
+              <a href="https://www.google.com/maps/place/?q=place_id:{{event.placeId}}" target="_blank">
+                <mat-icon>place</mat-icon>
+              </a>
             </button>
           </mat-card-actions>
         </mat-card>

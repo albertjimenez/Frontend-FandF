@@ -60,5 +60,10 @@
   "Cargando": "Cargando",
   "Opciones": "Opciones",
   "Editar": "Editar",
-  "Eliminar": "Eliminar"
+  "Eliminar": "Eliminar",
+  "Crear grupo": "Crear grupo",
+  "Cancelar": "Cancelar",
+  "Actualizar": "Actualizar",
+  "eventUpdatedOk": "Evento actualizado correctamente",
+  "eventUpdatedError": "No se ha podido actualizar el evento, pruebe más tarde"
 }

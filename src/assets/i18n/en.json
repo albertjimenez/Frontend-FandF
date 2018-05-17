@@ -60,6 +60,11 @@
   "Cargando": "Loading",
   "Opciones": "Options",
   "Editar": "Edit",
-  "Eliminar": "Delete"
+  "Eliminar": "Delete",
+  "Crear grupo": "Create group",
+  "Cancelar": "Cancel",
+  "Actualizar": "Update",
+  "eventUpdatedOk": "Event updated successfully",
+  "eventUpdatedError": "The event could not be updated, please try again in a few moments"
 
 }

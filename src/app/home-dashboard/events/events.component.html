@@ -1,6 +1,6 @@
 <section class="section-wrapper bg-events">
   <!--<h2 class="lobster">Eventos</h2>-->
-  <span class="dashed-shadow hello">{{'Eventos'|translate}}
+  <span class="dashed-shadow hello" routerLink="/my-events">{{'Eventos'|translate}}
   </span>
   <div class="w3-container">
     <div>
@@ -14,108 +14,42 @@
   </div>
   <mat-divider></mat-divider>
   <div class="card" id="events_cards">
-    <div class="card--content">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <div class="example-header-image" style="left: 50px;">
-            <mat-icon>favorite</mat-icon>
-          </div>
-          <mat-card-title>Nombre evento</mat-card-title>
-          <mat-card-subtitle>subt.</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="../../assets/card-bg.jpg" height="250" width="500">
-        <mat-card-content>
-          <p>
-            bla bla bla
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-mini-fab style="background-color: #f44336"></button>
-          <button mat-mini-fab style="background-color: #ffa000"></button>
-          <button mat-mini-fab style="background-color: #4caf50"></button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div class="card--content">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Nombre evento</mat-card-title>
-          <mat-card-subtitle>subt.</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="../../assets/card-bg.jpg" height="250" width="500">
-        <mat-card-content>
-          <p>
-            bla bla bla
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-mini-fab style="background-color: #f44336"></button>
-          <button mat-mini-fab style="background-color: #ffa000"></button>
-          <button mat-mini-fab style="background-color: #4caf50"></button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div class="card--content">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Nombre evento</mat-card-title>
-          <mat-card-subtitle>subt.</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="../../assets/card-bg.jpg" height="250" width="500">
-        <mat-card-content>
-          <p>
-            bla bla bla
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-mini-fab style="background-color: #f44336"></button>
-          <button mat-mini-fab style="background-color: #ffa000"></button>
-          <button mat-mini-fab style="background-color: #4caf50"></button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div class="card--content">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Nombre evento</mat-card-title>
-          <mat-card-subtitle>subt.</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="../../assets/card-bg.jpg" height="250" width="500">
-        <mat-card-content>
-          <p>
-            bla bla bla
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-mini-fab style="background-color: #f44336"></button>
-          <button mat-mini-fab style="background-color: #ffa000"></button>
-          <button mat-mini-fab style="background-color: #4caf50"></button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div class="card--content">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Nombre evento</mat-card-title>
-          <mat-card-subtitle>subt.</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="../../assets/card-bg.jpg" height="250" width="500">
-        <mat-card-content>
-          <p>
-            bla bla bla
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-mini-fab style="background-color: #f44336"></button>
-          <button mat-mini-fab style="background-color: #ffa000"></button>
-          <button mat-mini-fab style="background-color: #4caf50"></button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+    <app-logospinner *ngIf="isLoading; else dataEvents"></app-logospinner>
+    <ng-template #dataEvents>
+      <div class="card--content" *ngFor="let event of eventList">
+        <mat-card class="example-card">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <div class="example-header-image" style="left: 50px;">
+            </div>
+            <mat-card-title>{{event.name}}</mat-card-title>
+            <mat-card-subtitle>{{event.date}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="{{event.image}}" height="250" width="500"
+               *ngIf="validateImg(event.image); else defaultImg">
+          <ng-template #defaultImg>
+            <img mat-card-image src="../../../assets/logo/fandflogo.png" height="250" width="500">
+          </ng-template>
+          <mat-card-content>
+            {{event.description}}
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-mini-fab="" style="background-color: limegreen" matTooltip="Google Maps">
+              <a href="https://www.google.com/maps/place/?q=place_id:{{event.placeId}}" target="_blank">
+                <mat-icon>place</mat-icon>
+              </a>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div *ngIf="eventList.length === 0">
+        <h3 style="text-align: center">No tienes eventos, crea uno pulsando aquí</h3>
+        <button mat-fab style="background-color: limegreen" routerLink="/assistant-event">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </ng-template>
+
+
   </div>
 </section>

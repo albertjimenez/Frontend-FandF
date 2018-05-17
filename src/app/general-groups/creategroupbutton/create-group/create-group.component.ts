@@ -1,138 +1,125 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Group, GroupsService} from '../../../home-dashboard/groups/groups.service';
+import {Router} from '@angular/router';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Observable} from 'rxjs/Observable';
-import {startWith} from 'rxjs/operators/startWith';
-import {map} from 'rxjs/operators/map';
-import {Group} from '../../../home-dashboard/groups/groups.service';
+import {map, startWith} from 'rxjs/operators';
+import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
+import {isNullOrUndefined} from 'util';
+import {ToastrService} from 'ngx-toastr';
+import {SwalComponent} from '@toverux/ngx-sweetalert2';
+import {FriendsService} from '../../../home-dashboard/friends/friends.service';
 
 @Component({
   selector: 'app-create-group',
   templateUrl: './create-group.component.html',
-  styleUrls: ['./create-group.component.css']
+  styleUrls: ['./create-group.component.css'],
+  providers: [GroupsService, ToastrService, FriendsService]
 })
 export class CreateGroupComponent implements OnInit {
 
-  myControl: FormControl = new FormControl();
+  infoFormGroup: FormGroup;
+  friendsFormGroup: FormGroup;
+  selectable = true;
+  removable = true;
+  addOnBlur = false;
+  separatorKeysCodes = [ENTER, COMMA];
+  fruitCtrl = new FormControl();
+  filteredFruits: Observable<any[]>;
 
-  options = [
-    'Peris',
-    'Berbel',
-    'Santi',
-    'Tokeisi',
-    'Pereta',
-    'Pedriza',
-    'Harry'
-  ];
-  privacy = [
-    {
-      value: 'private',
-      viewValue: 'Privado',
-      description: 'Solo el propietario del grupo puede invitar a otros usuarios.',
-      icon: 'lock'
-    },
-    {
-      value: 'public',
-      viewValue: 'Público',
-      description: 'Cualquier usuario puede encontrar el grupo y solicitar unirse.',
-      icon: 'language'
-    }
-  ];
-  createFrom: FormGroup;
-  groupName = '';
-  image: string;
-  is_image_upload: boolean;
-  description = '';
-  dateOfCreation: Date;
-  closedGroup: boolean;
-  selectedValue = 'private';
-  filteredOptions: Observable<string[]>;
+  fruits: string[] = [];
+  @ViewChild('fruitInput') fruitInput: ElementRef;
+  @ViewChild('postNewGroupSwal') postNewGroupSwal: SwalComponent;
+
+  // allFruits = [
+  //   'berbel', 'toquis', 'kaiser', 'poeeeee', 'uji', 'shanty', 'beruto'
+  // ];
+  allFruits: string[] = [];
 
 
-  constructor() {
+  constructor(private _formBuilder: FormBuilder, private groupService: GroupsService, private router: Router,
+              private toastrService: ToastrService, private friendsService: FriendsService) {
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
   }
 
   ngOnInit() {
-    const MIN_CHAR = 1;
-    const MAX_DESCRIPTION_CHAR = 140;
-    const MAX_NAME_CHAR = 35;
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(val => this.filter(val))
-      );
-    this.closedGroup = true;
-    this.is_image_upload = false;
-    this.createFrom = new FormGroup({
-      groupname: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(MIN_CHAR),
-        Validators.maxLength(MAX_NAME_CHAR)
-      ])),
-      imageBeforeUpload: new FormControl(),
-      members: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.maxLength(MAX_DESCRIPTION_CHAR))
+    this.infoFormGroup = this._formBuilder.group({
+      groupName: ['', Validators.required],
+      description: ['', Validators.required],
+      photoUrl: [''],
     });
-
+    this.friendsFormGroup = this._formBuilder.group({
+      friends: ['', Validators.required]
+    });
+    this.friendsService.getMyFriends().subscribe(
+      data => {
+        console.log(data);
+        const arrayFriends = data.valueOf()['friends'];
+        this.allFruits = arrayFriends.map(a => a.username);
+      },
+      error2 => console.log(error2)
+    );
   }
 
-  create_group() {
-    this.groupName = this.createFrom.value.groupname;
-    this.description = this.createFrom.value.description;
-    this.dateOfCreation = new Date();
-    const newGroup: Group = {
-      name: this.groupName,
-      description: this.description,
-      closed: this.closedGroup,
-      users: this.createFrom.value.members.split('\n'),
-      image: '',
-      _id: '',
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if (this.allFruits.indexOf(value) === 0) {
+      this.fruits.push(value.trim());
+      this.fruits.filter((elem, index, arr) => arr.indexOf(elem) === index);
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(fruit: any): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
+  filter(name: string) {
+    return this.allFruits.filter(fruit =>
+      fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.fruits.push(event.option.viewValue);
+    if (!isNullOrUndefined(this.fruitInput)) {
+      this.fruitInput.nativeElement.value = '';
+    }
+    this.fruits = this.fruits.filter((elem, index, arr) => arr.indexOf(elem) === index);
+  }
+
+  validateImg(img: string) {
+    return !isNullOrUndefined(img) && img.length >= 15;
+  }
+
+  postNewGroup() {
+
+    const myGroup: Group = {
+      name: this.infoFormGroup.controls.groupName.value.toString(),
+      description: this.infoFormGroup.controls.description.value.toString(),
+      closed: true,
+      users: this.fruits,
+      image: this.infoFormGroup.controls.photoUrl.value.toString(),
     };
-    console.log(newGroup);
+    this.groupService.postNewGroup(myGroup).subscribe(
+      () => {
+        this.toastrService.success('Grupo creado correctamente');
+        this.router.navigateByUrl('/my-groups');
+      },
+      error => console.log('Error ', error)
+    );
   }
-
-  change_privacy() {
-    if (this.selectedValue === 'private') {
-      this.closedGroup = true;
-    } else if (this.selectedValue === 'public') {
-      this.closedGroup = false;
-    }
-  }
-
-  filter(val: string): string[] {
-    return this.options.filter(option =>
-      option.toLowerCase().indexOf(val.toLowerCase()) === 0);
-  }
-
-  new_friend() {
-    if (this.createFrom.value.members === '') {
-      this.createFrom.patchValue({
-        members: this.myControl.value
-      });
-    } else if (this.createFrom.value.members.indexOf(this.myControl.value) === -1) {
-      this.createFrom.patchValue({
-        members: this.createFrom.value.members + '\n' + this.myControl.value
-      });
-    }
-    this.myControl.setValue('');
-  }
-
-  handle_upload() {
-    document.getElementById('upload').click();
-  }
-
-  before_upload_image() {
-    this.is_image_upload = true;
-    const input: any = document.getElementById('upload');
-    const file = input.files[0];
-    const reader = new FileReader();
-    reader.onload = this.fileOnLoad;
-    reader.readAsDataURL(file);
-
-  }
-
-  fileOnLoad(e) {
-    const result = e.target.result;
-    document.getElementById('group_img').setAttribute('src', result);
-  }
-
 }

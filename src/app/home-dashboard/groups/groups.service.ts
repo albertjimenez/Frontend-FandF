@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {groups_endpoint} from '../../API_Strings';
+import {groups_endpoint, post_new_group_endpoint} from '../../API_Strings';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -19,13 +19,17 @@ export class GroupsService {
     return this.httpClient.get(groups_endpoint, {params: params});
   }
 
+  postNewGroup(group: Group): Observable<Object> {
+    return this.httpClient.post(post_new_group_endpoint, group);
+  }
+
 }
 
 export interface Group {
   name: string;
   description: string;
   closed: boolean;
-  users: [string];
+  users: string[];
   dateOfCreation?: number;
   createdBy?: string;
   image: string;

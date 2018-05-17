@@ -11,19 +11,33 @@
       <h3 class="deepshadow">{{username}}</h3>
     </a>
     <ul class="list-unstyled components">
-      <p>{{'Menú'|translate}}</p>
-      <li class="active">
-        <a routerLink="home-dashboard">Home</a>
+      <!--<li class="active">-->
+      <li class="">
+        <a routerLink="home-dashboard">
+          <mat-icon>home</mat-icon>
+          Home
+        </a>
       </li>
       <li>
-        <a routerLink="my-events">{{'Mis eventos' | translate}}</a>
-        <a routerLink="my-groups">{{'Mis grupos' | translate}}</a>
+        <a routerLink="my-events">
+          <mat-icon>events</mat-icon>
+          {{'Mis eventos' | translate}}
+        </a>
       </li>
       <li>
-        <a routerLink="my-friends">{{'Mis amigos'|translate}}</a>
+        <a routerLink="my-groups">
+          <mat-icon>groups</mat-icon>
+          {{'Mis grupos' | translate}}</a>
       </li>
       <li>
-        <a routerLink="gmaps">{{'Restaurantes'|translate}}</a>
+        <a>
+          <mat-icon>contacts</mat-icon>
+          {{'Mis amigos'|translate}}</a>
+      </li>
+      <li>
+        <a routerLink="gmaps">
+          <mat-icon>restaurants</mat-icon>
+          {{'Restaurantes'|translate}}</a>
       </li>
     </ul>
 

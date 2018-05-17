@@ -1,0 +1,17 @@
+mat-form-field {
+  display: block;
+}
+
+input {
+  width: 75%;
+}
+
+.assistant-item {
+  cursor: pointer;
+}
+
+.assistant-item:hover {
+  background-color: #bbbbbb;
+  transition: all 0.5s ease;
+  border-radius: 25px;
+}

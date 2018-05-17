@@ -1,61 +1,78 @@
-.group_icon{
-  font-size: 48px;
-}
-
-.label_features {
-  font-weight: bold;
-}
-.group_img {
+mat-form-field {
   display: block;
-  width: 250px;
-  height: 250px;
-  margin: 1em auto;
-  background-size: cover;
-  background: no-repeat center center;
-}
-.main_div{
-  display: flex;
-  padding: 80px;
-  justify-content: center;
-  align-items: center;
-}
-.card{
-  max-width: 800px;
-  width: 100%;
 }
 
-.input_area_class {
-  width: 100%;
+input {
+  width: 75%;
 }
 
-.text_area_heigth {
-  height: 100px;
+.assistant-item {
+  cursor: pointer;
 }
 
-.button_site {
-  display: block;
-  text-align: center;
-
+.assistant-item:hover {
+  background-color: #bbbbbb;
+  transition: all 0.5s ease;
+  border-radius: 25px;
 }
 
-.upload_button {
-  padding: 10px 20px;
-  background-color: blue;
-  color: white;
-  border-radius: 6px;
-  font-weight: bolder;
-}
+/*.group_icon{*/
+/*font-size: 48px;*/
+/*}*/
 
-.create_button {
-  padding: 5px 10px;
-  border-radius: 2px;
-  font-weight: bolder;
-  background: blue;
-  color: white;
-}
+/*.label_features {*/
+/*font-weight: bold;*/
+/*}*/
+/*.group_img {*/
+/*display: block;*/
+/*width: 250px;*/
+/*height: 250px;*/
+/*margin: 1em auto;*/
+/*background-size: cover;*/
+/*background: no-repeat center center;*/
+/*}*/
+/*.main_div{*/
+/*display: inherit;*/
+/*justify-content: center;*/
+/*align-items: center;*/
+/*}*/
+/*.card{*/
+/*max-width: 800px;*/
+/*width: 100%;*/
+/*}*/
 
-.create_button_site {
-  display: block;
-  text-align: right;
-}
+/*.input_area_class {*/
+/*width: 100%;*/
+/*}*/
+
+/*.text_area_heigth {*/
+/*height: 100px;*/
+/*}*/
+
+/*.button_site {*/
+/*display: block;*/
+/*text-align: center;*/
+
+/*}*/
+
+/*.upload_button {*/
+/*padding: 10px 20px;*/
+/*background-color: blue;*/
+/*color: white;*/
+/*border-radius: 6px;*/
+/*font-weight: bolder;*/
+/*}*/
+
+/*.create_button {*/
+/*padding: 5px 10px;*/
+/*border-radius: 2px;*/
+/*font-weight: bolder;*/
+/*background: blue;*/
+/*color: white;*/
+/*}*/
+
+/*.create_button_site {*/
+/*display: block;*/
+/*text-align: right;*/
+/*}*/
 

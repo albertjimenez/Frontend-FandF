@@ -1,10 +1,16 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {EventsService, MyEvent, parseUnixtimeToDate} from '../home-dashboard/events/events.service';
 import {Subscription} from 'rxjs/Subscription';
-import {isNullOrUndefined} from 'util';
+import {isNullOrUndefined, isUndefined} from 'util';
 import {CredentialsService} from '../credentials.service';
 import {SwalComponent} from '@toverux/ngx-sweetalert2';
 import {ToastrService} from 'ngx-toastr';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Group, GroupsService} from '../home-dashboard/groups/groups.service';
+import {Address} from 'ngx-google-places-autocomplete/objects/address';
+import {parseDateAndTime} from './event-creator/assistant-event/assistant-event.component';
+import {Router} from '@angular/router';
 
 declare const $: any;
 
@@ -46,7 +52,7 @@ export class GeneralEventsComponent implements OnInit, OnDestroy {
   }
 
   constructor(private eventsService: EventsService, private toasterService: ToastrService,
-              private credentialService: CredentialsService) {
+              private credentialService: CredentialsService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -123,4 +129,165 @@ export class GeneralEventsComponent implements OnInit, OnDestroy {
     this.eventIdRemove = _id;
     this.removeEvent.show();
   }
+
+  openDialog(event: MyEvent) {
+    const d = this.dialog.open(DialogEditEventComponent, {
+      width: '750px',
+      height: '650px',
+      data: {eventData: event},
+    });
+    d.afterClosed().subscribe((value) => {
+      console.log(value);
+      if (value) {
+        this.eventsService.getMyEvents().subscribe(events => this.getMyEvents(events), error => {
+          console.log('Error', error);
+          this.isLoading = false;
+        });
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'app-dialog-edit-event.component',
+  templateUrl: 'dialog-edit-event.html',
+  styleUrls: ['./dialog-edit-event.component.css'],
+  providers: [GroupsService, EventsService]
+})
+export class DialogEditEventComponent {
+
+  informationFormGroup: FormGroup;
+  minDate = new Date();
+  maxDate = new Date(2099, 1, 1);
+  selectedDate: Date;
+  placeIdFormGroup: FormGroup;
+  invitedsFormGroup: FormGroup;
+  placeId = '';
+  groupId = '';
+  myGroups: Group[] = [];
+  autocompleteGroups: Group[] = [];
+  addressName = '';
+  isLoading = true;
+  oldEvent: MyEvent = null;
+  @ViewChild('eventOk') eventOk: SwalComponent;
+  @ViewChild('eventError') eventError: SwalComponent;
+
+  constructor(public dialogRef: MatDialogRef<DialogEditEventComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any, private _formBuilder: FormBuilder,
+              private groupService: GroupsService, private eventService: EventsService,
+              private router: Router) {
+
+    this.informationFormGroup = this._formBuilder.group({
+      eventName: ['', Validators.required],
+      description: ['', Validators.required],
+      photoUrl: [''],
+      date: ['', Validators.required],
+      hour: ['', Validators.required],
+    });
+
+    this.placeIdFormGroup = this._formBuilder.group({
+      placeId: ['', Validators.required]
+    });
+    this.invitedsFormGroup = this._formBuilder.group({
+      groupName: ['', Validators.required]
+    });
+    this.getMyGroups();
+    this.oldEvent = this.data.eventData;
+    // Fulfill the form with the previous data
+    this.informationFormGroup.controls.eventName.patchValue(this.oldEvent.name);
+    this.informationFormGroup.controls.description.patchValue(this.oldEvent.description);
+    this.informationFormGroup.controls.photoUrl.patchValue(this.oldEvent.image);
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+  setMyDate(value) {
+    this.selectedDate = value.value;
+  }
+
+  onChange(address: Address) {
+    this.addressName = address.name;
+    this.placeId = address.place_id;
+  }
+
+  getMyGroups() {
+    this.groupService.getMyGroups().subscribe(data => {
+      const groups = data.valueOf()['groups'];
+      Object.entries(groups).forEach(
+        ([key, value]) => {
+          const g: Group = {
+            name: value.name,
+            description: value.description,
+            closed: value.closed,
+            users: value.users,
+            dateOfCreation: value.dateOfCreation,
+            createdBy: value.createdBy,
+            image: value.image,
+            updateDate: value.updateDate,
+            _id: value._id
+          };
+          this.myGroups.push(g);
+        }
+      );
+    }, error => {
+      console.log('Error', error);
+      this.isLoading = false;
+    }, () => {
+      this.isLoading = false;
+      this.autocompleteGroups = this.myGroups;
+    });
+  }
+
+  filterGroups(inputText) {
+    this.autocompleteGroups = this.myGroups.filter(g => g.name.toLowerCase().indexOf(inputText.toLowerCase()) > -1);
+  }
+
+  onClickGroup(id, name) {
+    this.groupId = id;
+    this.invitedsFormGroup.controls.groupName.patchValue(name);
+  }
+
+  parseDateToStr(): string {
+    if (!isUndefined(this.selectedDate) && !isUndefined(this.informationFormGroup.controls.hour.value)) {
+      return parseUnixtimeToDate(parseDateAndTime(this.selectedDate, this.informationFormGroup.controls.hour.value).toString());
+    }
+    return '';
+  }
+
+  updateEvent() {
+    const photo = isUndefined(this.informationFormGroup.controls.photoUrl.value) ?
+      'https://foodandfriendsapp.firebaseapp.com/assets/logo/fandflogo.png' :
+      this.informationFormGroup.controls.photoUrl.value;
+    const myEvent: MyEvent = {
+      name: this.informationFormGroup.controls.eventName.value,
+      date: parseDateAndTime(this.selectedDate, this.informationFormGroup.controls.hour.value),
+      description: this.informationFormGroup.controls.description.value,
+      placeId: this.placeId,
+      groupId: this.groupId,
+      image: photo
+    };
+    this.eventService.updateEvent(this.oldEvent._id, myEvent).subscribe(data => this.eventOk.show(),
+      error => {
+        console.log('Error', error);
+        this.eventError.show();
+      });
+  }
+
+  isValid(): boolean {
+    return this.informationFormGroup.invalid && this.placeIdFormGroup.invalid
+      && this.groupId === '';
+  }
+
+  redirectIfSuccess() {
+    this.dialogRef.close('true');
+  }
+
+  checkPhoto(): string {
+    return isUndefined(this.informationFormGroup.controls.photoUrl.value) ?
+      'https://foodandfriendsapp.firebaseapp.com/assets/logo/fandflogo.png' :
+      this.informationFormGroup.controls.photoUrl.value;
+  }
+
 }

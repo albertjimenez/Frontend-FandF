@@ -25,8 +25,8 @@ export class AssistantEventComponent implements OnInit {
   groupId = '';
   myGroups: Group[] = [];
   autocompleteGroups: Group[] = [];
-  isLoading = true;
   addressName = '';
+  isLoading = true;
 
   @ViewChild('eventOk') eventOk: SwalComponent;
   @ViewChild('eventError') eventError: SwalComponent;
