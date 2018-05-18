@@ -137,7 +137,6 @@ export class GeneralEventsComponent implements OnInit, OnDestroy {
       data: {eventData: event},
     });
     d.afterClosed().subscribe((value) => {
-      console.log(value);
       if (value) {
         this.eventsService.getMyEvents().subscribe(events => this.getMyEvents(events), error => {
           console.log('Error', error);

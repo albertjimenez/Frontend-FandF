@@ -65,5 +65,6 @@
   "Cancelar": "Cancelar",
   "Actualizar": "Actualizar",
   "eventUpdatedOk": "Evento actualizado correctamente",
-  "eventUpdatedError": "No se ha podido actualizar el evento, pruebe más tarde"
+  "eventUpdatedError": "No se ha podido actualizar el evento, pruebe más tarde",
+  "Llamada grupal": "Llamada grupal"
 }

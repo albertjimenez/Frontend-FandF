@@ -1,10 +1,24 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {Group, GroupsService} from '../home-dashboard/groups/groups.service';
 import {parseUnixtimeToDate} from '../home-dashboard/events/events.service';
 import {isNullOrUndefined} from 'util';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import {
+  MAT_DIALOG_DATA,
+  MatAutocompleteSelectedEvent,
+  MatChipInputEvent,
+  MatDialog,
+  MatDialogRef
+} from '@angular/material';
 import * as SimpleWebRTC from 'simplewebrtc';
 import {CredentialsService} from '../credentials.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Observable} from 'rxjs/Observable';
+import {SwalComponent} from '@toverux/ngx-sweetalert2';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {FriendsService} from '../home-dashboard/friends/friends.service';
+import {map, startWith} from 'rxjs/operators';
 
 declare let chatGroup: any;
 
@@ -12,7 +26,7 @@ declare let chatGroup: any;
   selector: 'app-general-groups',
   templateUrl: './general-groups.component.html',
   styleUrls: ['./general-groups.component.css'],
-  providers: [GroupsService, CredentialsService],
+  providers: [GroupsService, CredentialsService, ToastrService],
 
 })
 export class GeneralGroupsComponent implements OnInit {
@@ -21,32 +35,39 @@ export class GeneralGroupsComponent implements OnInit {
   numMatches = this.groupList.length;
   private numImages = 10;
   isLoading = true;
+  groupIDRemoving = null;
+  @ViewChild('removeGroup') removeGroup: SwalComponent;
+  retrieveGroups = (data) => {
+    const groups = data.valueOf()['groups'];
+    this.groupList = [];
+    Object.entries(groups).forEach(
+      ([key, value]) => {
+        const g: Group = {
+          name: value.name,
+          description: value.description,
+          closed: value.closed,
+          users: value.users,
+          dateOfCreation: value.dateOfCreation,
+          createdBy: value.createdBy,
+          image: value.image,
+          updateDate: value.updateDate,
+          _id: value._id,
+          headerImg: `${this.randomBgHeader()}.jpg`
+        };
+        this.groupList.push(g);
+      }
+    );
+    this.isLoading = false;
+  }
 
-  constructor(private groupsService: GroupsService, public dialog: MatDialog, private credentialsService: CredentialsService) {
+  constructor(private groupsService: GroupsService, public dialog: MatDialog,
+              private credentialsService: CredentialsService, private toastrService: ToastrService) {
 
   }
 
   ngOnInit() {
     this.groupsService.getMyGroups().subscribe(data => {
-      const groups = data.valueOf()['groups'];
-      Object.entries(groups).forEach(
-        ([key, value]) => {
-          const g: Group = {
-            name: value.name,
-            description: value.description,
-            closed: value.closed,
-            users: value.users,
-            dateOfCreation: value.dateOfCreation,
-            createdBy: value.createdBy,
-            image: value.image,
-            updateDate: value.updateDate,
-            _id: value._id,
-            headerImg: `${this.randomBgHeader()}.jpg`
-          };
-          this.groupList.push(g);
-        }
-      );
-      this.isLoading = false;
+      this.retrieveGroups(data);
 
       // const group: Group = {
       //   name: 'Tetío y neuronía',
@@ -85,6 +106,19 @@ export class GeneralGroupsComponent implements OnInit {
     }
   }
 
+  removeSelectedGroup() {
+    if (!isNullOrUndefined(this.groupIDRemoving)) {
+      this.groupsService.removeGroup(this.groupIDRemoving).subscribe(() =>
+        this.toastrService.success('Grupo borrado con éxito'));
+      this.groupsService.getMyGroups().subscribe(data => this.retrieveGroups(data));
+    }
+  }
+
+  showRemoveDialog(_id: string) {
+    this.groupIDRemoving = _id;
+    this.removeGroup.show();
+  }
+
   rotateCard(btn) {
     const $card = $(btn).closest('.card-container');
     if ($card.hasClass('hover')) {
@@ -106,6 +140,10 @@ export class GeneralGroupsComponent implements OnInit {
     return parseUnixtimeToDate(time, shortDate);
   }
 
+  iAmOwner(owner: string): boolean {
+    return this.credentialsService.getUsername().toLowerCase() === owner.toLowerCase();
+  }
+
   openDialog(_id: string, username: string, groupname: string) {
     this.dialog.open(DialogCallComponent, {
       width: '1000px',
@@ -119,6 +157,19 @@ export class GeneralGroupsComponent implements OnInit {
 
   getMyUsername(): string {
     return this.credentialsService.getUsername().toString();
+  }
+
+  openEditDialog(group: Group) {
+    const d = this.dialog.open(DialogEditGroupComponent, {
+      width: '1000px',
+      height: '500',
+      data: {group: group},
+    });
+    d.afterClosed().subscribe(value => {
+      if (value) {
+        this.groupsService.getMyGroups().subscribe(data => this.retrieveGroups(data), error2 => console.log(error2));
+      }
+    });
   }
 }
 
@@ -157,6 +208,131 @@ export class DialogCallComponent {
 
   resumeVideo() {
     this.webrtc.resume();
+  }
+
+}
+
+@Component({
+  selector: 'app-dialog-edit-group-component',
+  templateUrl: 'dialog-edit-group.html',
+  styleUrls: ['./dialog-edit-group.css'],
+  providers: [GroupsService, FriendsService, ToastrService]
+})
+export class DialogEditGroupComponent {
+
+  infoFormGroup: FormGroup;
+  friendsFormGroup: FormGroup;
+  selectable = true;
+  removable = true;
+  addOnBlur = false;
+  separatorKeysCodes = [ENTER, COMMA];
+  fruitCtrl = new FormControl();
+  filteredFruits: Observable<any[]>;
+
+  fruits: string[] = [];
+  @ViewChild('fruitInput') fruitInput: ElementRef;
+  @ViewChild('postNewGroupSwal') postNewGroupSwal: SwalComponent;
+  allFruits: string[] = [];
+
+  constructor(public dialogRef: MatDialogRef<DialogEditGroupComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any, private _formBuilder: FormBuilder,
+              private groupService: GroupsService, private router: Router,
+              private toastrService: ToastrService, private friendsService: FriendsService) {
+    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => fruit ? this.filter(fruit) : this.allFruits.slice()));
+    this.infoFormGroup = this._formBuilder.group({
+      groupName: ['', Validators.required],
+      description: ['', Validators.required],
+      photoUrl: [''],
+    });
+    this.friendsFormGroup = this._formBuilder.group({
+      friends: ['', Validators.required]
+    });
+    this.friendsService.getMyFriends().subscribe(
+      friends => {
+        const arrayFriends = friends.valueOf()['friends'];
+        this.allFruits = arrayFriends.map(a => a.username);
+        this.fruits = [...this.allFruits];
+      },
+      error2 => console.log(error2)
+    );
+    this.infoFormGroup.controls.groupName.patchValue(data.group.name);
+    this.infoFormGroup.controls.description.patchValue(data.group.description);
+    this.infoFormGroup.controls.photoUrl.patchValue(data.group.image);
+
+  }
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if (this.allFruits.indexOf(value) === 0) {
+      this.fruits.push(value.trim());
+      this.fruits.filter((elem, index, arr) => arr.indexOf(elem) === index);
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(fruit: any): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
+  filter(name: string) {
+    return this.allFruits.filter(fruit =>
+      fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.fruits.push(event.option.viewValue);
+    if (!isNullOrUndefined(this.fruitInput)) {
+      this.fruitInput.nativeElement.value = '';
+    }
+    this.fruits = this.fruits.filter((elem, index, arr) => arr.indexOf(elem) === index);
+  }
+
+  validateImg(img: string) {
+    return !isNullOrUndefined(img) && img.length >= 15;
+  }
+
+  invalidForm() {
+    return this.infoFormGroup.invalid || this.allFruits.length === 0;
+  }
+
+  closeDialog(value?: string) {
+    this.dialogRef.close(value);
+  }
+
+  updateGroup() {
+    const myGroup: Group = {
+      name: this.infoFormGroup.controls.groupName.value.toString(),
+      description: this.infoFormGroup.controls.description.value.toString(),
+      closed: true,
+      users: this.fruits,
+      image: this.infoFormGroup.controls.photoUrl.value.toString(),
+    };
+    this.groupService.updateGroup(this.data.group._id, myGroup).subscribe(
+      () => {
+        this.toastrService.success('Grupo actualizado correctamente');
+        this.closeDialog('true');
+      },
+      error => console.log('Error ', error)
+    );
+  }
+
+  checkPhoto(): string {
+    return isNullOrUndefined(this.infoFormGroup.controls.photoUrl.value) ?
+      'http://icons.iconarchive.com/icons/blackvariant/button-ui-system-folders-drives/1024/Group-icon.png' :
+      this.infoFormGroup.controls.photoUrl.value;
   }
 
 }

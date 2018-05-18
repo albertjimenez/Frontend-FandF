@@ -47,7 +47,11 @@ import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {DialogEditEventComponent, GeneralEventsComponent} from './general-events/general-events.component';
-import {DialogCallComponent, GeneralGroupsComponent} from './general-groups/general-groups.component';
+import {
+  DialogCallComponent,
+  DialogEditGroupComponent,
+  GeneralGroupsComponent
+} from './general-groups/general-groups.component';
 import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
 import {AssistantEventComponent} from './general-events/event-creator/assistant-event/assistant-event.component';
 import {AuthInterceptorService} from './auth-interceptor.service';
@@ -95,9 +99,11 @@ export const routes: Routes = [
     CreateGroupComponent,
     CreategroupbuttonComponent,
     DialogCallComponent,
-    DialogEditEventComponent
+    DialogEditEventComponent,
+    DialogEditGroupComponent
   ],
-  entryComponents: [GeneralGroupsComponent, DialogCallComponent, GeneralEventsComponent, DialogEditEventComponent],
+  entryComponents: [GeneralGroupsComponent, DialogCallComponent, GeneralEventsComponent,
+    DialogEditEventComponent, DialogEditGroupComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -65,5 +65,6 @@
   "Cancelar": "Cancel·lar",
   "Actualizar": "Actualitzar",
   "eventUpdatedOk": "Esdeveniment actualitzat correctament",
-  "eventUpdatedError": "No s'ha pogut actualitzar l'esdeveniment, provi-ho més tard"
+  "eventUpdatedError": "No s'ha pogut actualitzar l'esdeveniment, provi-ho més tard",
+  "Llamada grupal": "Trucada grupal"
 }

@@ -1,0 +1,65 @@
+<h5 mat-dialog-title>{{'Editar'|translate}}</h5>
+<div mat-dialog-content>
+  <form [formGroup]="infoFormGroup">
+    <!--Nombre grupo-->
+    <mat-form-field>
+      <input matInput #groupNameInput placeholder="{{'Nombre del grupo'|translate}}"
+             formControlName="groupName" required maxlength="35">
+      <mat-hint align="end">{{groupNameInput.value?.length || 0}}/35</mat-hint>
+      <mat-error *ngIf="infoFormGroup.controls.groupName.invalid">
+        {{'Nombre en blanco'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <!--Descripción-->
+    <mat-form-field>
+      <input matInput #descNameInput placeholder="{{'Descripción'|translate}}" formControlName="description" required>
+      <mat-hint align="end">{{descNameInput.value?.length || 0}}/140</mat-hint>
+      <mat-error *ngIf="infoFormGroup.controls.description.invalid">
+        {{'Descripción en blanco'|translate}}
+      </mat-error>
+    </mat-form-field>
+    <!--Foto-->
+    <mat-form-field>
+      <input matInput placeholder="{{'Url de la foto'|translate}}" formControlName="photoUrl">
+      <img mat-card-avatar src="{{checkPhoto()}}" height="32" width="32" style="border-radius: 50%">
+    </mat-form-field>
+  </form>
+
+  <!--AMIGOS-->
+  <form [formGroup]="infoFormGroup">
+    <ng-template matStepLabel>{{'Amigos'|translate}}</ng-template>
+    <mat-form-field class="demo-chip-list">
+      <mat-chip-list #chipList>
+        <mat-chip
+          *ngFor="let fruit of fruits"
+          [selectable]="selectable"
+          [removable]="removable"
+          (remove)="remove(fruit)">
+          {{fruit}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="{{'Amigos'|translate}}"
+          #fruitInput
+          [formControl]="fruitCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)"
+        />
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+          {{ fruit }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button (click)="closeDialog()">{{'Cancelar'|translate}}</button>
+  <button mat-flat-button color="accent" (click)="updateGroup()"
+          [disabled]="invalidForm()">{{'Actualizar'|translate}}
+  </button>
+</div>

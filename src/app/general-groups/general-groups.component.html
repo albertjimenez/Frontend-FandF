@@ -53,11 +53,21 @@
                   <mat-icon>expand_more</mat-icon>
                   {{'Más'|translate}}
                 </button>
-                <button mat-icon-button (click)="openDialog(group._id, getMyUsername(), group.name)">
-                  <mat-icon>pregnant_woman</mat-icon>
-                  Surprais
+                <br>
+                <button mat-mini-fab *ngIf="iAmOwner(group.createdBy)" matTooltip="{{'Editar'|translate}}"
+                        style="background-color: #2C93FF" (click)="openEditDialog(group)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-mini-fab *ngIf="iAmOwner(group.createdBy)" matTooltip="{{'Eliminar'|translate}}"
+                        style="background-color: red" (click)="showRemoveDialog(group._id)">
+                  <mat-icon>delete</mat-icon>
                 </button>
               </div>
+              <button mat-icon-button (click)="openDialog(group._id, getMyUsername(), group.name)">
+                <mat-icon>video_call</mat-icon>
+                {{'Llamada grupal'|translate}}
+              </button>
+
             </div>
           </div> <!-- end front panel -->
           <div class="back">
@@ -125,11 +135,12 @@
             </mat-chip-list>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-mini-fab style="background-color: red" matTooltip="Eliminar">
+            <button mat-mini-fab style="background-color: red" matTooltip="Eliminar"
+                    (click)="showRemoveDialog(group._id)">
               <mat-icon>delete</mat-icon>
             </button>
-            <button mat-mini-fab style="background-color: #2C93FF" matTooltip="Editar">
-              <mat-icon>create</mat-icon>
+            <button mat-mini-fab style="background-color: #2C93FF" matTooltip="Editar" (click)="openEditDialog(group)">
+              <mat-icon>edit</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>
@@ -145,3 +156,11 @@
 
 </ng-template>
 <app-creategroupbutton></app-creategroupbutton>
+<swal
+  #removeGroup
+  title="¿Desea borrar el grupo?"
+  text="Esta acción no se puede deshacer"
+  type="warning"
+  (confirm)="removeSelectedGroup()"
+  [showCancelButton]="true">
+</swal>
