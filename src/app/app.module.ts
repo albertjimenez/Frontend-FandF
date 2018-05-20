@@ -46,10 +46,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {ToastrModule} from 'ngx-toastr';
 import {GmapsComponent} from './gmaps/gmaps.component';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
-import {DialogEditEventComponent, GeneralEventsComponent} from './general-events/general-events.component';
+import {DialogEditEventComponent} from './general-events/general-events.component';
 import {
-  DialogCallComponent,
-  DialogEditGroupComponent,
+  DialogCallComponent, DialogEditGroupComponent,
   GeneralGroupsComponent
 } from './general-groups/general-groups.component';
 import {EventCreatorComponent} from './general-events/event-creator/event-creator.component';
@@ -59,6 +58,10 @@ import {AvatarModule} from 'ngx-avatar';
 import {LogospinnerComponent} from './logospinner/logospinner.component';
 import {CreateGroupComponent} from './general-groups/creategroupbutton/create-group/create-group.component';
 import {CreategroupbuttonComponent} from './general-groups/creategroupbutton/creategroupbutton.component';
+import {GeneralEventsComponent} from './general-events/general-events.component';
+import {GeneralFriendsComponent} from './general-friends/general-friends.component';
+import {AssistantComponent} from './general-friends/friend-search/assistant/assistant.component';
+import {FriendSearchComponent} from './general-friends/friend-search/friend-search.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -74,6 +77,8 @@ export const routes: Routes = [
   {path: 'gmaps', component: GmapsComponent},
   {path: 'my-events', component: GeneralEventsComponent},
   {path: 'my-groups', component: GeneralGroupsComponent},
+  {path: 'my-friends', component: GeneralFriendsComponent},
+  {path: 'search-friend', component: AssistantComponent},
   {path: 'assistant-event', component: AssistantEventComponent},
   {path: 'create-group', component: CreateGroupComponent},
   {path: '**', redirectTo: 'login'}
@@ -97,10 +102,13 @@ export const routes: Routes = [
     AssistantEventComponent,
     LogospinnerComponent,
     CreateGroupComponent,
+    GeneralFriendsComponent,
     CreategroupbuttonComponent,
     DialogCallComponent,
     DialogEditEventComponent,
-    DialogEditGroupComponent
+    DialogEditGroupComponent,
+    FriendSearchComponent,
+    AssistantComponent
   ],
   entryComponents: [GeneralGroupsComponent, DialogCallComponent, GeneralEventsComponent,
     DialogEditEventComponent, DialogEditGroupComponent],

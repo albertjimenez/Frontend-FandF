@@ -1,3 +1,25 @@
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC");
+.my-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
+}
+
+.styled-p {
+  color: #eeeeee;
+}
+
+input[type=text] {
+  width: 130px;
+  border-radius: 25px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 100%;
+}
+
 .rounded-img {
   display: block;
   width: 250px;
@@ -70,7 +92,6 @@
 .hello {
   font-family: 'Cookie', cursive;
   font-size: 50pt;
-  cursor: pointer;
 }
 
 .card {
@@ -96,6 +117,20 @@
 
 .lobster {
   font-family: Lobster, sans-serif;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+
+}
+
+.grid-item {
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+
 }
 
 

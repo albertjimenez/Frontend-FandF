@@ -1,0 +1,15 @@
+.mat-align {
+  left: 85%;
+  bottom: 10px;
+  position: -webkit-sticky;
+  position: fixed;
+}
+
+.mat-align:hover {
+  -webkit-filter: brightness(120%) drop-shadow(4px 4px 4px gray); /* Safari 6.0 - 9.0 */
+  filter: brightness(120%) drop-shadow(4px 4px 4px gray);
+}
+
+.red-color {
+  background-color: red;
+}
