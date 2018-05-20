@@ -135,7 +135,6 @@ export class GeneralGroupsComponent implements OnInit {
   randomBgHeader(): number {
     return Math.floor(Math.random() * (this.numImages));
   }
-
   parseUnixTime(time: string, shortDate?: boolean) {
     return parseUnixtimeToDate(time, shortDate);
   }
