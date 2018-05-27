@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
@@ -12,18 +12,14 @@ import {map} from 'rxjs/operators/map';
 export class AssistantComponent implements OnInit {
 
   myControl: FormControl = new FormControl('');
-
   dbNames = [
     'Santi',
     'Berbel',
     'Peris',
     'Tokeisi'
   ];
-
   dbUsers = [];
-  firstSearched = true;
   user = null;
-  registered: boolean;
   filteredOptions: Observable<string[]>;
   constructor() { }
 
@@ -64,23 +60,14 @@ export class AssistantComponent implements OnInit {
 
   search() {
     const friendName = this.myControl.value;
-    this.firstSearched = false;
-    for (let i = 0; i < this.dbUsers.length; i++) {
-      if (this.dbUsers[i].name === friendName) {
-        this.user = this.dbUsers[i];
-        break;
-      }
+    const filteredUser = this.dbUsers.filter(user => user.name === friendName);
+    if (filteredUser.length === 1) {
+      this.user = filteredUser[0];
+    } else {
+      this.user = null;
     }
   }
-  change_option() {
-    this.firstSearched = true;
-  }
-
   handle_add() {
     alert('Enviando solicitud de amistad');
-  }
-
-  handle_see_profile() {
-    alert('Ver perfil del usuario');
   }
 }
