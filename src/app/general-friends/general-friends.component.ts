@@ -1,38 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FriendsService, MyFriend} from '../home-dashboard/friends/friends.service';
 
 @Component({
   selector: 'app-general-friends',
   templateUrl: './general-friends.component.html',
-  styleUrls: ['./general-friends.component.css']
+  styleUrls: ['./general-friends.component.css'],
+  providers: [FriendsService]
 })
 export class GeneralFriendsComponent implements OnInit {
 
-  friendsList = [];
+  friendsList: Array<MyFriend> = [];
   numMatches = 0;
-  constructor() { }
+  isLoading = true;
+  getMyFriends = (friends) => {
+    const myEvents = friends.valueOf()['friends'];
+    this.friendsList = [];
+    Object.entries(myEvents).forEach(
+      ([key, value]) => {
+        const e: MyFriend = {
+          username: value.username,
+          since: value.since,
+          sinceHuman: value.sinceHuman,
+        };
+        this.friendsList.push(e);
+      }
+    );
+    this.isLoading = false;
+  }
+
+  constructor(private friendsService: FriendsService) {
+  }
 
   ngOnInit() {
-    const friend = {
-      name: 'Peris',
-      image: '../../../assets/peris.jpg',
-      lastConexion: 'Amigos desde el 29/10/2017'
-    };
-    const friend2 = {
-      name: 'Santi',
-      image: '../../../assets/santi.jpg',
-      lastConexion: 'Amigos desde el 29/10/2017'
-    };
-    const friend3 = {
-      name: 'Berbel',
-      image: '../../../assets/berbel.jpg',
-      lastConexion: 'Amigos desde el 29/10/2017'
-    };
-    const friend4 = {
-      name: 'Tokeisi',
-      image: '../../../assets/tokeisi.jpg',
-      lastConexion: 'Amigos desde el 29/10/2017'
-    };
-    this.friendsList.push(friend, friend2, friend3, friend4);
+    this.friendsService.getMyFriends().subscribe(
+      data => this.getMyFriends(data), error => console.log('Error', error)
+    );
   }
 
   filterElems(filter: string) {

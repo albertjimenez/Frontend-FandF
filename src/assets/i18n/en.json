@@ -66,6 +66,6 @@
   "Actualizar": "Update",
   "eventUpdatedOk": "Event updated successfully",
   "eventUpdatedError": "The event could not be updated, please try again in a few moments",
-  "Llamada grupal": "Videocall"
-
+  "Llamada grupal": "Videocall",
+  "sinceFriends": "Friends since"
 }

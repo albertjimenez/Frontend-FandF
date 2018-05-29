@@ -8,15 +8,20 @@
     <div class="card--content">
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title><strong>{{friend.name}}</strong></mat-card-title>
-          <mat-card-subtitle>{{friend.lastConexion}}</mat-card-subtitle>
+          <mat-card-title><strong>{{friend.username}}</strong></mat-card-title>
+          <mat-card-subtitle>{{'sinceFriends'|translate}} {{friend.sinceHuman}}</mat-card-subtitle>
+          <img src="../../../assets/logo/fandflogo.png" mat-card-avatar>
         </mat-card-header>
-        <img src="{{friend.image}}" class="rounded-img" mat-card-image>
+        <img src="../../assets/avatar.svg" class="rounded-img" mat-card-image>
         <mat-card-content>
           <p>
           </p>
         </mat-card-content>
         <mat-card-actions>
+          <button mat-raised-button matTooltip="{{'Eliminar'|translate}}" style="color: red">
+            <mat-icon>delete</mat-icon>
+            {{'Eliminar'|translate}}
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -29,15 +34,20 @@
         <div class="card--content">
           <mat-card class="example-card">
             <mat-card-header>
-              <mat-card-title><strong>{{friend.name}}</strong></mat-card-title>
-              <mat-card-subtitle>{{friend.lastConexion}}</mat-card-subtitle>
+              <mat-card-title><strong>{{friend.username}}</strong></mat-card-title>
+              <mat-card-subtitle>{{'sinceFriends'|translate}} {{friend.sinceHuman}}</mat-card-subtitle>
+              <img src="../../../assets/logo/fandflogo.png" mat-card-avatar>
             </mat-card-header>
-            <img src="{{friend.image}}" class="rounded-img" mat-card-image>
+            <img src="../../assets/avatar.svg" class="rounded-img" mat-card-image>
             <mat-card-content>
               <p>
               </p>
             </mat-card-content>
             <mat-card-actions>
+              <button mat-raised-button matTooltip="{{'Eliminar'|translate}}" style="color: red">
+                <mat-icon>delete</mat-icon>
+                {{'Eliminar'|translate}}
+              </button>
             </mat-card-actions>
           </mat-card>
         </div>

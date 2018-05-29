@@ -66,5 +66,7 @@
   "Actualizar": "Actualitzar",
   "eventUpdatedOk": "Esdeveniment actualitzat correctament",
   "eventUpdatedError": "No s'ha pogut actualitzar l'esdeveniment, provi-ho més tard",
-  "Llamada grupal": "Trucada grupal"
+  "Llamada grupal": "Trucada grupal",
+  "sinceFriends": "Amics desde"
+
 }

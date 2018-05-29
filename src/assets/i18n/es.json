@@ -66,5 +66,6 @@
   "Actualizar": "Actualizar",
   "eventUpdatedOk": "Evento actualizado correctamente",
   "eventUpdatedError": "No se ha podido actualizar el evento, pruebe más tarde",
-  "Llamada grupal": "Llamada grupal"
+  "Llamada grupal": "Llamada grupal",
+  "sinceFriends": "Amigos desde"
 }
