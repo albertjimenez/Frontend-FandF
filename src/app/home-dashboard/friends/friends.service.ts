@@ -4,8 +4,10 @@ import {
   accept_friend_requests_enpoint,
   create_friend_requests_enpoint,
   delete_friend_requests_enpoint,
+  detailed_username_endpoint,
   friend_requests_enpoint,
-  friends_enpoint
+  friends_enpoint,
+  usernames_endpoint
 } from '../../API_Strings';
 import {Observable} from 'rxjs/Observable';
 
@@ -40,10 +42,22 @@ export class FriendsService {
     return this.httpClient.post(create_friend_requests_enpoint,
       {params: FriendsService.usernameParam(username)});
   }
+
+  autocompleteUsernames(): Observable<Object> {
+    return this.httpClient.get(usernames_endpoint);
+  }
+
+  detailedUser(username: string): Observable<Object> {
+    return this.httpClient.get(detailed_username_endpoint + username);
+  }
 }
 
 export interface MyFriend {
   username: string;
-  since: number;
-  sinceHuman: string;
+  since?: number;
+  sinceHuman?: string;
+  status?: string;
+  name?: string;
+  surnames?: string;
+  image?: string;
 }

@@ -67,6 +67,15 @@
   "eventUpdatedOk": "Esdeveniment actualitzat correctament",
   "eventUpdatedError": "No s'ha pogut actualitzar l'esdeveniment, provi-ho més tard",
   "Llamada grupal": "Trucada grupal",
-  "sinceFriends": "Amics desde"
+  "sinceFriends": "Amics desde",
+  "userNotFound": "L'usuari que busques no existeix",
+  "notFriend": "Sense amistat",
+  "notAcceptedByMe": "Petició rebuda",
+  "notAcceptedByTheUser": "Petició enviada",
+  "friend": "Amic",
+  "Añadir amigo": "Afegir amic",
+  "Eliminar amigo": "Esborrar amic",
+  "Eliminar petición": "Esborrar petició",
+  "Aceptar petición": "Acceptar petició"
 
 }

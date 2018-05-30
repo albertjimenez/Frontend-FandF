@@ -67,5 +67,14 @@
   "eventUpdatedOk": "Evento actualizado correctamente",
   "eventUpdatedError": "No se ha podido actualizar el evento, pruebe más tarde",
   "Llamada grupal": "Llamada grupal",
-  "sinceFriends": "Amigos desde"
+  "sinceFriends": "Amigos desde",
+  "userNotFound": "El usuario que buscas no está registrado",
+  "notFriend": "Sin amistad",
+  "notAcceptedByMe": "Petición recibida",
+  "notAcceptedByTheUser": "Petición enviada",
+  "friend": "Amigo",
+  "Añadir amigo": "Añadir amigo",
+  "Eliminar amigo": "Eliminar amigo",
+  "Eliminar petición": "Eliminar petición",
+  "Aceptar petición": "Aceptar petición"
 }

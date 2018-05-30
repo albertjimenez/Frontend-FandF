@@ -67,5 +67,14 @@
   "eventUpdatedOk": "Event updated successfully",
   "eventUpdatedError": "The event could not be updated, please try again in a few moments",
   "Llamada grupal": "Videocall",
-  "sinceFriends": "Friends since"
+  "sinceFriends": "Friends since",
+  "userNotFound": "The user you are currently searching does not exists",
+  "notFriend": "Not friends",
+  "notAcceptedByMe": "Request received",
+  "notAcceptedByTheUser": "Request sent",
+  "friend": "Friend",
+  "Añadir amigo": "Add friend",
+  "Eliminar amigo": "Delete friend",
+  "Eliminar petición": "Revoke request",
+  "Aceptar petición": "Accept request"
 }

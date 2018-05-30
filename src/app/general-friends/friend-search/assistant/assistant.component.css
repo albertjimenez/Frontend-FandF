@@ -112,6 +112,41 @@ input[type=text] {
   grid-gap: 60px;
 }
 
+.friend {
+  background-color: #69FF40;
+}
+
+.notAcceptedByMe {
+  background-color: hotpink;
+}
+
+.notAcceptedByTheUser {
+  background-color: #6d7fcc;
+}
+
+.notFriend {
+  background-color: #999999;
+}
+
+.actionnotFriend {
+  background-color: #b1ff9a;
+  border-radius: 25px;
+}
+
+.actionfriend {
+  background-color: #abcdff;
+  border-radius: 25px;
+}
+
+.actionnotAcceptedByMe {
+  background-color: #c461ff;
+  border-radius: 25px;
+}
+
+.actionnotAcceptedByTheUser {
+  background-color: #ff7b5e;
+  border-radius: 25px;
+}
 
 
 

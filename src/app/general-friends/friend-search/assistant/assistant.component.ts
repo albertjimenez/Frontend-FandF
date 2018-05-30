@@ -3,49 +3,32 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {startWith} from 'rxjs/operators/startWith';
 import {map} from 'rxjs/operators/map';
+import {FriendsService, MyFriend} from '../../../home-dashboard/friends/friends.service';
 
 @Component({
   selector: 'app-assistant',
   templateUrl: './assistant.component.html',
-  styleUrls: ['./assistant.component.css']
+  styleUrls: ['./assistant.component.css'],
+  providers: [FriendsService]
 })
 export class AssistantComponent implements OnInit {
 
   myControl: FormControl = new FormControl('');
-  dbNames = [
-    'Santi',
-    'Berbel',
-    'Peris',
-    'Tokeisi'
-  ];
-  dbUsers = [];
-  user = null;
+  dbNames = [];
+  user: MyFriend = null;
   filteredOptions: Observable<string[]>;
-  constructor() { }
+  buttonText = '';
+  myIcon = '';
+
+  constructor(private friendService: FriendsService) {
+  }
 
   ngOnInit() {
-    const friend = {
-      name: 'Peris',
-      image: '../../../assets/peris.jpg',
-      lastConexion: 'Amigos desde el 29/10/2017'
-    };
-    const friend2 = {
-      name: 'Santi',
-      image: '../../../assets/santi.jpg',
-      lastConexion: 'Amigos desde el 29/10/2017'
-    };
-    const friend3 = {
-      name: 'Berbel',
-      image: '../../../assets/berbel.jpg',
-      lastConexion: 'Amigos desde el 29/10/2017'
-    };
-    const friend4 = {
-      name: 'Tokeisi',
-      image: '../../../assets/tokeisi.jpg',
-      lastConexion: 'Amigos desde el 29/10/2017'
-    };
-    this.dbUsers.push(friend, friend2, friend3, friend4);
 
+    this.friendService.autocompleteUsernames().subscribe(
+      data =>
+        this.dbNames = data.valueOf()['usernames']
+    );
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
@@ -60,14 +43,40 @@ export class AssistantComponent implements OnInit {
 
   search() {
     const friendName = this.myControl.value;
-    const filteredUser = this.dbUsers.filter(user => user.name === friendName);
+    const filteredUser = this.dbNames.filter(user => user === friendName);
     if (filteredUser.length === 1) {
-      this.user = filteredUser[0];
+      this.friendService.detailedUser(friendName).subscribe(
+        data => {
+          this.user = data.valueOf()['user'];
+          this.colorStatus(this.user.status);
+        }
+      );
     } else {
       this.user = null;
     }
   }
   handle_add() {
     alert('Enviando solicitud de amistad');
+  }
+
+  // TODO añadir la función que se especifíca en el click
+  colorStatus(status: string) {
+    switch (status) {
+      case 'notAcceptedByMe':
+        this.buttonText = 'Aceptar petición';
+        this.myIcon = 'done';
+        break;
+      case 'notAcceptedByTheUser':
+        this.buttonText = 'Eliminar petición';
+        this.myIcon = 'access_time';
+        break;
+      case 'friend':
+        this.buttonText = 'Eliminar amigo';
+        this.myIcon = 'delete';
+        break;
+      default:
+        this.buttonText = 'Añadir amigo';
+        this.myIcon = 'person_add';
+    }
   }
 }
