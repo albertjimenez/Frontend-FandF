@@ -31,9 +31,14 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button ngClass="action{{user.status}}">
+        <button mat-raised-button ngClass="action{{user.status}}" (click)="funAction(this.myControl.value)">
           <mat-icon matPrefix>{{myIcon}}</mat-icon>
           {{buttonText|translate}}
+        </button>
+        <button mat-raised-button ngClass="actionnotAcceptedByTheUser" (click)="funRejectFriend(this.myControl.value)"
+                *ngIf="user.status === 'notAcceptedByMe'">
+          <mat-icon matPrefix>access_time</mat-icon>
+          {{'Eliminar petición'|translate}}
         </button>
       </mat-card-actions>
     </mat-card>

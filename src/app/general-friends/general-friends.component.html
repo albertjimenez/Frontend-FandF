@@ -44,12 +44,22 @@
               </p>
             </mat-card-content>
             <mat-card-actions>
-              <button mat-raised-button matTooltip="{{'Eliminar'|translate}}" style="color: red">
+              <button mat-raised-button matTooltip="{{'Eliminar'|translate}}" (click)="deleteFriendSwal.show()"
+                      style="color: red">
                 <mat-icon>delete</mat-icon>
                 {{'Eliminar'|translate}}
               </button>
             </mat-card-actions>
           </mat-card>
+          <swal
+            #deleteFriendSwal
+            title="¿Desea eliminar a {{friend.username}} ?"
+            text="Esta acción no se puede deshacer"
+            type="warning"
+            (confirm)="deleteFriend(friend.username)"
+            [showCancelButton]="true">
+          </swal>
+
         </div>
       </div>
     </div>

@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {
   accept_friend_requests_enpoint,
   create_friend_requests_enpoint,
+  delete_friend,
   delete_friend_requests_enpoint,
   detailed_username_endpoint,
   friend_requests_enpoint,
@@ -16,10 +17,6 @@ export class FriendsService {
 
   constructor(private httpClient: HttpClient) {
   }
-
-  private static usernameParam(username: string): HttpParams {
-    return new HttpParams().set('username', username);
-  }
   getMyFriends(): Observable<Object> {
     return this.httpClient.get(friends_enpoint);
   }
@@ -29,18 +26,19 @@ export class FriendsService {
   }
 
   rejectRequest(username: string): Observable<Object> {
-    return this.httpClient.delete(delete_friend_requests_enpoint,
-      {params: FriendsService.usernameParam(username)});
+    return this.httpClient.delete(delete_friend_requests_enpoint + username, {});
   }
 
   acceptRequest(username: string): Observable<Object> {
-    return this.httpClient.post(accept_friend_requests_enpoint,
-      {params: FriendsService.usernameParam(username)});
+    return this.httpClient.post(accept_friend_requests_enpoint + username, {});
   }
 
-  sendFriendRequest(username: string) {
-    return this.httpClient.post(create_friend_requests_enpoint,
-      {params: FriendsService.usernameParam(username)});
+  sendFriendRequest(username: string): Observable<Object> {
+    return this.httpClient.post(create_friend_requests_enpoint + username, {});
+  }
+
+  deleteFriend(username: string): Observable<Object> {
+    return this.httpClient.delete(delete_friend + username, {});
   }
 
   autocompleteUsernames(): Observable<Object> {

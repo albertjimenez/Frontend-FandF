@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FriendsService, MyFriend} from '../home-dashboard/friends/friends.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-general-friends',
   templateUrl: './general-friends.component.html',
   styleUrls: ['./general-friends.component.css'],
-  providers: [FriendsService]
+  providers: [FriendsService, ToastrService]
 })
 export class GeneralFriendsComponent implements OnInit {
 
@@ -28,7 +29,7 @@ export class GeneralFriendsComponent implements OnInit {
     this.isLoading = false;
   }
 
-  constructor(private friendsService: FriendsService) {
+  constructor(private friendsService: FriendsService, private toastrService: ToastrService) {
   }
 
   ngOnInit() {
@@ -51,6 +52,13 @@ export class GeneralFriendsComponent implements OnInit {
         card[i].style.display = 'none';
       }
     }
+  }
+
+  deleteFriend(username: string) {
+    this.friendsService.deleteFriend(username).subscribe(data => {
+      this.toastrService.info('Eliminado amigo ' + username);
+      this.friendsService.getMyFriends().subscribe(dataFriend => this.getMyFriends(dataFriend));
+    });
   }
 
 
