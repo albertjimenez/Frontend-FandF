@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FriendsService, MyFriend} from '../home-dashboard/friends/friends.service';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FriendRequest, FriendsService, MyFriend} from '../home-dashboard/friends/friends.service';
 import {ToastrService} from 'ngx-toastr';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-general-friends',
@@ -13,6 +14,7 @@ export class GeneralFriendsComponent implements OnInit {
   friendsList: Array<MyFriend> = [];
   numMatches = 0;
   isLoading = true;
+  myPendingRequest: Array<FriendRequest> = [];
   getMyFriends = (friends) => {
     const myEvents = friends.valueOf()['friends'];
     this.friendsList = [];
@@ -29,13 +31,15 @@ export class GeneralFriendsComponent implements OnInit {
     this.isLoading = false;
   }
 
-  constructor(private friendsService: FriendsService, private toastrService: ToastrService) {
+  constructor(private friendsService: FriendsService, private toastrService: ToastrService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
     this.friendsService.getMyFriends().subscribe(
       data => this.getMyFriends(data), error => console.log('Error', error)
     );
+    this.getMyRequests();
   }
 
   filterElems(filter: string) {
@@ -54,6 +58,24 @@ export class GeneralFriendsComponent implements OnInit {
     }
   }
 
+  getMyRequests() {
+    this.friendsService.getMyRequestsFriends().subscribe(
+      data => {
+        const sentToMe = data.valueOf()['sentToMe'];
+        this.myPendingRequest = [];
+        Object.entries(sentToMe).forEach(
+          ([key, value]) => {
+            const f: FriendRequest = {
+              from: value.from,
+              dateHuman: value.dateHuman,
+            };
+            this.myPendingRequest.push(f);
+          }
+        );
+      }
+    );
+  }
+
   deleteFriend(username: string) {
     this.friendsService.deleteFriend(username).subscribe(data => {
       this.toastrService.info('Eliminado amigo ' + username);
@@ -61,5 +83,52 @@ export class GeneralFriendsComponent implements OnInit {
     });
   }
 
+  openDialog() {
+    const d = this.dialog.open(DialogFriendRequestsComponent, {
+      width: '800px',
+      height: '650px',
+      data: {requests: this.myPendingRequest},
+    });
+    d.afterClosed().subscribe(infoDialog => this.getMyRequests());
+  }
+}
+
+@Component({
+  selector: 'app-dialog-friend-requests.component',
+  templateUrl: 'dialog-friend-requests.html',
+  styleUrls: ['./dialog-friend-requests.css'],
+  providers: [FriendsService, ToastrService]
+})
+export class DialogFriendRequestsComponent {
+
+  myRequests = this.data.requests;
+  removeUsername = (username) => {
+    console.log('Antes ', this.myRequests);
+    this.myRequests = this.myRequests.filter(u => u.from !== username);
+    console.log('Después ', this.myRequests);
+  }
+
+  constructor(public dialogRef: MatDialogRef<DialogFriendRequestsComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any, private friendService: FriendsService,
+              private toastrService: ToastrService) {
+  }
+
+  acceptRequest(username: string) {
+    this.friendService.acceptRequest(username).subscribe(
+      data => {
+        this.toastrService.success('Usuario ' + username + ' añadido');
+        this.removeUsername(username);
+      }
+    );
+  }
+
+  rejectRequest(username: string) {
+    this.friendService.rejectRequest(username).subscribe(
+      data => {
+        this.toastrService.success('Usuario ' + username + ' rechazado');
+        this.removeUsername(username);
+      }
+    );
+  }
 
 }

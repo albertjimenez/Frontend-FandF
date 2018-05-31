@@ -31,6 +31,19 @@ body {
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 }
 
+.w3-badge, .w3-tag, .w3-sign {
+  background-color: #000;
+  color: #fff;
+  display: inline-block;
+  padding-left: 8px;
+  padding-right: 8px;
+  text-align: center;
+}
+
+.w3-green, .w3-hover-green:hover {
+  color: #fff !important;
+  background-color: #4CAF50 !important;
+}
 .center-img {
   padding-top: 2%;
   display: block;

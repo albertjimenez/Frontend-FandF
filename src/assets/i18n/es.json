@@ -76,5 +76,10 @@
   "Añadir amigo": "Añadir amigo",
   "Eliminar amigo": "Eliminar amigo",
   "Eliminar petición": "Rechazar petición",
-  "Aceptar petición": "Aceptar petición"
+  "Aceptar petición": "Aceptar petición",
+  "Gestionar peticiones": "Gestionar peticiones",
+  "Peticiones recibidas": "Peticiones recibidas",
+  "Aceptar": "Aceptar",
+  "noRequests": "No tienes solicitudes pendientes"
+
 }

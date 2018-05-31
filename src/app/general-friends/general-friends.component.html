@@ -2,6 +2,10 @@
 <input type="text" name="search" placeholder="{{'Filtrar amigos' |translate}}" #searchInput
        (keyup)="filterElems(searchInput.value.toLocaleLowerCase())">
 <strong class="styled-p">{{numMatches}} {{'coincidencias'|translate}}</strong>
+<button mat-raised-button style="display: inline" (click)="openDialog()">
+  <mat-icon>settings</mat-icon>
+  {{'Gestionar peticiones'|translate}}<span class="w3-badge w3-green">{{myPendingRequest.length}}</span>
+</button>
 <br><br>
 <div class="my-grid" id="myUL"*ngIf="friendsList.length > 2; else empty">
   <div id="friend_card" *ngFor="let friend of friendsList">

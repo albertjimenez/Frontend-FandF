@@ -59,3 +59,8 @@ export interface MyFriend {
   surnames?: string;
   image?: string;
 }
+
+export interface FriendRequest {
+  from: string;
+  dateHuman: string;
+}

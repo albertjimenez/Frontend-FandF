@@ -1,0 +1,11 @@
+button {
+  border-radius: 25px;
+}
+
+.greenButton {
+  background-color: limegreen;
+}
+
+.redButton {
+  background-color: #ff4546;
+}

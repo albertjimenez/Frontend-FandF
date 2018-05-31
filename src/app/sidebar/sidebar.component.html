@@ -32,7 +32,9 @@
       <li>
         <a routerLink="my-friends">
           <mat-icon>contacts</mat-icon>
-          {{'Mis amigos'|translate}}</a>
+          {{'Mis amigos'|translate}}
+          <span class="w3-badge w3-green w3-hover-green">{{numPendingRequests}}</span>
+        </a>
       </li>
       <li>
         <a routerLink="gmaps">

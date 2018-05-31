@@ -76,5 +76,9 @@
   "Añadir amigo": "Add friend",
   "Eliminar amigo": "Delete friend",
   "Eliminar petición": "Revoke request",
-  "Aceptar petición": "Accept request"
+  "Aceptar petición": "Accept request",
+  "Gestionar peticiones": "Manage requests",
+  "Peticiones recibidas": "Received requests",
+  "Aceptar": "Accept",
+  "noRequests": "No pending requests for now"
 }
