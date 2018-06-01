@@ -21,10 +21,13 @@ export class NotificationsService {
     }
   }
 
-  showNotification(title: string, body: string, icon = 'assets/logo/fandflogo.png') {
+  showNotification(title: string, body: string, action: any = null, icon = 'assets/logo/fandflogo.png') {
     if (this.notif.permission === 'granted') {
       // Si esta correcto lanzamos la notificación
       const notification = new Notification(title, {body: body, icon: icon});
+      if (action) {
+        notification.onclick = action;
+      }
     }
   }
 }

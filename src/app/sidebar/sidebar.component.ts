@@ -1,15 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CredentialsService} from '../credentials.service';
-import {Router} from '@angular/router';
+import {NavigationStart, Router} from '@angular/router';
 import * as $ from 'jquery';
 import {FriendsService} from '../home-dashboard/friends/friends.service';
+import {NotificationsService} from '../notifications.service';
 
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
-  providers: [CredentialsService, FriendsService]
+  providers: [CredentialsService, FriendsService, NotificationsService]
 })
 export class SidebarComponent implements OnInit {
 
@@ -26,7 +27,7 @@ export class SidebarComponent implements OnInit {
   }
 
   constructor(private credentialService: CredentialsService, private router: Router,
-              private friendsService: FriendsService) {
+              private friendsService: FriendsService, private notificationService: NotificationsService) {
   }
 
   ngOnInit() {
@@ -35,9 +36,16 @@ export class SidebarComponent implements OnInit {
       this.friendsService.getMyRequestsFriends().subscribe(
         data => this.getMyRequests(data)
       );
-      this.router.events.subscribe(() => {
+      this.router.events.subscribe((e) => {
         this.friendsService.getMyRequestsFriends().subscribe(
-          data => this.getMyRequests(data)
+          data => {
+            this.getMyRequests(data);
+            const action = () => this.router.navigateByUrl('/my-friends');
+            if (this.numPendingRequests > 0 && e instanceof NavigationStart) {
+              this.notificationService.showNotification('Petición de amistad', 'Has recibido una nueva petición de amistad',
+                action);
+            }
+          }
         );
       });
     }
