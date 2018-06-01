@@ -7,6 +7,17 @@
   {{'Gestionar peticiones'|translate}}<span class="w3-badge w3-green">{{myPendingRequest.length}}</span>
 </button>
 <br><br>
+<div *ngIf="isLoading">
+  <br><br>
+  <div class="cssload-preloader cssload-loading">
+    <span class="cssload-slice"></span>
+    <span class="cssload-slice"></span>
+    <span class="cssload-slice"></span>
+    <span class="cssload-slice"></span>
+    <span class="cssload-slice"></span>
+    <span class="cssload-slice"></span>
+  </div>
+</div>
 <div class="my-grid" id="myUL"*ngIf="friendsList.length > 2; else empty">
   <div id="friend_card" *ngFor="let friend of friendsList">
     <div class="card--content">
@@ -14,20 +25,32 @@
         <mat-card-header>
           <mat-card-title><strong>{{friend.username}}</strong></mat-card-title>
           <mat-card-subtitle>{{'sinceFriends'|translate}} {{friend.sinceHuman}}</mat-card-subtitle>
-          <img src="../../../assets/logo/fandflogo.png" mat-card-avatar>
         </mat-card-header>
-        <img src="../../assets/avatar.svg" class="rounded-img" mat-card-image>
+        <img src="../../../assets/{{friend.username}}.jpg" mat-card-image
+             class="rounded-img" *ngIf="isUs(friend.username); else defaultImg2">
+        <ng-template #defaultImg2>
+          <img src="../../assets/avatar.svg" class="rounded-img" mat-card-image>
+        </ng-template>
         <mat-card-content>
           <p>
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button matTooltip="{{'Eliminar'|translate}}" style="color: red">
+          <button mat-raised-button matTooltip="{{'Eliminar'|translate}}" style="color: red"
+                  (click)="deleteFriendSwal.show()">
             <mat-icon>delete</mat-icon>
             {{'Eliminar'|translate}}
           </button>
         </mat-card-actions>
       </mat-card>
+      <swal
+        #deleteFriendSwal
+        title="¿Desea eliminar a {{friend.username}} ?"
+        text="Esta acción no se puede deshacer"
+        type="warning"
+        (confirm)="deleteFriend(friend.username)"
+        [showCancelButton]="true">
+      </swal>
     </div>
   </div>
 </div>
@@ -42,7 +65,11 @@
               <mat-card-subtitle>{{'sinceFriends'|translate}} {{friend.sinceHuman}}</mat-card-subtitle>
               <img src="../../../assets/logo/fandflogo.png" mat-card-avatar>
             </mat-card-header>
-            <img src="../../assets/avatar.svg" class="rounded-img" mat-card-image>
+            <img src="../../../assets/{{friend.username}}.jpg" mat-card-avatar
+                 *ngIf="isUs(friend.username); else defaultImg1" class="rounded-img">
+            <ng-template #defaultImg1>
+              <img src="../../../assets/logo/fandflogo.png" mat-card-avatar class="rounded-img">
+            </ng-template>
             <mat-card-content>
               <p>
               </p>

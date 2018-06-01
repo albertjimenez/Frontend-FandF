@@ -16,6 +16,14 @@ export class SidebarComponent implements OnInit {
 
   @Input() username: string;
   numPendingRequests: number;
+  getMyRequests = (data) => {
+    const num = data.valueOf()['sentToMe'].length;
+    if (num > 0) {
+      this.numPendingRequests = num;
+    } else {
+      this.numPendingRequests = 0;
+    }
+  }
 
   constructor(private credentialService: CredentialsService, private router: Router,
               private friendsService: FriendsService) {
@@ -25,13 +33,13 @@ export class SidebarComponent implements OnInit {
     if (this.sessionExists()) {
       this.username = this.credentialService.getUsername().toString();
       this.friendsService.getMyRequestsFriends().subscribe(
-        data => {
-          const num = data.valueOf()['sentToMe'].length;
-          if (num > 0) {
-            this.numPendingRequests = num;
-          }
-        }
+        data => this.getMyRequests(data)
       );
+      this.router.events.subscribe(() => {
+        this.friendsService.getMyRequestsFriends().subscribe(
+          data => this.getMyRequests(data)
+        );
+      });
     }
   }
 

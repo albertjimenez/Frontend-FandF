@@ -15,6 +15,7 @@ export class GeneralFriendsComponent implements OnInit {
   numMatches = 0;
   isLoading = true;
   myPendingRequest: Array<FriendRequest> = [];
+  private ourPics = ['berbel', 'kaiser', 'beruto', 'toquis'];
   getMyFriends = (friends) => {
     const myEvents = friends.valueOf()['friends'];
     this.friendsList = [];
@@ -85,11 +86,18 @@ export class GeneralFriendsComponent implements OnInit {
 
   openDialog() {
     const d = this.dialog.open(DialogFriendRequestsComponent, {
-      width: '800px',
-      height: '650px',
+      width: '700px',
+      height: '500px',
       data: {requests: this.myPendingRequest},
     });
-    d.afterClosed().subscribe(infoDialog => this.getMyRequests());
+    d.afterClosed().subscribe(infoDialog => {
+      this.getMyRequests();
+      this.friendsService.getMyFriends().subscribe(data => this.getMyFriends(data));
+    });
+  }
+
+  isUs(username: string) {
+    return this.ourPics.filter(name => username === name).length === 1;
   }
 }
 
@@ -102,11 +110,7 @@ export class GeneralFriendsComponent implements OnInit {
 export class DialogFriendRequestsComponent {
 
   myRequests = this.data.requests;
-  removeUsername = (username) => {
-    console.log('Antes ', this.myRequests);
-    this.myRequests = this.myRequests.filter(u => u.from !== username);
-    console.log('Después ', this.myRequests);
-  }
+  removeUsername = (username) => this.myRequests = this.myRequests.filter(u => u.from !== username)
 
   constructor(public dialogRef: MatDialogRef<DialogFriendRequestsComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, private friendService: FriendsService,
@@ -130,5 +134,4 @@ export class DialogFriendRequestsComponent {
       }
     );
   }
-
 }

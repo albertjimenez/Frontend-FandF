@@ -30,28 +30,40 @@ export class AssistantComponent implements OnInit {
   funAcceptFriend = (username) => {
     console.log('Aceptando ' + username);
     this.friendService.acceptRequest(username).subscribe(
-      data => this.toastrServide.success('Usuario ' + username + ' aceptado'),
+      data => {
+        this.toastrServide.success('Usuario ' + username + ' aceptado');
+        this.user.status = 'friend';
+      },
       error => this.funError(error)
     );
   }
   funRejectFriend = (username) => {
     console.log('Rechazando ' + username);
     this.friendService.rejectRequest(username).subscribe(
-      data => this.toastrServide.success('Usuario ' + username + ' rechazado'),
+      data => {
+        this.toastrServide.success('Usuario ' + username + ' rechazado');
+        this.user.status = 'notFriend';
+      },
       error => this.funError(error)
     );
   }
   funSendRequestFriendship = (username) => {
     console.log('Enviando petición', username);
     this.friendService.sendFriendRequest(username).subscribe(
-      data => this.toastrServide.success('Usuario ' + username + ' ha recibido tu petición de amistad'),
+      data => {
+        this.toastrServide.success('Usuario ' + username + ' ha recibido tu petición de amistad');
+        this.user.status = 'notAcceptedByTheUser';
+      },
       error => this.funError(error)
     );
   }
   funDeletefriend = (username) => {
     console.log('Eliminando amigo', username);
     this.friendService.deleteFriend(username).subscribe(
-      data => this.toastrServide.info('Eliminado amigo ' + username),
+      data => {
+        this.toastrServide.info('Eliminado amigo ' + username);
+        this.user.status = 'notFriend';
+      },
       error => this.funError(error)
     );
   }

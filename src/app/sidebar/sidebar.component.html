@@ -33,7 +33,7 @@
         <a routerLink="my-friends">
           <mat-icon>contacts</mat-icon>
           {{'Mis amigos'|translate}}
-          <span class="w3-badge w3-green w3-hover-green">{{numPendingRequests}}</span>
+          <span class="w3-badge w3-green w3-hover-green" *ngIf="numPendingRequests > 0">{{numPendingRequests}}</span>
         </a>
       </li>
       <li>
