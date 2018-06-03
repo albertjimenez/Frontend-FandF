@@ -81,6 +81,7 @@ export const routes: Routes = [
   {path: 'search-friend', component: AssistantComponent},
   {path: 'assistant-event', component: AssistantEventComponent},
   {path: 'create-group', component: CreateGroupComponent},
+  {path: 'add-friend', component: AssistantComponent},
   {path: '**', redirectTo: 'login'}
 ];
 @NgModule({

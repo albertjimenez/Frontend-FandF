@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {
   accept_friend_requests_enpoint,
   create_friend_requests_enpoint,
@@ -19,6 +19,10 @@ export class FriendsService {
   }
   getMyFriends(): Observable<Object> {
     return this.httpClient.get(friends_enpoint);
+  }
+
+  getMyHomeFriends(): Observable<Object> {
+    return this.httpClient.get(friends_enpoint, {params: new HttpParams().set('last', '5')});
   }
 
   getMyRequestsFriends(): Observable<Object> {

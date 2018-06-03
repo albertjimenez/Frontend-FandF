@@ -80,6 +80,8 @@
   "Gestionar peticiones": "Gestionar peticiones",
   "Peticiones recibidas": "Peticiones recibidas",
   "Aceptar": "Aceptar",
-  "noRequests": "No tienes solicitudes pendientes"
+  "noRequests": "No tienes solicitudes pendientes",
+  "Abandonar grupo": "Abandonar grupo",
+  "buscarAmigos": "Busca a tus amigos pulsando aquí"
 
 }

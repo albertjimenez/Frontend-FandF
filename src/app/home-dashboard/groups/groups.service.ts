@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {groups_endpoint, post_new_group_endpoint, put_group_endpoint} from '../../API_Strings';
+import {groups_endpoint, leave_group_endpoint, post_new_group_endpoint, put_group_endpoint} from '../../API_Strings';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -29,6 +29,10 @@ export class GroupsService {
 
   removeGroup(id: string): Observable<Object> {
     return this.httpClient.delete(put_group_endpoint + id);
+  }
+
+  leaveGroup(id: string): Observable<Object> {
+    return this.httpClient.delete(leave_group_endpoint + id);
   }
 }
 

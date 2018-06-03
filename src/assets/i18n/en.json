@@ -80,5 +80,7 @@
   "Gestionar peticiones": "Manage requests",
   "Peticiones recibidas": "Received requests",
   "Aceptar": "Accept",
-  "noRequests": "No pending requests for now"
+  "noRequests": "No pending requests for now",
+  "Abandonar grupo": "Leave group",
+  "buscarAmigos": "Start looking for your friends right here"
 }

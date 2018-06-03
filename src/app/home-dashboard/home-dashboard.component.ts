@@ -45,7 +45,6 @@ export class HomeDashboardComponent implements OnInit {
     // }
     // this.notificationService.showNotification('Prueba', 'Esto es una prueba bro');
   }
-
   toggleSidebar() {
     $('#sidebar, #content').toggleClass('active');
     $('.collapse.in').toggleClass('in');

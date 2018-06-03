@@ -68,24 +68,23 @@ export class GeneralGroupsComponent implements OnInit {
   ngOnInit() {
     this.groupsService.getMyGroups().subscribe(data => {
       this.retrieveGroups(data);
-
-      // const group: Group = {
-      //   name: 'Tetío y neuronía',
-      //   description: 'Sólo chorradas y poco más',
-      //   closed: true,
-      //   users: ['Santi', 'El adris', 'Vervhel'],
-      //   dateOfCreation: 1525252545,
-      //   createdBy: 'beruto',
-      //   image: 'https://cdn.memegenerator.es/imagenes/memes/full/26/55/26550209.jpg',
-      //   updateDate: 1525252988,
-      //   _id: 'Tiusa',
-      //   headerImg: 'https://cdn.memegenerator.es/imagenes/memes/full/26/55/26550209.jpg'
-      // };
-      // this.groupList.push(group, group);
     }, error => {
       console.log(error);
       this.isLoading = false;
     });
+  }
+
+  leaveGroup(id: string) {
+    this.groupsService.leaveGroup(id).subscribe(
+      data => {
+        this.toastrService.info('Ha abandonado el grupo correctamente', 'Salida de grupo');
+        this.groupsService.getMyGroups().subscribe(dataGroup => this.retrieveGroups(dataGroup));
+      },
+      error => {
+        console.log('error', error);
+        this.toastrService.error('Error inesperado, pruebe más tarde', 'Error al abandonar el grupo');
+      }
+    );
   }
 
   filterElems(filter: string) {

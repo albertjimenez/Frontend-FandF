@@ -16,13 +16,20 @@ export class SidebarComponent implements OnInit {
 
 
   @Input() username: string;
-  numPendingRequests: number;
+  numPendingRequests = 0;
+  isAnotherNotificationArrived = false;
   getMyRequests = (data) => {
     const num = data.valueOf()['sentToMe'].length;
     if (num > 0) {
+      if (this.numPendingRequests !== num) {
+        this.isAnotherNotificationArrived = true;
+      } else {
+        this.isAnotherNotificationArrived = false;
+      }
       this.numPendingRequests = num;
     } else {
       this.numPendingRequests = 0;
+      this.isAnotherNotificationArrived = false;
     }
   }
 
@@ -41,7 +48,7 @@ export class SidebarComponent implements OnInit {
           data => {
             this.getMyRequests(data);
             const action = () => this.router.navigateByUrl('/my-friends');
-            if (this.numPendingRequests > 0 && e instanceof NavigationStart) {
+            if (this.numPendingRequests > 0 && this.isAnotherNotificationArrived && e instanceof NavigationStart) {
               this.notificationService.showNotification('Petición de amistad', 'Has recibido una nueva petición de amistad',
                 action);
             }
@@ -50,7 +57,6 @@ export class SidebarComponent implements OnInit {
       });
     }
   }
-
   sessionExists() {
     return this.credentialService.sessionExists();
   }
